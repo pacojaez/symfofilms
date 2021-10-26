@@ -1,0 +1,46 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Todas las peliculas{% endblock %}
+
+{% block main %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+<div class="example-wrapper">
+<!-- Hoverable rows -->
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>TITULO</th>
+	  <th>IMAGEN</th>
+      <th>DIRECTOR</th>
+	  <th>GENERO</th>
+      <th>DURACION</th>
+	  <th class="text-right">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  	{% for peli in movies %}
+    <tr>
+      <th>{{ peli.id }}</th>
+      <td>{{ peli.titulo }}</td>
+      <td>
+	  	<img src="/img/{{ peli.titulo }}.jpg" class="img-fluid rounded-top" alt="{{ peli.titulo }}"> <!-- rounded-top = rounded corners on the top -->
+	  </td>
+      <td class="text-right">{{ peli.director }}</td>
+	  <td class="text-right">{{ peli.genero }}</td>
+	  <td class="text-right">{{ peli.duracion }}</td>
+	  <td>
+	  	<button class="btn" type="button"> <a href="{{ path('movie_show', {'id':peli.id })}}" >VER</a></button>
+		<button class="btn btn-primary" type="button"> <a href="{{ path('movie_update', {'id':peli.id })}}" >EDITAR</a></button>
+		<button class="btn btn-danger" type="button"> <a href="{{ path('movie_delete', {'id': peli.id })}}" >BORRAR</a></button>
+	  </td>
+    </tr>
+	{% endfor %}
+  </tbody>
+</table>
+
+		
+{% endblock %}

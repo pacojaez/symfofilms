@@ -1,0 +1,58 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}{{ peli.titulo }}{% endblock %}
+
+{% block main %}
+<!-- Card with no padding with multiple content containers nested inside of it -->
+<div class="w-800 mw-full"> <!-- w-600 = width: 60rem (600px), mw-full = max-width: 100% -->
+  <div class="card p-0"> <!-- p-0 = padding: 0 -->
+    <img src="/img/{{ peli.titulo }}.jpg" class="img-fluid rounded-top" alt="{{ peli.titulo }}"> <!-- rounded-top = rounded corners on the top -->
+    <!-- First content container nested inside card -->
+    <div class="content">
+      <h2 class="content-title">
+        Dirigida por {{ peli.director }}
+      </h2>
+      <div>
+        <span class="text-muted">
+          <i class="fa fa-clock-o mr-5" aria-hidden="true"></i> duracion: {{ peli.duracion }} <!-- mr-5 = margin-right: 0.5rem (5px) -->
+        </span>
+      </div>
+      <div>
+        <span class="badge">
+          <i class="fa fa-comments text-primary mr-5" aria-hidden="true"></i> {{ peli.genero }} <!-- text-primary = color: primary-color, mr-5 = margin-right: 0.5rem (5px) -->
+        </span>
+        <span class="badge ml-5"> <!-- ml-5 = margin-left: 0.5rem (5px) -->
+          <i class="fa fa-heart text-danger mr-5" aria-hidden="true"></i> {{ peli }} <!-- text-danger = color: danger-color, mr-5 = margin-right: 0.5rem (5px) -->
+        </span>
+      </div>
+    </div>
+    <hr />
+    <!-- Second content container nested inside card (comments) -->
+    <div class="content">
+      <h2 class="content-title">
+        Comments
+      </h2>
+      <div>
+        <strong>John Doe</strong>
+        <br />
+        Amazing picture! Great job!
+      </div>
+      <hr />
+      <div>
+        <strong>Jane Doe</strong>
+        <br />
+        This is beautiful.
+      </div>
+      <hr />
+      <div>
+        <strong>James Bucks</strong>
+        <br />
+        This is just pretentious enough for my tastes. I love it.
+      </div>
+      <div class="text-center mt-20"> <!-- text-center = text-align: center, mt-20 = margin-top: 2rem (20px) -->
+        <button class="btn btn-sm">Load all comments</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
