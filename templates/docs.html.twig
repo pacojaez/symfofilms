@@ -4,7 +4,7 @@
 
 {% block main %}
 
-<div class="container-fluid">
+<div class="container-fluid m-4 p-4">
     <div class="row">
         <h2>Cosas que vamos haciendo en el proyecto</h2>        
     </div>
@@ -12,12 +12,20 @@
         La función path()
     </div>
     <div class="row">
-    Modifica las rutas de la plantilla base y de la vista de portada para
-    usar la función asset() en todas las rutas a recursos externos
-    (también en las imágenes).
+    Solapamiento de rutas. distintas maneras de evitarlo
     </div>
     <div class="row">
-    Solapamiento de rutas. distintas maneras de evitarlo
+        <ul>
+        <li> <code class="code">/pelicula/create/</code> entraría por el método <code class="code">show()</code> 
+        y tomaría el id como
+        </li>
+        <li>Esto también se puede resolver haciendo que la ruta para
+            <code class="code">pelicula_show</code> sea <code class="code">/pelicula/show/{id}</code> o hilando fino con los tipos de
+            los parámetros (vigilando que sea un entero).
+    </ul>
+    </div>
+    <div class="row">
+         <code class="code">composer require symfony/form</code>
     </div>
 </div>
 

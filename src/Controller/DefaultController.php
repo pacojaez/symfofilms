@@ -24,4 +24,9 @@ class DefaultController extends AbstractController
     public function docs(){
         return $this->render('docs.html.twig');
     }
+
+    #[Route('/components', name: 'components')]
+    public function components(){
+        return $this->render('components.html.twig');
+    }
 }

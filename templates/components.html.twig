@@ -1,0 +1,83 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %} Portada {% endblock %}
+
+{% block main %}
+
+<div class="container-fluid">
+    <div class="row">
+      <h2>CODE BLOCK: </h2>
+      <ul>
+        <li> <code class="code">/pelicula/create/</code> entraría por el método <code class="code">show()</code> 
+        y tomaría el id como
+        </li>
+        <li>Esto también se puede resolver haciendo que la ruta para
+            <code class="code">pelicula_show</code> sea <code class="code">/pelicula/show/{id}</code> o hilando fino con los tipos de
+            los parámetros (vigilando que sea un entero).
+      </ul>
+    </div>
+    <!-- collapse panel -->
+    <div class="col">
+      <h2>COLLAPSE BLOCK: </h2>
+      <details class="collapse-panel w-400 mw-full"> <!-- w-400 = width: 40rem (400px), mw-full = max-width: 100% -->
+        <summary class="collapse-header">
+          Why are computers important?
+        </summary>
+        <div class="collapse-content">
+          Computers are important because they are like bicycles for the mind.
+        </div>
+      </details>
+    </div>
+    <div class="col">
+      <h2>DROPDOWN: </h2>
+      <div class="dropdown">
+        <button class="btn" data-toggle="dropdown" type="button" id="dropdown-toggle-btn-1" aria-haspopup="true" aria-expanded="false">
+          Click me <i class="fa fa-angle-down ml-5" aria-hidden="true"></i> <!-- ml-5 = margin-left: 0.5rem (5px) -->
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdown-toggle-btn-1">
+        <h6 class="dropdown-header">Header</h6>
+        <a href="#" class="dropdown-item">Link 1</a>
+        <a href="#" class="dropdown-item">Link 2</a>
+        <div class="dropdown-divider"></div>
+        <div class="dropdown-content">
+          <button class="btn btn-block" type="button">Button</button>
+        </div>
+    </div>
+
+    <div class="col">
+      <h2>MODAL</h2>
+    </div>
+    <div class="col">
+      <!-- First comes the modal -->
+      <div class="modal" id="modal-1" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <a href="#" class="close" role="button" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </a>
+            <h5 class="modal-title">Modal title</h5>
+            <p>
+              This is the modal content. Almost any type of content can be presented to the user here.
+            </p>
+            <div class="text-right mt-20"> <!-- text-right = text-align: right, mt-20 = margin-top: 2rem (20px) -->
+              <a href="#" class="btn mr-5" role="button">Close</a>
+              <a href="#" class="btn btn-primary" role="button">I understand</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Page wrapper -->
+    <div>
+      <!-- Modal toggle inside the content wrapper -->
+      <div class="">
+        <a href="#modal-1" class="btn btn-primary" role="button">Open modal</a>
+      </div>
+    </div>
+</div>
+
+
+    </div>
+</div>
+
+{% endblock %}
