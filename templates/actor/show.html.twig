@@ -39,11 +39,15 @@
             </div>
             <div class="d-flex flex-col m-2 p-2">
                 <h2>BIOGRAFÍA</h2>
+                {% if actor.biografia %}
                 <span class="badge">
                     {% autoescape false %}
                     <p class="m-2">{{ actor.biografia|replace({ "\n":"</p><p class='m-2'>" }) }}</p>
                     {% endautoescape %}
                 </span>
+                {% else %}
+                    <p class="m-2">AUN NO HAY BIOGRAFIA PUBLICADA</p>
+                {% endif %}
             </div>
         </div>
 	</div>

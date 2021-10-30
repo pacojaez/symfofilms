@@ -52,12 +52,21 @@
             <a href="{{ path('all_actors') }}" class="nav-link">Actores</a>
           </li>
         </ul>
+        <!-- Toggling dark mode -->
+        <button class="btn btn-primary mx-2" type="button" onclick="halfmoon.toggleDarkMode()">Toogle Light/Dark Mode!</button>
         <div class="mr-0">
           {{ "now"|date('d/m/Y H:i', timezone="Europe/Madrid")}}
         </div>
         <!-- Navbar form (inline form) -->
-        <form class="form-inline d-none d-md-flex ml-auto" action="..." method="..."> <!-- d-none = display: none, d-md-flex = display: flex on medium screens and up (width > 768px), ml-auto = margin-left: auto -->
-          <input type="text" class="form-control" placeholder="Buscador de películas" required="required">
+        <form class="form-inline d-none d-md-flex ml-auto" action="{{ path('movie_search') }}" method="POST"> 
+          <!-- Select box -->
+          <select class="form-control" id="campo" name="campo">
+            <option value="" selected="selected" disabled="disabled">Select a criteriar</option>
+            <option value="titulo">TITULO</option>
+            <option value="director">DIRECTOR</option>
+            <option value="sinopsis">SINOPSIS</option>
+          </select>
+          <input type="text" class="form-control" name="valor" id="valor" placeholder="Buscador de películas" required="required">
           <button class="btn btn-primary" type="submit">SEARCH</button>
         </form>
         <!-- Navbar content (with the dropdown menu) -->

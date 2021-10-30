@@ -118,6 +118,22 @@ class MovieController extends AbstractController
         ]);
     }
 
+     /**
+     * @Route("/movie/search", name="movie_search")
+     */
+    public function search( Request $request ): Response {
+        
+        $campo = $request->request->get('campo');
+        $valor = $request->request->get('valor');
+        $criterio = [ $campo=>$valor ];
+
+        $movies = $this->getDoctrine()->getRepository( Movie::class )->findBy( $criterio );
+        dd($movies);
+        return $this->render('movie/allmovies.html.twig', [
+            'movies' => $movies,
+        ]);
+    }
+
 
     /**
      * @Route("/movie/show/{id}", name="movie_show")
@@ -158,17 +174,6 @@ class MovieController extends AbstractController
 
     }
 
-    /**
-     * @Route("/movie/search/{campo}/{valor}", name="movie_search")
-     */
-    public function search( string $campo, string $valor ): Response {
-        $criterio = [ $campo=>$valor ];
-
-        $pelis = $this->getDoctrine()->getRepository( Movie::class )->findBy( $criterio );
-        
-        return new Response( "Lista de peliculas encontradas con los criterios CAMPO: $campo y VALOR: $valor:<br>"
-                            .implode("<br>", $pelis));
-    }
 
     /**
      * @Route("/movie/update/{id}", name="movie_update")

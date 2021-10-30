@@ -67,10 +67,15 @@
 			      <h2 class="content-title">
 			        Sinopsis
 			      </h2>
+				   {% if peli.sinopsis %}
 			      <div>
-			        {{ peli.sinopsis }}
+				   {% autoescape false %}
+                    <p class="m-2">{{ peli.sinopsis|replace({ "\n":"</p><p class='m-2'>" }) }}</p>
+                    {% endautoescape %}
 			      </div>
-			      <hr />
+			      {% else %}
+				  <p>AUN NO HAY SINPOSIS DE LA PELÍCULA</p>
+				  {% endif %}
 			      {# <div class="text-center mt-20"> <!-- text-center = text-align: center, mt-20 = margin-top: 2rem (20px) -->
 			        <button class="btn btn-sm">Load all comments</button>
 			      </div> #}

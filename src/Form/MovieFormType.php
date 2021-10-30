@@ -22,25 +22,32 @@ class MovieFormType extends AbstractType
             ])
         ->add('duracion', NumberType::class, [
             'empty_data' => 0,
-            'html5' => true
+            'html5' => true,
+            'required' => false,
         ])
         ->add('director', TextType::class, [
-            'attr' => ['class' => 'form-control']
+            'attr' => ['class' => 'form-control'],
+            'required' => false,
             ])
         ->add('genero', TextType::class, [
-            'attr' => ['class' => 'form-control']
+            'attr' => ['class' => 'form-control'],
+            'required' => false,
             ])
         ->add('valoracion', NumberType::class, [
-            'attr' => ['class' => 'form-control']
+            'attr' => ['class' => 'form-control'],
+            'required' => false,
             ])
         ->add('estreno', NumberType::class, [
-            'attr' => ['class' => 'form-control']
+            'attr' => ['class' => 'form-control'],
+            'required' => false,
             ])
         ->add('genero', TextType::class, [
-            'attr' => ['class' => 'form-control']
+            'attr' => ['class' => 'form-control'],
+            'required' => false,
             ])
         ->add('sinopsis', TextareaType::class, [
-            'attr' => ['class' => 'form-control']
+            'attr' => ['class' => 'form-control'],
+            'required' => false,
             ])
         ->add('Guardar', SubmitType::class, [
             'attr' => ['class' => 'btn btn-primary']

@@ -137,9 +137,8 @@ class ActorController extends AbstractController
          if( $nacimiento != NULL ){
             $hoy = date('Y-m-d');
             $edad = date_diff(date_create($nacimiento->format('Y-m-d')), date_create($hoy))->y;
+            return $edad;
         }
-        return $edad ? $edad : "No hay fecha de nacimiento para poder calcular la edad";
+        return "No hay fecha de nacimiento para poder calcular la edad";
     }
-
-
 }

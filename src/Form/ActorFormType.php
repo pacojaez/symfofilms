@@ -23,13 +23,17 @@ class ActorFormType extends AbstractType
                 'attr' => ['class' => 'form-control']
                 ])
             ->add('fecha_nacimiento',  DateType::class, [
-                'attr' => ['class' => 'form-control']
+                'attr' => ['class' => 'form-control'],
+                'required' => false,
+                'input' => 'datetime'
                 ])
             ->add('nacionalidad', TextType::class, [
-                'attr' => ['class' => 'form-control']
+                'attr' => ['class' => 'form-control'],
+                'required' => false,
                 ])
             ->add('biografia', TextareaType::class, [
-                'attr' => ['class' => 'form-control']
+                'attr' => ['class' => 'form-control'],
+                'required' => false,
                 ])
             ->add('Guardar', SubmitType::class, [
                 'attr' => ['class' => 'btn btn-primary']
