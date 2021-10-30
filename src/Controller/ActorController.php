@@ -38,6 +38,8 @@ class ActorController extends AbstractController
             $entityManager->persist( $actor );
             $entityManager->flush();
 
+            $this->addFlash('success', 'Actor creado correctamente');
+
             return $this->redirectToRoute('actor_show', [
                 'id' => $actor->getId()
             ]);
@@ -49,35 +51,44 @@ class ActorController extends AbstractController
     }
 
     #[Route('/actor/edit/{id}', name: 'actor_edit')]
-    public function edit( actor $actor, Request $request ){
+    public function edit( Actor $actor, Request $request ){
 
-        $formulario = $this->createForm( MovieFormType::class, $actor );
+        $formulario = $this->createForm( ActorFormType::class, $actor );
 
         //guardando la pelicula cuando llega el form
         $formulario->handleRequest($request);
 
+       //calculo de la edad del actor:
+       $edad = $this->calculoEdad($actor->getFechaNacimiento());
+        
+        
         if($formulario->isSubmitted() && $formulario->isValid()){
+
+            //calculo de la edad del actor:
+            $edad = $this->calculoEdad($actor->getFechaNacimiento());
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();
 
-            $this->addFlash('success', 'Actor actualizada correctamente');
+            $this->addFlash('success', 'Actor actualizado correctamente');
 
             return $this->redirectToRoute('actor_show', [
-                'id' => $actor->getId()
+                'id' => $actor->getId(),
+                'edad' => $edad
             ]);
         }
 
         return $this->render('actor/edit.html.twig', [
             'formulario' => $formulario->createView(),
-            'actor' => $actor
+            'actor' => $actor,
+            'edad' => $edad
         ]);
     }
 
     #[Route('/actor/delete/{id}', name: 'actor_delete')]
     public function delete( Actor $actor, Request $request ): Response {
 
-        $formulario = $this->createForm( MovieDeleteFormType::class, $actor );
+        $formulario = $this->createForm( ActorDeleteFormType::class, $actor );
 
         //guardando la pelicula cuando llega el form
         $formulario->handleRequest($request);
@@ -88,7 +99,7 @@ class ActorController extends AbstractController
             $entityManager->remove($actor);
             $entityManager->flush();
 
-            $this->addFlash('success', 'PelicActorula borrada correctamente');
+            $this->addFlash('success', 'Actor borrada correctamente');
 
             return $this->redirectToRoute('all_actors');
         }
@@ -108,12 +119,26 @@ class ActorController extends AbstractController
 
         $peli = $this->getDoctrine()->getRepository( Actor::class )->find($actor);
 
+        //calculo de la edad del actor:
+       $edad = $this->calculoEdad($actor->getFechaNacimiento());
+
         if(!$peli)
             throw $this->createNotFoundException( "No se encontró el actor con id: $peli." );
 
         return $this->render('actor/show.html.twig', [
             'actor' => $actor,
+            'edad' => $edad
         ]); 
+    }
+
+
+    public function calculoEdad( $nacimiento){
+         //calculo de la edad del actor:
+         if( $nacimiento != NULL ){
+            $hoy = date('Y-m-d');
+            $edad = date_diff(date_create($nacimiento->format('Y-m-d')), date_create($hoy))->y;
+        }
+        return $edad ? $edad : "No hay fecha de nacimiento para poder calcular la edad";
     }
 
 

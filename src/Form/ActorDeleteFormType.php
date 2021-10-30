@@ -6,17 +6,17 @@ use App\Entity\Actor;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class ActorDeleteFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nombre')
-            ->add('fecha_nacimiento')
-            ->add('nacionalidad')
-            ->add('biografia')
-        ;
+        ->add('Confirmar', SubmitType::class, [
+            'attr' => ['class' => 'btn btn-danger']
+            ]
+        );
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -26,3 +26,5 @@ class ActorDeleteFormType extends AbstractType
         ]);
     }
 }
+
+

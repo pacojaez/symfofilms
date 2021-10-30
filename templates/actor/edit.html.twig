@@ -1,0 +1,20 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}WEditar una ficha de Actor de la DB{% endblock %}
+
+{% block main %}
+{{ parent() }}
+<!-- Card with no padding with multiple content containers nested inside of it -->
+<div class="w-800 mw-full">
+  <h2>EDICION DE LA FICHA DEL ACTOR {{ actor.nombre }}
+  <img src="/img/{{ actor.nombre }}.jpg" class="img-fluid rounded-top" alt="{{ actor.nombre }}"> 
+  <!-- w-600 = width: 60rem (600px), mw-full = max-width: 100% -->
+  <div class="card p-0"> <!-- p-0 = padding: 0 -->
+    <!-- First content container nested inside card -->
+    <div class="content">
+      {{ form(formulario) }}
+    </div>
+    
+  </div>
+</div>
+{% endblock %}

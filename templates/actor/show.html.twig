@@ -1,0 +1,50 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}
+	{{ actor.nombre }}
+{% endblock %}
+
+{% block main %}
+	<!-- Card with no padding with multiple content containers nested inside of it -->
+	<div class="w-800 mw-full d-flex justify-center">
+		<div class="card p-0">
+			<div class="d-flex justify-center font-weight-bold">
+                <h1>{{ actor.nombre }}</h1>
+            </div>
+
+            <!--TODO -->
+            {# <div class="d-flex justify-center">
+                <img src="/img/{{ actor.nombre }}.jpg" class="img-fluid rounded-top" alt="{{ actor.nombre }}">
+            </div> #}
+		
+			<!-- rounded-top = rounded corners on the top -->
+			<!-- First content container nested inside card -->
+            <div class="content flex-col justify-content-center m-2 p-2"> 
+            <h2 class="content-title">
+                Nacionalidad: {{ actor.nacionalidad }}
+            </h2>
+            <div class="d-flex flex-col m-2 p-2">
+                <span class="text-muted">
+                    <i class="fa fa-clock-o mr-5" aria-hidden="true"></i>
+                    Fecha de Nacimiento:
+                    {{ actor.fechanacimiento | date("d/m/Y") }}                             
+                    </span>
+            </div>
+            <div class="d-flex flex-col m-2 p-2">
+                <span class="text-muted">
+                    <i class="fa fa-clock-o mr-5" aria-hidden="true"></i>
+                    Edad:
+                    {{ edad }} años actualmente
+                </span>
+            </div>
+            <div class="d-flex flex-col m-2 p-2">
+                <h2>BIOGRAFÍA</h2>
+                <span class="badge">
+                    {% autoescape false %}
+                    <p class="m-2">{{ actor.biografia|replace({ "\n":"</p><p class='m-2'>" }) }}</p>
+                    {% endautoescape %}
+                </span>
+            </div>
+        </div>
+	</div>
+{% endblock %}
