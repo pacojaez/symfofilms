@@ -48,7 +48,13 @@
           <li class="nav-item">
             <a href="{{ path('all_movies') }}" class="nav-link">Peliculas</a>
           </li>
+          <li class="nav-item">
+            <a href="{{ path('all_actors') }}" class="nav-link">Actores</a>
+          </li>
         </ul>
+        <div class="mr-0">
+          {{ "now"|date('d/m/Y H:i', timezone="Europe/Madrid")}}
+        </div>
         <!-- Navbar form (inline form) -->
         <form class="form-inline d-none d-md-flex ml-auto" action="..." method="..."> <!-- d-none = display: none, d-md-flex = display: flex on medium screens and up (width > 768px), ml-auto = margin-left: auto -->
           <input type="text" class="form-control" placeholder="Buscador de películas" required="required">
@@ -77,14 +83,21 @@
           </div>
         </div>
       </nav>
-      {# {% block header %}{% endblock %} #}
-          
       {# {% block sidebar %} {% endblock %}#}
-          
-      
+ 
       <!-- Content wrapper -->
-      <div class="content-wrapper">
+      <div class="content-wrapper mt-10">
+        {% block success %}
+        {% for message in app.flashes('success') %}
+          <div class="alert alert-success m-4 p-4" role="alert">
+            <h4 class="alert-heading">Operación realizada correctamente</h4>
+            {{ message }}
+          </div>
+        {% endfor %}
+        {% endblock %}
+
         {% block main %}{% endblock %}
+
       </div>
     </div>
         {% block scripts %}

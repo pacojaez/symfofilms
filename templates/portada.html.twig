@@ -9,7 +9,7 @@
         {% for peli in peliculas %}
         <!-- Card with no padding with a content container nested inside of it -->
         <div class="w-400 mw-full"> <!-- w-400 = width: 40rem (400px), mw-full = max-width: 100% -->
-        <div class="card p-0"> <!-- p-0 = padding: 0 -->
+        <div class="card p-0 d-flex flex-col"> <!-- p-0 = padding: 0 -->
             <img src="/img/{{ peli.titulo }}.jpg" class="img-fluid rounded-top" alt="{{ peli.titulo }}"> <!-- rounded-top = rounded corners on the top -->
             <!-- Nested content container inside card -->
             <div class="content">
@@ -26,8 +26,8 @@
                 Género: {{ peli.genero }}
             </p>
             <div c
-            <div class="text-right"> <!-- text-right = text-align: right -->
-                <a href="{{ path('movie_show', {'id':peli.id })}}" class="btn">Read more</a>
+            <div class="text-center mt-6 alert alert-success"> <!-- text-right = text-align: right -->
+                <a href="{{ path('movie_show', {'id':peli.id })}}" class="btn">Más detalles</a>
             </div>
             </div>
         </div>

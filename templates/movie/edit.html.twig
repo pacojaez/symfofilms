@@ -1,0 +1,20 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Añadir una Nueva Película a la DB{% endblock %}
+
+{% block main %}
+{{ parent() }}
+<!-- Card with no padding with multiple content containers nested inside of it -->
+<div class="w-800 mw-full">
+  <h2>EDICION DE LA PELÍCULA {{ peli.id }}
+  <img src="/img/{{ peli.titulo }}.jpg" class="img-fluid rounded-top" alt="{{ peli.titulo }}"> 
+  <!-- w-600 = width: 60rem (600px), mw-full = max-width: 100% -->
+  <div class="card p-0"> <!-- p-0 = padding: 0 -->
+    <!-- First content container nested inside card -->
+    <div class="content">
+      {{ form(formulario) }}
+    </div>
+    
+  </div>
+</div>
+{% endblock %}

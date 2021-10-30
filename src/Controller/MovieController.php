@@ -7,6 +7,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Movie;
 
+use App\Form\MovieFormType;
+use App\Form\MovieDeleteFormType;
+use Symfony\Component\HttpFoundation\Request;
+
 class MovieController extends AbstractController
 {
     #[Route('/allmovies', name: 'all_movies')]
@@ -14,30 +18,106 @@ class MovieController extends AbstractController
 
         $movies = $this->getDoctrine()->getRepository( Movie::class )->findAll();
         return $this->render('movie/allmovies.html.twig', [
-            'controller_name' => 'MovieController',
             'movies' => $movies,
         ]);
     }
 
-    #[Route('/movie/store', name: 'movie_store')]
-    public function store(){
-        //gestor de entidades
-        $entityManager = $this->getDoctrine()->getManager();
+    // #[Route('/movie/store', name: 'movie_store')]
+    // public function store(){
+    //     //gestor de entidades
+    //     $entityManager = $this->getDoctrine()->getManager();
 
+    //     $peli = new Movie();
+
+    //     $peli
+    //         ->setTitulo('Some Kind of Monster')
+    //         ->setDirector('Joe Berlinger & Bruce Sinofsky')
+    //         ->setDuracion(103)
+    //         ->setGenero('Documentary');
+        
+    //     $entityManager->persist($peli);
+    //     $entityManager->flush();
+
+    //     return new Response('Pelicula guardada en la DB con id: '.$peli->getId()
+    //                         .' con un tipo: '.gettype($peli->getId()));
+    // }
+
+    #[Route('/movie/create', name: 'movie_create')]
+    public function create( Request $request ){
         $peli = new Movie();
 
-        $peli
-            ->setTitulo('Some Kind of Monster')
-            ->setDirector('Joe Berlinger & Bruce Sinofsky')
-            ->setDuracion(103)
-            ->setGenero('Documentary');
-        
-        $entityManager->persist($peli);
-        $entityManager->flush();
+        $formulario = $this->createForm( MovieFormType::class, $peli );
 
-        return new Response('Pelicula guardada en la DB con id: '.$peli->getId()
-                            .' con un tipo: '.gettype($peli->getId()));
+        //guardando la pelicula cuando llega el form
+        $formulario->handleRequest($request);
+
+        if($formulario->isSubmitted() && $formulario->isValid()){
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist( $peli );
+            $entityManager->flush();
+
+            return $this->redirectToRoute('movie_show', [
+                'id' => $peli->getId()
+            ]);
+        }
+
+        return $this->render('movie/create.html.twig', [
+            'formulario' => $formulario->createView()
+        ]);
     }
+
+    #[Route('/movie/edit/{id}', name: 'movie_edit')]
+    public function edit( Movie $peli, Request $request ){
+
+        $formulario = $this->createForm( MovieFormType::class, $peli );
+
+        //guardando la pelicula cuando llega el form
+        $formulario->handleRequest($request);
+
+        if($formulario->isSubmitted() && $formulario->isValid()){
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Pelicula actualizada correctamente');
+
+            return $this->redirectToRoute('movie_show', [
+                'id' => $peli->getId()
+            ]);
+        }
+
+        return $this->render('movie/edit.html.twig', [
+            'formulario' => $formulario->createView(),
+            'peli' => $peli
+        ]);
+    }
+
+    #[Route('/movie/delete/{id}', name: 'movie_delete')]
+    public function delete( Movie $peli, Request $request ): Response {
+
+        $formulario = $this->createForm( MovieDeleteFormType::class, $peli );
+
+        //guardando la pelicula cuando llega el form
+        $formulario->handleRequest($request);
+
+        if($formulario->isSubmitted() && $formulario->isValid()){
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($peli);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Pelicula borrada correctamente');
+
+            return $this->redirectToRoute('all_movies');
+        }
+
+        return $this->render('movie/delete.html.twig', [
+            'formulario'=>$formulario->createView(),
+            'peli' => $peli
+        ]);
+    }
+
 
     /**
      * @Route("/movie/show/{id}", name="movie_show")
@@ -93,34 +173,34 @@ class MovieController extends AbstractController
     /**
      * @Route("/movie/update/{id}", name="movie_update")
      */
-    public function update( Movie $movie ): Response {
-        if($movie->getId() > 10 ){
-            $entityManager= $this->getDoctrine()->getManager();
+    // public function update( Movie $movie ): Response {
+    //     if($movie->getId() > 10 ){
+    //         $entityManager= $this->getDoctrine()->getManager();
 
-            $movie->setTitulo('RockAndRollCircus');
-            $entityManager->flush();
+    //         $movie->setTitulo('RockAndRollCircus');
+    //         $entityManager->flush();
 
-            return $this->redirectToRoute('movie_show', ['id'=> $movie->getId()]);
+    //         return $this->redirectToRoute('movie_show', ['id'=> $movie->getId()]);
 
-        }else{
-            return $this->redirectToRoute('movies');
-        } 
-    }
+    //     }else{
+    //         return $this->redirectToRoute('movies');
+    //     } 
+    // }
 
     /**
      * @Route("/movie/destroy/{id}", name="movie_delete")
      */
-    public function destroy ( Movie $movie ){
-        if($movie->getId() >10 ){
-            $entityManager= $this->getDoctrine()->getManager();
+    // public function destroy ( Movie $movie ){
+    //     if($movie->getId() >10 ){
+    //         $entityManager= $this->getDoctrine()->getManager();
             
-            $entityManager->remove( $movie );
-            $entityManager->flush();
+    //         $entityManager->remove( $movie );
+    //         $entityManager->flush();
 
-            return new Response ( "Borrado de la pelicula $movie " );
+    //         return new Response ( "Borrado de la pelicula $movie " );
 
-        }else{
-            return $this->redirectToRoute('movies');
-        }
-    }
+    //     }else{
+    //         return $this->redirectToRoute('movies');
+    //     }
+    // }
 }

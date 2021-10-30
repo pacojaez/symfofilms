@@ -37,6 +37,21 @@ class Movie
      */
     private $genero;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $sinopsis;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $estreno;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $valoracion;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -93,5 +108,41 @@ class Movie
     public function  __toString(): string {
         return "La pelicula $this->titulo dirigida por $this->director 
                 tiene una duración de $this->duracion y es de género $this->genero ";
+    }
+
+    public function getSinopsis(): ?string
+    {
+        return $this->sinopsis;
+    }
+
+    public function setSinopsis(?string $sinopsis): self
+    {
+        $this->sinopsis = $sinopsis;
+
+        return $this;
+    }
+
+    public function getEstreno(): ?int
+    {
+        return $this->estreno;
+    }
+
+    public function setEstreno(?int $estreno): self
+    {
+        $this->estreno = $estreno;
+
+        return $this;
+    }
+
+    public function getValoracion(): ?int
+    {
+        return $this->valoracion;
+    }
+
+    public function setValoracion(?int $valoracion): self
+    {
+        $this->valoracion = $valoracion;
+
+        return $this;
     }
 }

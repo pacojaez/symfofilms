@@ -1,0 +1,44 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Todas las peliculas{% endblock %}
+
+{% block main %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+<div class="example-wrapper">
+  <a href=" {{ path('actor_create')}}"><button class="btn btn-primary">AÑADIR NUEVO ACTOR</button></a>
+<!-- Hoverable rows -->
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>NOMBRE</th>
+	    <th>FECHA NACIMIENTO</th>
+      <th>NACIONALIDAD</th>
+	  <th class="text-right">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  	{% for actor in actors %}
+    <tr>
+      <th>{{ actor.id }}</th>
+      <td>{{ actor.nombre }}</td>
+      {# <td>
+	  	<img src="/img/{{ actor.nombre }}.jpg" class="img-fluid rounded-top" alt="{{ actor.nombre }}"> <!-- rounded-top = rounded corners on the top -->
+	    </td> #}
+      <td class="text-right">{{ actor.fechanacimiento | date("d/m/Y") }}</td>
+      <td class="text-right">{{ actor.nacionalidad }}</td>
+      <td class="d-flex flex-row align-items-center justify-center">
+	  	<a href="{{ path('actor_show', {'id':actor.id })}}" ><img src="{{ asset('/img/buttons/show.png') }}" class="img-fluid"/></a>
+		  <a href="{{ path('actor_edit', {'id':actor.id })}}" ><img src="{{ asset('/img/buttons/update.png') }}" /></a>
+		  <a href="{{ path('actor_delete', {'id': actor.id })}}" ><img src="{{ asset('/img/buttons/delete.png') }}" /></a>
+	  </td>
+    </tr>
+	{% endfor %}
+  </tbody>
+</table>
+
+		
+{% endblock %}
