@@ -68,25 +68,43 @@
             <li>Migraciones</li>
         </ul>
     </div>
-    <div class="row">
-        La función path()
+    <div class="row m-2 p-2">
+        <h2 class="font-weight-bold uppercase m-4">SEARCH BY FIELD</h2>
+        <pre>
+        <code class="code"> public function findByField( string $campo, string $value): Array {  
+            return $this->createQueryBuilder('m')
+            ->andWhere("m.$campo = :val")
+            ->setParameter('val', $value)
+            ->orderBy('m.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult();
+        }
+        </code>
+        </pre>
     </div>
-    <div class="row">
-    Solapamiento de rutas. distintas maneras de evitarlo
-    </div>
-    <div class="row">
-        <ul>
-        <li> <code class="code">/pelicula/create/</code> entraría por el método <code class="code">show()</code> 
-        y tomaría el id como
-        </li>
-        <li>Esto también se puede resolver haciendo que la ruta para
+    <div class="row m-2 p-2">
+        <h2 class="font-weight-bold uppercase m-4">La función path()</h2>
+        <h3 class="m-4"> Solapamiento de rutas. distintas maneras de evitarlo</h3>
+        <ul class="m-4">
+            <li><code class="code">/pelicula/create/</code> entraría por el método <code class="code">show()</code> 
+                y tomaría el id como parámetro
+            </li>
+            <li>Esto también se puede resolver haciendo que la ruta para
             <code class="code">pelicula_show</code> sea <code class="code">/pelicula/show/{id}</code> o hilando fino con los tipos de
             los parámetros (vigilando que sea un entero).
-    </ul>
+            </li>
+        </ul>
+
     </div>
-    <div class="row">
-         <code class="code">composer require symfony/form</code>
+    <div class="row m-2 p-2">
+        <h2 class="font-weight-bold uppercase m-4">FORMULARIOS</h2>
+        <h3>CON EL fORMbUILDER DE SYMFONY</h3>
+        <ul>
+            <li><code class="code">composer require symfony/form</code></li>
+        </ul>
     </div>
+
 </div>
 
 {% endblock %}

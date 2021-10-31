@@ -19,14 +19,13 @@ class MovieRepository extends ServiceEntityRepository
         parent::__construct($registry, Movie::class);
     }
 
-    // /**
-    //  * @return Movie[] Returns an array of Movie objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
+     /**
+     * @return Movie[] Returns an array of Movie objects
+     */
+    public function findByField( string $campo, string $value): Array {   
+       
         return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
+            ->andWhere("m.$campo = :val")
             ->setParameter('val', $value)
             ->orderBy('m.id', 'ASC')
             ->setMaxResults(10)
@@ -34,17 +33,17 @@ class MovieRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Movie
-    {
+
+    
+    public function findOneBySomeField($value): ?Movie {
+
         return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
+            ->andWhere('m.titulo = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
-    */
+   
 }

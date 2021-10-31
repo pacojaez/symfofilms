@@ -125,10 +125,11 @@ class MovieController extends AbstractController
         
         $campo = $request->request->get('campo');
         $valor = $request->request->get('valor');
-        $criterio = [ $campo=>$valor ];
+        // $criterio = [ "$campo" => "%$valor%" ];
 
-        $movies = $this->getDoctrine()->getRepository( Movie::class )->findBy( $criterio );
-        dd($movies);
+        $movies = $this->getDoctrine()->getRepository( Movie::class )->findByField( $campo, $valor );
+        // $movies = $this->getDoctrine()->getRepository( Movie::class )-> findOneBySomeField(  $valor );
+        
         return $this->render('movie/allmovies.html.twig', [
             'movies' => $movies,
         ]);
