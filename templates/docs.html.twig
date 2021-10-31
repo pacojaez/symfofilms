@@ -4,135 +4,427 @@
 
 {% block main %}
 
-<div class="d-flex flex-col justify-content-center m-4 p-4">
-    <div class="row m-2 p-2">
-        <h1 class="font-weight-bold uppercase">Cosas que vamos haciendo en el proyecto</h1>        
+<div class="flex-col p-4 m-4 d-flex justify-content-center">
+    <div class="p-2 m-2 row">
+        <h1 class="uppercase font-weight-bold">Cosas que vamos haciendo en el proyecto</h1>        
+    </div>
+
+    <div class="row">
+      <h2 class="p-2 m-4 font-weight-bold">INTRODUCCION: SYMFONY01 </h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+          PRINCIPIOS DE FUNCIONAMIENTO DE SYMFONY:
+        </summary>
+        <div class="collapse-content">
+            <h3 class="m-4">La clase <code class="code">Symfony\Component\HttpKernel\Kernel</code></h3>
+            <ul class="m-4">
+                <li>Es la responsable de inicializar todos los paquetes</li>
+                <li>crea el contenedor de servicios antes de atender la petición usando el método <code class="code">handle()</code>.</li>
+                <li>El Kernel usa el nombre del entorno (dev, test o prod)</li>       
+            </ul>
+            <hr>
+            <ul class="m-4">
+                <li class="font-weight-bold">DOCUMENTACIÓN HERRAMIENTAS:</li>
+                <li><a href="https://twig.symfony.com/" target="blank">TWIG </a></li>
+                <li><a href="https://getcomposer.org/" target="blank">COMPOSER</a></li>
+                <li><a href="https://flex.symfony.com/" target="blank">SYMFONY/FLEX</a></li>      
+                <li><a href="https://symfony.com/doc/current/doctrine.html" target="blank">DOCTRINE</a></li>
+                <li><a href="https://symfony.com/doc/current/logging.html" target="blank">SYMFONY/MONOLOG-BUNDLE</a></li>
+                <li><a href="https://symfony.com/doc/current/email.html" target="blank">SWIFTMAILER</a></li>
+            </ul>
+        </div>
+      </details>
+    </div>
+
+    <div class="row">
+      <h2 class="p-2 m-4 font-weight-bold">INTRODUCCION: SYMFONY01 </h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+          PRINCIPIOS DE FUNCIONAMIENTO DE SYMFONY:
+        </summary>
+        <div class="collapse-content">
+            <h3 class="m-4">La clase <code class="code">Symfony\Component\HttpKernel\Kernel</code></h3>
+            <ul class="m-4">
+                <li>Es la responsable de inicializar todos los paquetes</li>
+                <li>crea el contenedor de servicios antes de atender la petición usando el método <code class="code">handle()</code>.</li>
+                <li>El Kernel usa el nombre del entorno (dev, test o prod)</li>       
+            </ul>
+            <hr>
+            <ul class="m-4">
+                <li class="font-weight-bold">DOCUMENTACIÓN HERRAMIENTAS:</li>
+                <li><a href="https://twig.symfony.com/" target="blank">TWIG </a></li>
+                <li><a href="https://getcomposer.org/" target="blank">COMPOSER</a></li>
+                <li><a href="https://flex.symfony.com/" target="blank">SYMFONY/FLEX</a></li>      
+                <li><a href="https://symfony.com/doc/current/doctrine.html" target="blank">DOCTRINE</a></li>
+                <li><a href="https://symfony.com/doc/current/logging.html" target="blank">SYMFONY/MONOLOG-BUNDLE</a></li>
+                <li><a href="https://symfony.com/doc/current/email.html" target="blank">SWIFTMAILER</a></li>
+            </ul>
+        </div>
+      </details>
+    </div>
+
+    <div class="row">
+      <h2 class="p-2 m-4 font-weight-bold">INTRODUCCION: SYMFONY01 </h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+           <p class="font-weight-bold">comandos útiles:</p>
+        </summary>
+        <div class="collapse-content">
+            <ul class="m-4">
+                <li> <code class="code"> composer install</code></li>
+                <li> <code class="code"> composer require</code></li>
+                <li> <code class="code"> composer update</code></li>
+                <li> <code class="code"> composer remove</code></li> 
+                
+                <li> 
+                    Crear un proyecto: <code class="code"> composer create-project vendor/project nombre</code> vendor-project será 
+                    <code class="code">symfony/website-skeleton:</code> para una app web o
+                    <code class="code">symfony/skeleton:</code> para una API o microservicio
+                </li>
+                
+                <li> Con el binario de symfony: <code class="code"> symfony new nombreproyecto</code></li>
+                <li> <code class="code">symfony server:start</code></li>  
+                <li> <code class="code">php bin/console cache:clear</code></li> 
+                <li> <code class="code">php bin/console debug:router</code></li>
+                <li> <code class="code">composer require annotations</code></li>
+                <li> <code class="code">composer require logger</code></li>
+                <li> <code class="code">symfony check:security</code></li>
+                <li> <code class="code">php bin/console server:dump</code></li>
+                <li> <code class="code">php bin/console debug:container --env-vars</code></li>
+            </ul>
+        </div>
+      </details>
+    </div>
+
+    <div class="row">
+      <h2 class="p-2 m-4 font-weight-bold">NUEVO PROYECTO: SYMFONY02 </h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+          REQUERIMIENTOS
+        </summary>
+        <div class="collapse-content">
+            <h3 class="m-4"><code class="code">symfony check:requirements</code></h3>
+            <ul class="m-4">
+                <li>Para cumplir con los requisitos opcionales, editaremos el fichero php.ini</li>
+            </ul>
+        </div>
+      </details>
+    </div>
+    <div class="row">
+      <h2 class="p-2 m-4 font-weight-bold">NUEVO PROYECTO: SYMFONY02 </h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+          FORMAS DE CREAR UN PROYECTO
+        </summary>
+        <div class="collapse-content">
+            <ul class="m-4">
+                <li>1. Crear el proyecto haciendo uso de Composer</li>
+                <li>2. Crear el proyecto con el binario de Symfony (opción recomendada).</li>
+                <li>3. Crear el proyecto directamente desde el IDE, por ejemplo Eclipse.</li>
+                <li>4. Clonar el repositorio de Symfony con GIT.</li>
+            </ul>
+        </div>
+      </details>
+    </div>
+    <!-- collapse panel -->
+    <div class="row">
+      <h2 class="p-2 m-4 font-weight-bold">CONCEPTOS BÁSICOS SYMFONY03:</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+          ESTRUCTURA DE CARPETAS
+        </summary>
+        <div class="collapse-content">
+            <ul class="m-4">
+                <li>config: contiene la configuración del proyecto, es una de las primeras cosas que tendremos que editar.</li>
+                <li>src: contiene todo el código PHP.</li>
+                <li>template: contiene los templates de Twig</li>
+                <li>bin: contiene el fichero bin/console</li>
+                <li>var: contiene los ficheros creados automáticamente, como ficheros de caché y de log.</li>
+                <li>vendor: contiene los paquetes de terceros</li>
+                <li>public: es el documentroot de nuestro proyecto y contendrá todos los ficheros que deban ser accesibles públicamente.</li>
+            </ul>
+        </div>
+      </details>
     </div>
 
     <!-- collapse panel -->
     <div class="row">
-      <h2 class="font-weight-bold m-4 p-2">CONFIGURACIÓN: </h2>
+      <h2 class="p-2 m-4 font-weight-bold">CONCEPTOS BÁSICOS SYMFONY03:</h2>
       <details class="collapse-panel mw-full"> 
         <summary class="collapse-header">
-          ENTORNOS, FICHEROS Y PAQUETES-----CONFIGURACION 05
+          CONFIGURAR DB
         </summary>
         <div class="collapse-content">
-        <h3 class="m-4">Entornos</h3>
             <ul class="m-4">
-                <li>Los ficheros de configuración</li>
-                <li>Parámetros de configuración.</li>
-                <li>Configurar paquetes</li>
-                <li>Configuración por entorno</li>            
+                <li>En .env<code class="code">DATBASE_URL=“mysql://user:password@host:puerto/nombreBDD?serverVersion=versionMySQL”</code></li>
+            </ul>
+        </div>
+      </details>
+    </div>
+
+    <div class="row">
+      <h2 class="p-2 m-4 font-weight-bold">CONFIGURACIÓN 1: SYMFONY05</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+            Formatos de configuración
+        </summary>
+        <div class="collapse-content">
+        <h3 class="m-4">Entornos: DEV, PROD, TEST</h3>
+            <ul class="m-4">
+                <li>seleccionar el entorno en <code class="code">.env</code></li>
+                <li>Carpeta config/packages para configurar entornos</li>
             </ul>
         </div>
       </details>
     </div>
     <div class="row">
-      <h2 class="font-weight-bold m-4 p-2">CONFIGURACIÓN: Formatos de configuración</h2>
+      <h2 class="p-2 m-4 font-weight-bold">CONFIGURACIÓN 1: SYMFONY05</h2>
       <details class="collapse-panel mw-full"> 
         <summary class="collapse-header">
-            Formatos de configuración-----CONFIGURACION 05
+            Ficheros de configuración
         </summary>
         <div class="collapse-content">
-        <h3 class="m-4">Entornos</h3>
             <ul class="m-4">
-                <li>El formato Yaml</li>
-                <li>DotEnv</li>
-                <li>Variables de entorno</li>
+                <li>routes.yaml define la configuración de rutas,</li>
+                <li>services.yaml configura los servicios</li>
+                <li>bundles.php activa o desactiva los paquetes</li>
             </ul>
         </div>
       </details>
     </div>
     <div class="row">
-      <h2 class="font-weight-bold m-4 p-2">CONFIGURACIÓN: Formatos de configuración</h2>
+      <h2 class="p-2 m-4 font-weight-bold">CONFIGURACIÓN 1: SYMFONY05</h2>
       <details class="collapse-panel mw-full"> 
         <summary class="collapse-header">
-            Formatos de configuración-----CONFIGURACION 05
+            El fichero .env y Variables de entorno
         </summary>
         <div class="collapse-content">
-        <h3 class="m-4">Secretos</h3>
             <ul class="m-4">
-                <li>Debug Mode</li>
-                <li>Creacion entornos</li>
-                <li>Secretos</li>
+                <li>carga automáticamente las variables de los ficheros .env en la variable superglobal $_ENV.</li>
+                <li>
+                    Si queremos acceder a una variable de entorno, por ejemplo desde un controlador, una de las formas es la de declararla como
+                    parámetro en el fichero services.yaml.
+                </li>
             </ul>
         </div>
       </details>
     </div>
     <div class="row">
-      <h2 class="font-weight-bold m-4 p-2">ENTIDADES Y MIGRACIONES 07</h2>
+      <h2 class="p-2 m-4 font-weight-bold">CONFIGURACIÓN 2: SYMFONY06</h2>
       <details class="collapse-panel mw-full"> 
         <summary class="collapse-header">
-            CONFIGURACION DB
+            Secretos y Creacion de entornos
         </summary>
         <div class="collapse-content">
-        <h3 class="m-4">Secretos</h3>
             <ul class="m-4">
-                <li>Configuracion packages/doctrine.yaml</li>
-                <li>Configuracion .env</li>
+                <li><code class="code">APP_DEBUG=true</code></li>
+                <li>SECRETOS:</li>
+                <li>extension=sodium</li>
+                <li>php bin/console secrets:generate-keys</li>
+                <li>php bin/console secrets:set DATABASE_PASSWORD</li>
+                <li>php bin/console secrets:list</li>
                 
-                <li>Comandos Doctrine</li>
-            <ul>
-                <li>php bin/console doctrine:database:create</li>
-                <li>php bin/console list doctrine</li>
-                <li>php bin/console make:entity</li>
-                <li>php bin/console doctrine:migrations:migrate</li>
-                <li>php bin/console make:entity --regenerate -overwrite</li>
-            </ul>
-                <li>Entidades</li>
-                <li>Migraciones</li>
             </ul>
         </div>
       </details>
     </div>
     <div class="row">
-      <h2 class="font-weight-bold m-4 p-2">CRUD 08</h2>
+      <h2 class="p-2 m-4 font-weight-bold">BDD1: SYMFONY07</h2>
       <details class="collapse-panel mw-full"> 
         <summary class="collapse-header">
-            Comandos MÁS USADOS
-        </summary>
-        <div class="collapse-content">
-            <ul>
-                <li>php bin/console make:controller PeliculaController</li>
-            </ul>
-            <li>GENERA METODO <code class="code">index()</code></li>
-        </div>
-      </details>
-    </div>
-    <div class="row">
-      <h2 class="font-weight-bold m-4 p-2">La función path()</h2>
-      <details class="collapse-panel mw-full"> 
-        <summary class="collapse-header">
-            Solapamiento de rutas. distintas maneras de evitarlo
+            ENTIDADES Y MIGRACIONES - DOCTRINE ORM
         </summary>
         <div class="collapse-content">
             <ul class="m-4">
-            <li><code class="code">/pelicula/create/</code> entraría por el método <code class="code">show()</code> 
-                y tomaría el id como parámetro
-            </li>
-            <li>Esto también se puede resolver haciendo que la ruta para
-            <code class="code">pelicula_show</code> sea <code class="code">/pelicula/show/{id}</code> o hilando fino con los tipos de
-            los parámetros (vigilando que sea un entero).
-            </li>
+                <ul>
+                <li><code class="code">php bin/console doctrine:database:create</code></li>
+                <li><code class="code">php bin/console list doctrine</code></li>
+                <li><code class="code">php bin/console make:entity</code></li>
+                <li><code class="code">php bin/console doctrine:migrations:migrate</code></li>
+                <li><code class="code">php bin/console doctrine:migrations:status</code></li>
+                <li><code class="code">php bin/console make:entity --regenerate -overwrite</code></li>
+        </div>
+      </details>
+    </div>
+
+    <div class="row">
+      <h2 class="p-2 m-4 font-weight-bold">BDD1: SYMFONY08</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+            EJEMPLO CRUD
+        </summary>
+        <div class="collapse-content">
+            <ul class="m-4">
+                <li><code class="code">php bin/console make:controller PeliculaController</code></li>
+                <li>Para los métodos del controlador: <code class="code">$entityManager= $this->getDoctrine()->getManager();</code></li>
+                <li>Para los guardar en la DB: <code class="code">$entityManager->persist( $peli )->flush();</code></li>
+            
+                <li>Ejecutar consultas por la consola de comandos: <code class="code">php bin/console doctrine:query:sql “consulta”</code></li>
+            </ul>
+        </div>
+      </details>
+    </div>
+    <div class="row">
+      <h2 class="p-2 m-4 font-weight-bold">BDD1: SYMFONY08</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+            CREACIÓN DE COMANDOS
+        </summary>
+        <div class="collapse-content">
+            <ul class="m-4">
+                <li>SINTAXIS: <code class="code">php bin/console app:create-movie “Titanic” 179 “James Cameron” “Drama”</code></li>
+                <li>Carpeta: <code class="code">src/Command/CreateMovieCommand.php</code></li>
+                <li>Métodos: <code class="code">setDescription()->setHelp()->addArgument();</code></li>
+            </ul>
+        </div>
+      </details>
+    </div>
+    <div class="row">
+      <h2 class="p-2 m-4 font-weight-bold">BDD1: SYMFONY08</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+            READ
+        </summary>
+        <div class="collapse-content">
+            <ul class="m-4">
+                <li>INYECCION DE DEPENDENCIAS: <code class="code">public function show( Pelicula $pelicula): Response { ... }</code></li>
+                <li>SelectALL: <code class="code">$pelis = $this->getDoctrine()->getRepository(Pelicula::class)->findAll();</code></li>
+                <li>SelectOne: <code class="code">$peli = $this->getDoctrine()->getRepository(Pelicula::class)->find( $pelicula );</code></li>
+            </ul>
+        </div>
+      </details>
+    </div>
+    <div class="row">
+      <h2 class="p-2 m-4 font-weight-bold">BDD1: SYMFONY08</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+            UPDATE
+        </summary>
+        <div class="collapse-content">
+            <ul class="m-4">
+                <li>INYECCION DE DEPENDENCIAS: <code class="code">public function update( Pelicula $pelicula): Response { ... }</code></li>
+                <li>Update: <pre><code class="code">$entityManager = $this->getDoctrine()->getManager();
+                                               $peli = $entityManager->getRepository(Pelicula::class)->find($pelicula);               
+                                               $peli->setTitulo( "Nuevo titulo");
+                                               $entityManager->flush();
+                            </code></pre></li>
+            </ul>
+        </div>
+      </details>
+    </div>
+    <div class="row">
+      <h2 class="p-2 m-4 font-weight-bold">BDD1: SYMFONY08</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+            DELETE
+        </summary>
+        <div class="collapse-content">
+            <ul class="m-4">
+                <li>INYECCION DE DEPENDENCIAS: <code class="code">public function delete( Pelicula $pelicula): Response { ... }</code></li>
+                <li>Update: 
+                    <code class="code">
+                    $entityManager = $this->getDoctrine()->getManager();
+                    $peli = $entityManager->getRepository(Pelicula::class)->find($pelicula);
+                    $entityManager->remove( $peli );             
+                    $entityManager->flush();
+                    </code>
+                </li>
+                <li><code class="code">$entityManager->flush();</code></li>
+            </ul>
+        </div>
+      </details>
+    </div>
+    <div class="row">
+      <h2 class="p-2 m-4 font-weight-bold">BDD1: SYMFONY08</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+            CRUD FAST WAY
+        </summary>
+        <div class="collapse-content">
+            <ul class="m-4">
+                <li>Crear un CRUD con un solo comando de consola: <code class="code">php bin/console make:crud</code></li>
+            </ul>
+        </div>
+      </details>
+    </div>
+
+    <div class="row">
+      <h2 class="p-2 m-4 font-weight-bold">SYMFOFILMS: SYMFONY09</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+            RUTAS
+        </summary>
+        <div class="collapse-content">
+            <code class="code">/ portada Portada de SymfoFilms</code>
+            <code class="code">/peliculas pelicula_list Lista de películas</code>
+            <code class="code">/pelicula/create pelicula_create Nueva película</code>
+            <code class="code">/pelicula/edit/{id} pelicula_edit Editar datos de la película</code>
+            <code class="code">/pelicula/delete/{id} pelicula_delete Borrar película</code>
+            <code class="code">/pelicula/{id} pelicula_show Mostrar detalles de la película</code>
+            <ul class="m-4">
+                <li>Solapamiento de rutas</li>
+               <ul class="m-4">
+                    <li><code class="code">/pelicula/create/</code> entraría por el método <code class="code">show()</code> 
+                        y tomaría el id como parámetro
+                    </li>
+                    <li>Esto también se puede resolver haciendo que la ruta para
+                    <code class="code">pelicula_show</code> sea <code class="code">/pelicula/show/{id}</code> o hilando fino con los tipos de
+                    los parámetros (vigilando que sea un entero).
+                    </li>
+            </ul>
+        </div>
+      </details>
+    </div>
+    <div class="row">
+      <h2 class="p-2 m-4 font-weight-bold">SYMFOFILMS: SYMFONY09</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+            TWIG PLANTILLAS (herencia, templates), ASSETS
+        </summary>
+        <div class="collapse-content">
+            <ul>
+                <li><code class="code">composer require twig</code></li>
+                <li><code class="code">extends, block, parent()</code></li>
+            </ul>
+            <ul>
+                <li>ASSETS: <code class="code">asset('/js/app.js')</code></li>
+            </ul>
+        </div>
+      </details>
+    </div>
+    <div class="row">
+      <h2 class="p-2 m-4 font-weight-bold">SYMFOFILMS: SYMFONY09</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+            La función path()
+        </summary>
+        <div class="collapse-content">
+            <ul class="m-4">
+            <li><code class="code">path('nombre_de_la_ruta', {'parametro':peli.id})</code></li>
         </ul>
         </div>
       </details>
     </div>
     <div class="row">
-      <h2 class="font-weight-bold m-4 p-2">FORMULARIOS</h2>
+      <h2 class="p-2 m-4 font-weight-bold">SYMFOFILMS: SYMFONY10</h2>
       <details class="collapse-panel mw-full"> 
         <summary class="collapse-header">
-            CON EL FORMBUILDER DE SYMFONY
+            FORMULARIOS CON EL FORMBUILDER DE SYMFONY
         </summary>
         <div class="collapse-content">
             <ul>
                 <li><pre><code class="code">composer require symfony/form</code></pre></li>
+                <li><pre><code class="code"> php bin/console make:form</code></pre></li>
+                <li>Vincularlo a una Entity</li>
+                <li><a href="https://symfony.com/doc/current/reference/forms/types.html" target="blank">Link a Form Types</a></li>
+                <li>Hacer todos los use necesarios</li>
+                <li>incluirlo en la vista form(formulario) </li>
             </ul>
         </div>
       </details>
     </div>
     <div class="row">
-      <h2 class="font-weight-bold m-4 p-2">METODO DE BUSQUEDA EN EL REPOSITORY</h2>
+      <h2 class="p-2 m-4 font-weight-bold">Extra: METODO DE BUSQUEDA EN EL REPOSITORY</h2>
       <details class="collapse-panel mw-full"> 
         <summary class="collapse-header">
             OJO CON LA CONSTRUCCIÓN DE LA CONSULTA
@@ -163,7 +455,7 @@
       </details>
     </div>
     <div class="row">
-      <h2 class="font-weight-bold m-4 p-2">METODO DE BUSQUEDA EN EL CONTROLADOR</h2>
+      <h2 class="p-2 m-4 font-weight-bold">Extra: METODO DE BUSQUEDA EN EL CONTROLADOR</h2>
       <details class="collapse-panel mw-full"> 
         <summary class="collapse-header">
             Para pasarle a la vista los datos obtenidos
@@ -200,7 +492,7 @@
       </details>
     </div>
     <div class="row">
-      <h2 class="font-weight-bold m-4 p-2">TWIG ISSUES</h2>
+      <h2 class="p-2 m-4 font-weight-bold">TWIG ISSUES</h2>
       <details class="collapse-panel mw-full"> 
         <summary class="collapse-header">
             CREAR UN DATE TIME PICKER
