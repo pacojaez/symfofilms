@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}{% endblock %}
+			-Symfofilms Project!
+        </title>
+		{# Run `composer require symfony/webpack-encore-bundle`
+		           and uncomment the following Encore helpers to start using Symfony UX #}
+		{% block stylesheets %}
+			{#{{ encore_entry_link_tags('app') }}#}
+			<link rel="stylesheet" type="text/css" href="{{ asset('css/halfmoon-variables.css') }}"/>
+		{% endblock %}
+        {% block fontawesome %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />        {% endblock %}
+		<!--Tailwind css -->
+		<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+		{% block javascripts %}
+			{#{{ encore_entry_script_tags('app') }}#}
+		{% endblock %}
+	</head>
+	<body>
+		<!-- Page wrapper with overlayed sidebar -->
+		<div
+			class="page-wrapper with-navbar with-sidebar with-navbar-fixed-bottom" data-sidebar-type="full-height">
+			<!-- Sidebar overlay -->
+            <!-- Toggle sidebar -->
+
+			<!-- Navbar -->
+			<nav class="navbar">
+				{% include('components/navbar.html.twig') %}
+			</nav>
+			<!-- Overlayed sidebar -->
+			<div class="sidebar">
+				{% include('components/sidebar.html.twig') %}
+			</div>
+			<!-- Content wrapper -->
+			<div class="content-wrapper">
+				{% block main %}{% endblock %}
+			</div>
+			<!-- Navbar fixed bottom -->
+			<nav class="navbar navbar-fixed-bottom">
+				<button class="btn" type="button" onclick="halfmoon.toggleSidebar()">Toggle sidebar</button>
+			</nav>
+		</div>
+
+		<!-- Requires halfmoon.js for toggling sidebar -->
+		{% block scripts %}
+			<script src="{{ asset('js/halfmoon.js') }}" defer></script>
+		{% endblock %}
+	</body>
+</html>
