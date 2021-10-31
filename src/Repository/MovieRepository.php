@@ -22,28 +22,28 @@ class MovieRepository extends ServiceEntityRepository
      /**
      * @return Movie[] Returns an array of Movie objects
      */
-    public function findByField( string $campo, string $value): Array {   
+    public function findByTitle ( string $value ): Array {   
        
         return $this->createQueryBuilder('m')
-            ->andWhere("m.$campo = :val")
-            ->setParameter('val', $value)
-            ->orderBy('m.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
+        ->where("m.titulo LIKE :value")
+        ->setParameter('value', "%".$value."%")
+        ->orderBy('m.id', 'ASC')
+        ->setMaxResults(10)
+        ->getQuery()
+        ->getResult()
         ;
     }
 
 
     
-    public function findOneBySomeField($value): ?Movie {
+    // public function findOneBySomeField($value): ?Movie {
 
-        return $this->createQueryBuilder('m')
-            ->andWhere('m.titulo = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
+    //     return $this->createQueryBuilder('m')
+    //         ->andWhere('m.titulo = :val')
+    //         ->setParameter('val', $value)
+    //         ->getQuery()
+    //         ->getOneOrNullResult()
+    //     ;
+    // }
    
 }

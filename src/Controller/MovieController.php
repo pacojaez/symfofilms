@@ -123,13 +123,10 @@ class MovieController extends AbstractController
      */
     public function search( Request $request ): Response {
         
-        $campo = $request->request->get('campo');
         $valor = $request->request->get('valor');
-        // $criterio = [ "$campo" => "%$valor%" ];
 
-        $movies = $this->getDoctrine()->getRepository( Movie::class )->findByField( $campo, $valor );
-        // $movies = $this->getDoctrine()->getRepository( Movie::class )-> findOneBySomeField(  $valor );
-        
+        $movies = $this->getDoctrine()->getRepository( Movie::class )->findByTitle( $valor );
+
         return $this->render('movie/allmovies.html.twig', [
             'movies' => $movies,
         ]);

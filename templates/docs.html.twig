@@ -4,47 +4,74 @@
 
 {% block main %}
 
-<div class="container-fluid m-4 p-4">
+<div class="d-flex flex-col justify-content-center m-4 p-4">
     <div class="row m-2 p-2">
         <h1 class="font-weight-bold uppercase">Cosas que vamos haciendo en el proyecto</h1>        
     </div>
 
-    <div class="row m-2 p-2">
-        <h2 class="font-weight-bold uppercase m-4">CONFIGURACION 05</h2>
+    <!-- collapse panel -->
+    <div class="row">
+      <h2 class="font-weight-bold m-4 p-2">CONFIGURACIÓN: </h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+          ENTORNOS, FICHEROS Y PAQUETES-----CONFIGURACION 05
+        </summary>
+        <div class="collapse-content">
         <h3 class="m-4">Entornos</h3>
-        <ul class="m-4">
-            <li>Los ficheros de configuración</li>
-            <li>Parámetros de configuración.</li>
-            <li>Configurar paquetes</li>
-            <li>Configuración por entorno</li>            
-        </ul>
+            <ul class="m-4">
+                <li>Los ficheros de configuración</li>
+                <li>Parámetros de configuración.</li>
+                <li>Configurar paquetes</li>
+                <li>Configuración por entorno</li>            
+            </ul>
+        </div>
+      </details>
     </div>
-    <div class="row m-2 p-2">
-        <h2 class="font-weight-bold uppercase m-4">CONFIGURACION 05</h2>
-        <h3 class="m-4">Formatos de configuración</h3>
-        <ul class="m-4">
-            <li>El formato Yaml</li>
-            <li>DotEnv</li>
-            <li>Variables de entorno</li>
-        </ul>
+    <div class="row">
+      <h2 class="font-weight-bold m-4 p-2">CONFIGURACIÓN: Formatos de configuración</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+            Formatos de configuración-----CONFIGURACION 05
+        </summary>
+        <div class="collapse-content">
+        <h3 class="m-4">Entornos</h3>
+            <ul class="m-4">
+                <li>El formato Yaml</li>
+                <li>DotEnv</li>
+                <li>Variables de entorno</li>
+            </ul>
+        </div>
+      </details>
     </div>
-    <div class="row m-2 p-2">
-        <h2 class="font-weight-bold uppercase m-4">CONFIGURACION 06</h2>
+    <div class="row">
+      <h2 class="font-weight-bold m-4 p-2">CONFIGURACIÓN: Formatos de configuración</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+            Formatos de configuración-----CONFIGURACION 05
+        </summary>
+        <div class="collapse-content">
         <h3 class="m-4">Secretos</h3>
-        <ul class="m-4">
-            <li>Debug Mode</li>
-            <li>Creacion entornos</li>
-            <li>Secretos</li>
-        </ul>
+            <ul class="m-4">
+                <li>Debug Mode</li>
+                <li>Creacion entornos</li>
+                <li>Secretos</li>
+            </ul>
+        </div>
+      </details>
     </div>
-    <div class="row m-2 p-2">
-        <h2 class="font-weight-bold uppercase m-4">ENTIDADES Y MIGRACIONES 07</h2>
-        <h3 class="m-4">CONFIGURACION DB</h3>
-        <ul class="m-4">
-            <li>Configuracion packages/doctrine.yaml</li>
-            <li>Configuracion .env</li>
-            
-            <li>Comandos Doctrine</li>
+    <div class="row">
+      <h2 class="font-weight-bold m-4 p-2">ENTIDADES Y MIGRACIONES 07</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+            CONFIGURACION DB
+        </summary>
+        <div class="collapse-content">
+        <h3 class="m-4">Secretos</h3>
+            <ul class="m-4">
+                <li>Configuracion packages/doctrine.yaml</li>
+                <li>Configuracion .env</li>
+                
+                <li>Comandos Doctrine</li>
             <ul>
                 <li>php bin/console doctrine:database:create</li>
                 <li>php bin/console list doctrine</li>
@@ -52,41 +79,34 @@
                 <li>php bin/console doctrine:migrations:migrate</li>
                 <li>php bin/console make:entity --regenerate -overwrite</li>
             </ul>
-            <li>Entidades</li>
-            <li>Migraciones</li>
-        </ul>
+                <li>Entidades</li>
+                <li>Migraciones</li>
+            </ul>
+        </div>
+      </details>
     </div>
-    <div class="row m-2 p-2">
-        <h2 class="font-weight-bold uppercase m-4">CRUD 08</h2>
-        <h3 class="m-4">CONFIGURACION DB</h3>
-        <ul class="m-4">            
-            <li>Comandos</li>
+    <div class="row">
+      <h2 class="font-weight-bold m-4 p-2">CRUD 08</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+            Comandos MÁS USADOS
+        </summary>
+        <div class="collapse-content">
             <ul>
                 <li>php bin/console make:controller PeliculaController</li>
             </ul>
             <li>GENERA METODO <code class="code">index()</code></li>
-            <li>Migraciones</li>
-        </ul>
+        </div>
+      </details>
     </div>
-    <div class="row m-2 p-2">
-        <h2 class="font-weight-bold uppercase m-4">SEARCH BY FIELD</h2>
-        <pre>
-        <code class="code"> public function findByField( string $campo, string $value): Array {  
-            return $this->createQueryBuilder('m')
-            ->andWhere("m.$campo = :val")
-            ->setParameter('val', $value)
-            ->orderBy('m.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult();
-        }
-        </code>
-        </pre>
-    </div>
-    <div class="row m-2 p-2">
-        <h2 class="font-weight-bold uppercase m-4">La función path()</h2>
-        <h3 class="m-4"> Solapamiento de rutas. distintas maneras de evitarlo</h3>
-        <ul class="m-4">
+    <div class="row">
+      <h2 class="font-weight-bold m-4 p-2">La función path()</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+            Solapamiento de rutas. distintas maneras de evitarlo
+        </summary>
+        <div class="collapse-content">
+            <ul class="m-4">
             <li><code class="code">/pelicula/create/</code> entraría por el método <code class="code">show()</code> 
                 y tomaría el id como parámetro
             </li>
@@ -95,14 +115,89 @@
             los parámetros (vigilando que sea un entero).
             </li>
         </ul>
-
+        </div>
+      </details>
     </div>
-    <div class="row m-2 p-2">
-        <h2 class="font-weight-bold uppercase m-4">FORMULARIOS</h2>
-        <h3>CON EL fORMbUILDER DE SYMFONY</h3>
-        <ul>
-            <li><code class="code">composer require symfony/form</code></li>
+    <div class="row">
+      <h2 class="font-weight-bold m-4 p-2">FORMULARIOS</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+            CON EL FORMBUILDER DE SYMFONY
+        </summary>
+        <div class="collapse-content">
+            <ul>
+                <li><pre><code class="code">composer require symfony/form</code></pre></li>
+            </ul>
+        </div>
+      </details>
+    </div>
+    <div class="row">
+      <h2 class="font-weight-bold m-4 p-2">METODO DE BUSQUEDA EN EL REPOSITORY</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+            OJO CON LA CONSTRUCCIÓN DE LA CONSULTA
+        </summary>
+        <div class="collapse-content">
+            <ul>
+            <li>
+                <pre>
+                    <code class="code">/**
+                    * @return Movie[] Returns an array of Movie objects
+                    */
+                    public function findByTitle ( string $value ): Array {   
+                    
+                        return $this->createQueryBuilder('m')
+                        ->where("m.titulo LIKE :value")
+                        ->setParameter('value', "%".$value."%")
+                        ->orderBy('m.id', 'ASC')
+                        ->setMaxResults(10)
+                        ->getQuery()
+                        ->getResult()
+                        ;
+                    }
+                    </code>
+                </pre>
+            </li>
         </ul>
+        </div>
+      </details>
+    </div>
+    <div class="row">
+      <h2 class="font-weight-bold m-4 p-2">METODO DE BUSQUEDA EN EL CONTROLADOR</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+            Para pasarle a la vista los datos obtenidos
+        </summary>
+        <div class="collapse-content">
+            <ul>
+                <li>
+                    Recuperamos el value de la Request
+                </li>
+                <li>
+                    Llamamos al método del Repositorio con una sola línea
+                </li>
+                <li>
+                    Le pasamos a la vista el array de Movies con o sin datos
+                </li>
+            </ul>
+            <pre>
+                <code class="code">  /**
+                            * @Route("/movie/search", name="movie_search")
+                            */
+                            public function search( Request $request ): Response {
+                                
+                                $valor = $request->request->get('valor');
+
+                                $movies = $this->getDoctrine()->getRepository( Movie::class )->findByTitle( $valor );
+
+                                return $this->render('movie/allmovies.html.twig', [
+                                    'movies' => $movies,
+                                ]);
+                            }
+                </code>
+            </pre>
+        </div>
+      </details>
     </div>
 
 </div>

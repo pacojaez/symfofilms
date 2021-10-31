@@ -60,12 +60,12 @@
         <!-- Navbar form (inline form) -->
         <form class="form-inline d-none d-md-flex ml-auto" action="{{ path('movie_search') }}" method="POST"> 
           <!-- Select box -->
-          <select class="form-control" id="campo" name="campo">
+          {# <select class="form-control" id="campo" name="campo">
             <option value="" selected="selected" disabled="disabled">Select a criteriar</option>
             <option value="titulo">TITULO</option>
             <option value="director">DIRECTOR</option>
             <option value="sinopsis">SINOPSIS</option>
-          </select>
+          </select> #}
           <input type="text" class="form-control" name="valor" id="valor" placeholder="Buscador de películas" required="required">
           <button class="btn btn-primary" type="submit">SEARCH</button>
         </form>
