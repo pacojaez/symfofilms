@@ -18,31 +18,39 @@ class MovieFormType extends AbstractType
     {
         $builder
         ->add('titulo', TextType::class, [
-            'attr' => ['class' => 'form-control']
+            'attr' => ['class' => 'form-control'],
+            'label_format' => 'TÍTULO DE LA PELÍCULA',
             ])
         ->add('duracion', NumberType::class, [
+            'attr' => ['class' => 'form-control'],
+            'label_format' => 'DURACIÓN (EN MINUTOS)',
             'empty_data' => 0,
             'html5' => true,
             'required' => false,
         ])
         ->add('director', TextType::class, [
             'attr' => ['class' => 'form-control'],
+            'label_format' => 'DIRECTOR',
             'required' => false,
             ])
         ->add('genero', TextType::class, [
             'attr' => ['class' => 'form-control'],
+            'label_format' => 'GÉNERO',
             'required' => false,
             ])
         ->add('valoracion', NumberType::class, [
-            'attr' => ['class' => 'form-control'],
+            'attr' => ['max' => 5],
+            'attr' => ['class' => 'form-control'],            
+            'label_format' => 'VALORACIÓN (Del 1 al 5)',
+            'empty_data' => 0,
+            'html5' => true,
             'required' => false,
             ])
         ->add('estreno', NumberType::class, [
             'attr' => ['class' => 'form-control'],
-            'required' => false,
-            ])
-        ->add('genero', TextType::class, [
-            'attr' => ['class' => 'form-control'],
+            'label_format' => 'AÑO DEL ESTRENO',
+            'empty_data' => 0,
+            'html5' => true,
             'required' => false,
             ])
         ->add('sinopsis', TextareaType::class, [

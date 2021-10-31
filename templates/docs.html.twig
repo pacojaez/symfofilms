@@ -199,6 +199,32 @@
         </div>
       </details>
     </div>
+    <div class="row">
+      <h2 class="font-weight-bold m-4 p-2">TWIG ISSUES</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+            CREAR UN DATE TIME PICKER
+        </summary>
+        <div class="collapse-content">
+            <ul>
+                <li>
+                    Hay que añadir esta linea en el metodo del FormBuilder
+                </li>
+                    <pre>
+                        <code class="code">  
+                        ->add('fecha_nacimiento',  DateType::class, [
+                        'attr' => ['class' => 'form-control'],
+                        'widget' => 'single_text',
+                        ])
+                        </code>
+                    </pre>
+                </li>
+            </ul>
+            
+        </div>
+      </details>
+    </div>
+    
 
 </div>
 
