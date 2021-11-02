@@ -3,11 +3,13 @@
    <nav class="navbar">
         <!-- Navbar content (with toggle sidebar button) -->
         <div class="navbar-content">
+        {% if(app.request.get('_route') == 'components')%}
           <nav class="navbar navbar-fixed-bottom">
             <button class="btn" type="button" onclick="halfmoon.toggleSidebar()">
               <i class="fa fa-bars" aria-hidden="true"></i>
             </button>
           </nav>
+          {% endif %}
           {# <button class="btn btn-action" type="button">
             <i class="fa fa-bars" aria-hidden="true"></i>
             <!-- Toggle sidebar -->
@@ -25,21 +27,21 @@
         <span class="navbar-text text-monospace">v3.0</span> <!-- text-monospace = font-family shifted to monospace -->
         <!-- Navbar nav -->
         <ul class="navbar-nav d-none d-md-flex"> <!-- d-none = display: none, d-md-flex = display: flex on medium screens and up (width > 768px) -->
-          <li class="nav-item active">
+          <li class="nav-item {{ app.request.get('_route') == 'docs' ? 'active'}}">
             <a href="{{ path('docs') }}" class="nav-link">Docs</a>
           </li>
-          <li class="nav-item">
+          {# <li class="nav-item {{ app.request.get('_route') == 'components' ? 'active'}}">
             <a href="{{ path('components') }}" class="nav-link">CSS COMPONENTS</a>
-          </li>
-          <li class="nav-item">
+          </li> #}
+          <li class="nav-item {{ app.request.get('_route') == 'all_movies' ? 'active'}}">
             <a href="{{ path('all_movies') }}" class="nav-link">Peliculas</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item {{ app.request.get('_route') == 'all_actors' ? 'active'}}">
             <a href="{{ path('all_actors') }}" class="nav-link">Actores</a>
           </li>
         </ul>
         <!-- Toggling dark mode -->
-        <button class="mx-2 btn btn-primary" type="button" onclick="halfmoon.toggleDarkMode()">Toogle Light/Dark Mode!</button>
+        <button class="mx-2 btn btn-primary" type="button" onclick="halfmoon.toggleDarkMode()">Light/Dark Mode!</button>
         <div class="mr-0">
           {{ "now"|date('d/m/Y H:i', timezone="Europe/Madrid")}}
         </div>

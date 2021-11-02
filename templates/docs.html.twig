@@ -243,6 +243,8 @@
                 <li><code class="code">php bin/console doctrine:migrations:migrate</code></li>
                 <li><code class="code">php bin/console doctrine:migrations:status</code></li>
                 <li><code class="code">php bin/console make:entity --regenerate -overwrite</code></li>
+                <li><code class="code"> php bin/console debug:router</code></li>
+                <li><code class="code">php bin/console router:match /movie/edit/3 </code></li>
         </div>
       </details>
     </div>
@@ -273,8 +275,14 @@
         <div class="collapse-content">
             <ul class="m-4">
                 <li>SINTAXIS: <code class="code">php bin/console app:create-movie “Titanic” 179 “James Cameron” “Drama”</code></li>
+                <li>Crear Comando: <code class="code">php bin/console make:command</code>  y añadir el nombre del comando <code class="code">app:createMovie</code></li>
                 <li>Carpeta: <code class="code">src/Command/CreateMovieCommand.php</code></li>
-                <li>Métodos: <code class="code">setDescription()->setHelp()->addArgument();</code></li>
+                <li>crear propiedad <code class="code">private $entityManager;</code></li>
+                <li>Método configure(): <code class="code">setDescription('')->setHelp('')->addArgument('');</code></li>
+                <li>Método execute(): <code class="code">$output->writeln('<fg=white;bg=black>CREAR PELICULA\</>');</code></li>
+                <li>Método execute(): <code class="code">$titulo= $input->getArgument('titulo'); $director....etc</code></li>
+                <li>Método execute(): <code class="code">$peli = new Movie();  $peli->setTitulo($titulo)->setDirector(......etc</code></li>
+                <li>Método execute(): <code class="code">$this->entityManager->persist($peli); $this->entityManager->flush(); $output->writeln("<fg=white;bg=black>PELÍCULA $titulo CREADA</>"); return Command::SUCCESS;</code></li>
             </ul>
         </div>
       </details>
@@ -423,6 +431,101 @@
         </div>
       </details>
     </div>
+
+    <div class="row">
+      <h2 class="p-2 m-4 font-weight-bold">RUTAS: SYMFONY11</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+            CONFIGURACIÓN DE LAS RUTAS: YAML, XML, PHP o anotaciones
+        </summary>
+        <div class="collapse-content">
+            <ul>
+                <li>Usar anotaciones:<pre><code class="code">composer require doctrine/annotations</code></pre></li>
+                <li><code class="code"> config/routes</code>llamado <code class="code">annotations.yaml</code></li>
+                <li>En el controlador crear anotaciones antes de cada método que nos devuelva una ruta:</li>
+                <li><code class="code"> 
+                                      /**
+                                      * @Route("/movie/search", name="movie_search")
+                                      */
+                                      public function search( Request $request ): Response {
+                    </code>
+                </li>
+                <li>Es más cómodo trabajar con nombres de ruta y no por su URL.</li>
+            </ul>
+        </div>
+      </details>
+    </div>
+   
+    <div class="row">
+      <h2 class="p-2 m-4 font-weight-bold">RUTAS: SYMFONY11</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+            Expression Language Translations
+        </summary>
+        <div class="collapse-content">
+            <ul>
+                <li>Expression Language: <pre><a class="code" href=" https://symfony.com/doc/current/components/expression_language/syntax.html"> https://symfony.com/doc/current/components/expression_language/syntax.html</a></pre></li>
+                <li><code class="code"> composer require symfony/expression-language</code></li>
+                
+                <li>Para más información sobre localización y traducción, podéis consultar los artículos:</li>
+                <li><a href="https://symfony.com/doc/current/translation.html" target="blank">https://symfony.com/doc/current/translation.html</a></li>
+                <li><a href="https://symfony.com/doc/current/translation/locale.html" target="blank">https://symfony.com/doc/current/translation/locale.html</a></li>
+                
+            </ul>
+        </div>
+      </details>
+    </div>
+
+     <div class="row">
+      <h2 class="p-2 m-4 font-weight-bold">RUTAS: SYMFONY11</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+            Parámetros y agrupamiento
+        </summary>
+        <div class="collapse-content">
+            <ul>
+                <li>Parámetro en la ruta: <pre>
+                 /** @Route("/movie/show/{id}", name="movie_show")*/
+                 </pre></li>
+                <li>Validación de parámetros: <code class="code">/** @Route("/movie/show/{id<\d+>}", name="movie_show")*/</code></li>
+                <li>Parámetros opcionales:<code class="code">/** @Route("/movie/show/{id?}", name="movie_show")*/</code></li>
+                <li>Conversión de Parámetros:<code class="code">/** @Route("/movie/show/{id?}", name="movie_show")*/</code>
+                Método en el controlador: <code class="code"> public function show( Movie $movie ): Response {</code></li>
+                <li>Parámetros especiales: <code class="code"> config/packages/translations.yaml</code></li>
+                <li>Accediendo a _locale: <code class="code"> $request->getLocale()</code></li>
+                <li>Recuperando parámetros en las rutas: 
+                    <code class="code">
+                        $nombreRuta = $request->attributes->get(‘_route’); 
+                        $parametros = $request->attributes->get(‘_route_params’);
+                        $todos = $request->attributes->all();
+                    </code>
+                </li>
+            </ul>
+        </div>
+      </details>
+    </div>
+
+    <div class="row">
+      <h2 class="p-2 m-4 font-weight-bold">RUTAS: SYMFONY11</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+            Prioridad y Depuración 
+        </summary>
+        <div class="collapse-content">
+            <ul>
+                <li>Podemos definir la prioridad de la ruta con un numero entero mayor de 0 (0 es por defecto). A mayor numero mayor prioridad <pre>
+                 /** @Route( "/movie/show/{id}", name="movie_show", priority=1 )*/
+                 </pre></li>
+                <li>Visualización de rutas: <code class="code">php bin/console debug:router</code></li>
+                <li>Info detallada de una ruta:<code class="code">php bin/console debug:router pelicula_create</code></li>
+                <li>Opciones de debug:router <code class="code">--env</code><code class="code">--show-controllers</code></li>
+                <li><code class="code"> php bin/console router:match /pelicula/show/3</code></li>
+               
+            </ul>
+        </div>
+      </details>
+    </div>
+
     <div class="row">
       <h2 class="p-2 m-4 font-weight-bold">Extra: METODO DE BUSQUEDA EN EL REPOSITORY</h2>
       <details class="collapse-panel mw-full"> 
@@ -516,6 +619,34 @@
         </div>
       </details>
     </div>
+
+    <div class="row">
+      <h2 class="p-2 m-4 font-weight-bold">DB ISSUES</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+            config DB 
+        </summary>
+        <div class="collapse-content">
+            <ul>
+                <li>
+                    Error: The metadata storage is not up to date, please run the sync-metadata-storage command to fix this issue.
+                </li>config/packages/doctrine.yaml: mirar la version de la DB
+                    <pre>
+                        <code class="code">  
+                        server_version: mariadb-10.4.13  
+                        </code>
+                        o mysql:
+                        <code class="code">  
+                        server_version: 5.7  
+                        </code>
+                    </pre>
+                </li>
+            </ul>
+            
+        </div>
+      </details>
+    </div>
+    
     
 
 </div>
