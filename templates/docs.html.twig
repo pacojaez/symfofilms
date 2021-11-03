@@ -527,6 +527,56 @@
     </div>
 
     <div class="row">
+      <h2 class="p-2 m-4 font-weight-bold">CONTROLADORES: SYMFONY12</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+            REQUEST - RESPONSE 
+        </summary>
+        <div class="collapse-content">
+            <ul>
+                <li>Crear controlador:<code class="code">php bin/console make:controller</code></li>
+                <li>RECIBE UNA REQUEST Y GENERA UNA RESPONSE</li>
+                <li>El Objeto Controller hereda de AbstractController: <code class="code">$this->render()</code> es un método heredado</li>
+                <li>Métodos interesantes: 
+                  <code class="code">$this->generateUrl('')</code>
+                  <code class="code">$this->redirect('')</code>
+                  <code class="code">$this->redirectToRoute('')</code>
+                </li>
+                <li>Conocer los canales disponibles, podemos hacer: <code class="code">php bin/console debug:container monolog</code></li>
+                <li>NOTA: recordad hacer los “use” si usamos directamente la clase.</li>
+                <li>CONFIGURACIÓN CON getParameters(): 
+                  <code class="code">  $projectDir = $this->getParameter('kernel.project_dir');</code>
+                  <code class="code">$adminEmail = $this->getParameter('app.admin_mail');</code>
+                </li>               
+            </ul>
+        </div>
+      </details>
+    </div>
+
+    <div class="row">
+      <h2 class="p-2 m-4 font-weight-bold">CONTROLADORES: SYMFONY12</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+            SERVICIOS 
+        </summary>
+        <div class="collapse-content">
+            <ul>
+                <li>Usos de los Servicios: enviar emails, consultar a la BDD, registrar información (log)</li>
+                <li>Servivio de log: <code class="code">composer require monolog</code></li>
+                <li>Inyectar dependencia: <code class="code">use Psr\Log\LoggerInterface;</code></li>
+                <li>Generar respuestas HHTP: 
+                  <code class="code">$mensaje = "Pelicula con id: $peli->getid() guardada correctamente";</code>
+                  <code class="code">this->addFlash('success', $mensaje);</code>
+                  <code class="code">$logger->info( $mensaje );</code>
+                </li>
+                <li>crear un canal en <code class="code">monolog.yaml</code> en <code class="code">config/packages</code></li>
+                <li>Nuestro parámetro $logger deberá llamarse <code class="code">$appInfoLogger.</code> OJO CON LA CONVENCIÓN!!!!!!</li>               
+            </ul>
+        </div>
+      </details>
+    </div>
+
+    <div class="row">
       <h2 class="p-2 m-4 font-weight-bold">Extra: METODO DE BUSQUEDA EN EL REPOSITORY</h2>
       <details class="collapse-panel mw-full"> 
         <summary class="collapse-header">
