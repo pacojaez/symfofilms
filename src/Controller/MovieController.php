@@ -15,6 +15,16 @@ use Psr\Log\LoggerInterface;
 
 class MovieController extends AbstractController
 {
+    #[Route('/', name: 'portada')]
+    public function portada(): Response
+    {   
+        $peliculas = $this->getDoctrine()->getRepository( Movie::class )->findAll();
+        return $this->render('portada.html.twig', [
+            'peliculas' => $peliculas,
+        ]);
+    }
+    
+    
     #[Route('/allmovies', name: 'all_movies')]
     public function allmovies(): Response {
 
@@ -184,29 +194,29 @@ class MovieController extends AbstractController
 
     }
 
-    /**
-     * @Route("/searchlogs", name="search_logs")
-     */
-    public function searchlogs(): Response {
+    // /**
+    //  * @Route("/searchlogs", name="searchlogs")
+    //  */
+    // public function searchlogs(): Response {
 
-        // "[2021-11-03T15:22:50.601744+00:00] app_search.INFO: Se ha buscado el término: Peter [] []" //linea que es guardada en el log de search
-        $logs = file('..\var\log\appsearch.log');
-        $resultado = [];
+    //     // "[2021-11-03T15:22:50.601744+00:00] app_search.INFO: Se ha buscado el término: Peter [] []" //linea que es guardada en el log de search
+    //     $logs = file('..\var\log\appsearch.log');
+    //     $resultado = [];
 
-        foreach( $logs as $log ){
-            $logLimpio = str_replace('[]', ' ', $log);
-            $terminoBusqueda = substr( $logLimpio, 1, 10);
-            $terminoBusqueda .= ': '.substr( $logLimpio, 79, (strlen($logLimpio)) );
-            array_push( $resultado, $terminoBusqueda );
+    //     foreach( $logs as $log ){
+    //         $logLimpio = str_replace('[]', ' ', $log);
+    //         $terminoBusqueda = substr( $logLimpio, 1, 10);
+    //         $terminoBusqueda .= ': '.substr( $logLimpio, 79, (strlen($logLimpio)) );
+    //         array_push( $resultado, $terminoBusqueda );
 
-            //TODO contar el numero de busquedas de caada término y añadirlo a la vista
-        }
+    //         //TODO contar el numero de busquedas de caada término y añadirlo a la vista
+    //     }
 
-        return $this->render('movie/searchlog.html.twig', [
-            'resultado' => $resultado,
-        ]);
+    //     return $this->render('movie/searchlog.html.twig', [
+    //         'resultado' => $resultado,
+    //     ]);
 
-    }
+    // }
 
 
     /**

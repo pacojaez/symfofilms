@@ -12,7 +12,7 @@
 
 <!-- ejemplo de como añadir un modal al proyecto -->
 {# <a href="#modal-2" class="btn btn-primary" role="button">Ejemplo de modal</a> #}
-			
+{% if movies %}			
 <!-- Hoverable rows -->
 <table class="table table-hover">
   <thead>
@@ -73,6 +73,11 @@
 	  {% endfor %}
   </tbody>
 </table>
+{% else %}
+ <div class="p-4 m-4 alert alert-danger" role="alert">
+    <h4 class="alert-heading">No hay películas en la DB con ese término de búsqueda</h4>
+  </div>
+{% endif %}
 
 		
 {% endblock %}

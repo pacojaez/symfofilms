@@ -5,28 +5,49 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 use App\Entity\Movie;
 
+#[Route("/admin", name:"admin_")]
 class DefaultController extends AbstractController
 {
-    #[Route('/', name: 'portada')]
-    public function index(): Response
-    {   
-        $peliculas = $this->getDoctrine()->getRepository( Movie::class )->findAll();
-        return $this->render('portada.html.twig', [
-            'controller_name' => 'DefaultController',
-            'peliculas' => $peliculas,
-        ]);
-    }
-    
-
+      
     #[Route('/docs', name: 'docs')]
     public function docs(){
         return $this->render('docs.html.twig');
     }
 
+    #[Route('/', name: 'admin')]
+    public function admin(){
+        return $this->render('admin.html.twig');
+    }
+
     #[Route('/components', name: 'components')]
     public function components(){
         return $this->render('components.html.twig');
+    }
+
+    /**
+     * @Route("/searchlogs", name="searchlogs")
+     */
+    public function searchlogs(): Response {
+
+        // "[2021-11-03T15:22:50.601744+00:00] app_search.INFO: Se ha buscado el término: Peter [] []" //linea que es guardada en el log de search
+        $logs = file('..\var\log\appsearch.log');
+        $resultado = [];
+
+        foreach( $logs as $log ){
+            $logLimpio = str_replace('[]', ' ', $log);
+            $terminoBusqueda = substr( $logLimpio, 1, 10);
+            $terminoBusqueda .= ': '.substr( $logLimpio, 79, (strlen($logLimpio)) );
+            array_push( $resultado, $terminoBusqueda );
+
+            //TODO contar el numero de busquedas de caada término y añadirlo a la vista
+        }
+
+        return $this->render('movie/searchlog.html.twig', [
+            'resultado' => $resultado,
+        ]);
+
     }
 }

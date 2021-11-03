@@ -15,17 +15,17 @@
           </div>
         </div>
         <!-- Sidebar links and titles -->
-        <h5 class="sidebar-title">Getting started</h5>
+        <a href="{{ path('admin_searchlogs') }}"><h5 class="sidebar-title">TERMINOS DE BUSQUEDA</h5></a>
         <div class="sidebar-divider"></div>
-        <a href="#" class="sidebar-link active">Installation</a>
-        <a href="#" class="sidebar-link">CLI commands</a>
+        <a href="{{ path('admin_docs') }}" class="sidebar-link active">DOCS DEL PROYECTO</a>
+        {# <a href="#" class="sidebar-link">CLI commands</a>
         <br />
         <h5 class="sidebar-title">Components</h5>
         <div class="sidebar-divider"></div>
         <a href="#" class="sidebar-link">File explorer</a>
         <a href="#" class="sidebar-link">Spreadsheet</a>
         <a href="#" class="sidebar-link">Map</a>
-        <a href="#" class="sidebar-link">Messenger</a>
+        <a href="#" class="sidebar-link">Messenger</a> #}
       </div>
     
 {% endblock %}
