@@ -4,26 +4,41 @@
       <div class="sidebar-menu">
         <!-- Sidebar brand -->
         <a href="#" class="sidebar-brand">
-          <img src="..." alt="...">
-          Brand
+          <img src="/img/icono.png" alt="SymfoFilms">
+          Admin Panel
         </a>
         <!-- Sidebar content with the search box -->
         <div class="sidebar-content">
-          <input type="text" class="form-control" placeholder="Search">
-          <div class="mt-10 font-size-12"> <!-- mt-10 = margin-top: 1rem (10px), font-size-12 = font-size: 1.2rem (12px) -->
+          <input type="text" class="form-control" placeholder="Buscador de algo....ya pensaré">
+          {# <div class="mt-10 font-size-12"> <!-- mt-10 = margin-top: 1rem (10px), font-size-12 = font-size: 1.2rem (12px) -->
             Press <kbd>/</kbd> to focus
-          </div>
+          </div> #}
         </div>
         <!-- Sidebar links and titles -->
-        <a href="{{ path('admin_searchlogs') }}"><h5 class="sidebar-title">TERMINOS DE BUSQUEDA</h5></a>
-        <div class="sidebar-divider"></div>
-        <a href="{{ path('admin_docs') }}" class="sidebar-link">DOCS DEL PROYECTO</a>
-        <a href="{{ path('api_allMovies', {'formato':'json'}) }}" class="sidebar-link active">API MOVIES JSON</a>
-        <a href="{{ path('api_allMovies', {'formato':'csv'}) }}" class="sidebar-link active">API MOVIES CSV</a>
-        <a href="{{ path('api_allMovies', {'formato':'xml'}) }}" class="sidebar-link active">API MOVIES XML</a>
-        <a href="{{ path('api_allActors', {'formato':'json'}) }}" class="sidebar-link active">API ACTORS JSON</a>
-        <a href="{{ path('api_allActors', {'formato':'csv'}) }}" class="sidebar-link active">API ACTORS CSV</a>
-        <a href="{{ path('api_allActors', {'formato':'xml'}) }}" class="sidebar-link active">API ACTORS XML</a>
+         <div class="sidebar-content">
+          <a href="{{ path('admin_searchlogs') }}"><h5 class="sidebar-title">LOGS DE BUSQUEDA</h5></a>
+          <div class="sidebar-divider"></div>
+          <a href="{{ path('admin_docs') }}" class="sidebar-link">DOCS DEL PROYECTO</a>
+        </div>
+
+      <div class="sidebar-content">
+      {# <h2 class="p-2 m-4 font-weight-bold">API DEL PROYECTO </h2> #}
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header font-weight-bold">
+          API: MOVIES AND ACTORS:
+        </summary>
+        <div class="collapse-content">
+            <ul class="m-4">
+                <li><a href="{{ path('api_allMovies', {'formato':'json'}) }}" class="sidebar-link">API MOVIES JSON</a></li>
+                <li><a href="{{ path('api_allMovies', {'formato':'csv'}) }}" class="sidebar-link">API MOVIES CSV</a></li>
+                <li><a href="{{ path('api_allMovies', {'formato':'xml'}) }}" class="sidebar-link">API MOVIES XML</a></li>      
+                <li><a href="{{ path('api_allActors', {'formato':'json'}) }}" class="sidebar-link">API ACTORS JSON</a></li>
+                <li><a href="{{ path('api_allActors', {'formato':'csv'}) }}" class="sidebar-link">API ACTORS CSV</a></li>
+                <li><a href="{{ path('api_allActors', {'formato':'xml'}) }}" class="sidebar-link">API ACTORS XML</a></li>
+            </ul>
+        </div>
+      </details>
+    </div>     
         {# <a href="#" class="sidebar-link">CLI commands</a>
         <br />
         <h5 class="sidebar-title">Components</h5>
