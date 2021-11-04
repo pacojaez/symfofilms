@@ -17,7 +17,13 @@
         <!-- Sidebar links and titles -->
         <a href="{{ path('admin_searchlogs') }}"><h5 class="sidebar-title">TERMINOS DE BUSQUEDA</h5></a>
         <div class="sidebar-divider"></div>
-        <a href="{{ path('admin_docs') }}" class="sidebar-link active">DOCS DEL PROYECTO</a>
+        <a href="{{ path('admin_docs') }}" class="sidebar-link">DOCS DEL PROYECTO</a>
+        <a href="{{ path('api_allMovies', {'formato':'json'}) }}" class="sidebar-link active">API MOVIES JSON</a>
+        <a href="{{ path('api_allMovies', {'formato':'csv'}) }}" class="sidebar-link active">API MOVIES CSV</a>
+        <a href="{{ path('api_allMovies', {'formato':'xml'}) }}" class="sidebar-link active">API MOVIES XML</a>
+        <a href="{{ path('api_allActors', {'formato':'json'}) }}" class="sidebar-link active">API ACTORS JSON</a>
+        <a href="{{ path('api_allActors', {'formato':'csv'}) }}" class="sidebar-link active">API ACTORS CSV</a>
+        <a href="{{ path('api_allActors', {'formato':'xml'}) }}" class="sidebar-link active">API ACTORS XML</a>
         {# <a href="#" class="sidebar-link">CLI commands</a>
         <br />
         <h5 class="sidebar-title">Components</h5>
