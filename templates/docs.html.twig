@@ -470,7 +470,6 @@
                 <li>Para más información sobre localización y traducción, podéis consultar los artículos:</li>
                 <li><a href="https://symfony.com/doc/current/translation.html" target="blank">https://symfony.com/doc/current/translation.html</a></li>
                 <li><a href="https://symfony.com/doc/current/translation/locale.html" target="blank">https://symfony.com/doc/current/translation/locale.html</a></li>
-                
             </ul>
         </div>
       </details>
@@ -520,7 +519,6 @@
                 <li>Info detallada de una ruta:<code class="code">php bin/console debug:router pelicula_create</code></li>
                 <li>Opciones de debug:router <code class="code">--env</code><code class="code">--show-controllers</code></li>
                 <li><code class="code"> php bin/console router:match /pelicula/show/3</code></li>
-               
             </ul>
         </div>
       </details>
@@ -571,6 +569,77 @@
                 </li>
                 <li>crear un canal en <code class="code">monolog.yaml</code> en <code class="code">config/packages</code></li>
                 <li>Nuestro parámetro $logger deberá llamarse <code class="code">$appInfoLogger.</code> OJO CON LA CONVENCIÓN!!!!!!</li>               
+            </ul>
+        </div>
+      </details>
+    </div>
+
+     <div class="row">
+      <h2 class="p-2 m-4 font-weight-bold">RESPONSE: SYMFONY13</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+          PROTOCOLO HTTP, RESPONSES, REDIRECCIONES 
+        </summary>
+        <div class="collapse-content">
+            <ul>
+                <li>EL OBJETO RESPONSE RECIBE TRES ARGUMENTOS: CONTENIDO DE RESPUESTA, CODIGO DE ESTADO Y UN ARRAY DE ENCABEZADOS</li>
+                <li>REDIRECCIÓN EXTERNA: <code class="code">$response = new RedirectResponse(‘https://juegayestudia.com’);</code></li>
+                <li>REDIRECCIÓN INTERNA: <code class="code">$response = new RedirectResponse(‘/pelicula’);</code></li>
+                <li>redirect: 
+                  <code class="code">$this->redirect(‘https://juegayestudia.com’);</code>
+                  <code class="code">$this->redirectToRoute(‘allmovies’);</code>
+                </li>           
+            </ul>
+        </div>
+      </details>
+    </div>
+
+    <div class="row">
+      <h2 class="p-2 m-4 font-weight-bold">JSON RESPONSE: SYMFONY13</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+          JSON, XML, CSV ....
+        </summary>
+        <div class="collapse-content">
+            <ul>
+                <li>Package: <code class="code">composer require symfony/serializer</code></li>
+                <li>El codificador se encarga de convertir al formato especificado. El normalizador se encarga de mapear los datos a objeto.</li>         
+            </ul>
+        </div>
+      </details>
+    </div>
+
+    <div class="row">
+      <h2 class="p-2 m-4 font-weight-bold">COOKIES-FICHEROS: SYMFONY13</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+          ANEXANDO COOKIES Y FICHEROS
+        </summary>
+        <div class="collapse-content">
+            <ul>
+                <li>Sintaxis: <code class="code">$response->headers->setCookie(Cookie::create(‘autor', ‘Robert'));</code></li>
+                <li>Método estático: <code class="code">Cookie::create()</code></li>
+                <li>PACKAGE MIME: <code class="code">composer require symfony/mime</code></li>     
+                <li>Metodo de kernel para recuperar el directorio raiz: <code class="code">$raiz=$kernel->getProjectDir();</code></li> 
+                <li>Forma de responder con el envio de un fichero: <code class="code">return new BinaryFileResponse('pathToResource')</code></li>    
+                <li>inline / attachment: <code class="code">Content-Disposition</code></li>
+                <li>Borrar tras enviar: <code class="code">$response->deleteFileAfterSend()</code></li>   
+            </ul>
+        </div>
+      </details>
+    </div>
+
+    <div class="row">
+      <h2 class="p-2 m-4 font-weight-bold">REQUEST: SYMFONY14</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+          EL OBJETO REQUEST
+        </summary>
+        <div class="collapse-content">
+            <ul>
+                <li>Los objetos Request los tomaremos en nuestros métodos del controlador haciendo uso de la inyección de dependencias:</li>
+                <li>VARIABLES SUPERGLOBALES DE PHP: <code class="code">$request = Request::createFromGlobals();</code></li>
+                <li>PACKAGE MIME: <code class="code">composer require symfony/mime</code></li>      
             </ul>
         </div>
       </details>
