@@ -25,6 +25,7 @@ class ActorController extends AbstractController
 
     #[Route('/actor/create', name: 'actor_create')]
     public function create( Request $request ){
+        
         $actor = new Actor();
 
         $formulario = $this->createForm( ActorFormType::class, $actor );
@@ -37,6 +38,11 @@ class ActorController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist( $actor );
             $entityManager->flush();
+
+            // $nombre = $request->request->all();
+            // $nombre = $request->query->all()['actor_form']['nombre'];
+            $nombre = $request->get('actor_form')['nombre'];
+            dd($nombre);
 
             $this->addFlash('success', 'Actor creado correctamente');
 

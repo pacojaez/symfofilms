@@ -639,7 +639,36 @@
             <ul>
                 <li>Los objetos Request los tomaremos en nuestros métodos del controlador haciendo uso de la inyección de dependencias:</li>
                 <li>VARIABLES SUPERGLOBALES DE PHP: <code class="code">$request = Request::createFromGlobals();</code></li>
-                <li>PACKAGE MIME: <code class="code">composer require symfony/mime</code></li>      
+                <li>Propiedades del objeto Request: <code class="code">request, query, cookies, attributes, files, server, headers</code></li>
+                <li>Métodos para obtener o actualizar sus datos:
+                   <code class="code">
+                     all(), keys(), add(), replace(), get(), set(), has(), remove()...
+                    </code>
+                </li>
+                <li>Forma de acceder a datos: <code class="code">$request->query->get('nombre');</code><code class="code">$request->headers->all();</code></li>
+                <li>Datos enviados por formularios: <code class="code">$nombre = $request->get('actor_form')['nombre'];</code></li>
+            </ul>
+        </div>
+      </details>
+    </div>
+    <div class="row">
+      <h2 class="p-2 m-4 font-weight-bold">REQUEST JSON: SYMFONY14</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+          REQUEST: Recuperando JSON
+        </summary>
+        <div class="collapse-content">
+            <ul>
+                <li>Si el cuerpo de la petición es una cadena de texto JSON, podemos convertirlo a array usando el método <code class="code">toArray()</code>.</li>
+                <li>Convertir JSON a Entity: <code class="code">$request = Request::createFromGlobals();</code></li>
+                <li>Propiedades del objeto Request: <code class="code">request, query, cookies, attributes, files, server, headers</code></li>
+                <li>Métodos para obtener o actualizar sus datos:
+                   <code class="code">
+                     all(), keys(), add(), replace(), get(), set(), has(), remove()...
+                    </code>
+                </li>
+                <li>Forma de acceder a datos: <code class="code">$request->query->get('nombre');</code><code class="code">$request->headers->all();</code></li>
+                <li>Datos enviados por formularios: <code class="code">$nombre = $request->get('actor_form')['nombre'];</code></li>
             </ul>
         </div>
       </details>
