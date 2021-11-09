@@ -1,0 +1,30 @@
+{% extends 'layouts/admin.html.twig' %}
+
+{% block title %} Portada {% endblock %}
+
+{% block main %}
+
+<div class="flex-col p-4 m-4 d-flex justify-content-center">
+    <div class="p-2 m-2 row">
+        <h1 class="uppercase font-weight-bold">Cosas TODO en el proyecto</h1>        
+    </div>
+
+    <div class="row">
+      <h2 class="p-2 m-4 font-weight-bold">ENVIO DE MAILS</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+          EMAILS:
+        </summary>
+        <div class="collapse-content">
+            <ul class="m-4">
+                <li>Estilos templates emails</li>
+                <li>Añadir canal log al envio de mails</li>
+                <li>Enviar mail con logs de busqueda, por ejemplo</li>
+            </ul>
+            <hr>
+        </div>
+      </details>
+    </div>
+</div>
+
+{% endblock %}

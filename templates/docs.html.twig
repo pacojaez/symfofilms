@@ -651,6 +651,7 @@
         </div>
       </details>
     </div>
+
     <div class="row">
       <h2 class="p-2 m-4 font-weight-bold">REQUEST JSON: SYMFONY14</h2>
       <details class="collapse-panel mw-full"> 
@@ -669,6 +670,51 @@
                 </li>
                 <li>Forma de acceder a datos: <code class="code">$request->query->get('nombre');</code><code class="code">$request->headers->all();</code></li>
                 <li>Datos enviados por formularios: <code class="code">$nombre = $request->get('actor_form')['nombre'];</code></li>
+            </ul>
+        </div>
+      </details>
+    </div>
+
+    <div class="row">
+      <h2 class="p-2 m-4 font-weight-bold">SUBIDA FICHEROS: SYMFONY15</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+          GESTIÓN DE LA SUBIDA DE FICHEROS
+        </summary>
+        <div class="collapse-content">
+            <ul>
+                <li>Packages para manejar archivos: <code class="code">composer require symfony/filesystem</code></li>
+                <li>Para recuperar la información del fichero: <code class="code">$fichero = $request->files->get('pelicula_form')['caratula'];</code></li>
+                <li>o bien recuperar la información del fichero: <code class="code">$fichero = $formulario->get(‘caratula')->getData();</code></li>
+                <li>Métodos: <code class="code">isValid(), getError(), getClientOriginalName(), guessExtension(), move(), ...</code></li>
+                <li>Configurando la carpeta donde guardamos las imágenes:
+                    <code class="code">
+                      Valor de configuración en el .env APP_COVERS="/img/covers", dos parámetros en services.yaml: app.covers: '(%env(APP_COVERS)%)' y app.covers_root:'(%kernel.project_dir%/public/%app.covers%)'
+                    </code>
+                </li>
+                <li>Configuración de Twig para crear un parámetro global: <code class="code">globals: covers_directory: '%app.covers%'</code></li>
+            </ul>
+        </div>
+      </details>
+    </div>
+    <div class="row">
+      <h2 class="p-2 m-4 font-weight-bold">SERVICIOS: SYMFONY16</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+          Objetos Útiles
+        </summary>
+        <div class="collapse-content">
+            <ul>
+                <li>Para saber los servicios: <code class="code">php bin/console debug:autowiring</code></li>
+                <li>Configuración de los SERVICIOS: <code class="code">services.yaml (o bien services.php o services.xml)</code></li>
+                <li>Crear un SERVICIO: <code class="code">$fichero = $formulario->get(‘caratula')->getData();</code></li>
+                <li>Métodos: <code class="code">isValid(), getError(), getClientOriginalName(), guessExtension(), move(), ...</code></li>
+                <li>Configurando la carpeta donde guardamos las imágenes:
+                    <code class="code">
+                      Valor de configuración en el .env APP_COVERS="/img/covers", dos parámetros en services.yaml: app.covers: '(%env(APP_COVERS)%)' y app.covers_root:'(%kernel.project_dir%/public/%app.covers%)'
+                    </code>
+                </li>
+                <li>Configuración de Twig para crear un parámetro global: <code class="code">globals: covers_directory: '%app.covers%'</code></li>
             </ul>
         </div>
       </details>

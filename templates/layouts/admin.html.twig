@@ -11,6 +11,9 @@
 		{% block stylesheets %}
 			{#{{ encore_entry_link_tags('app') }}#}
 			<link rel="stylesheet" type="text/css" href="{{ asset('css/halfmoon-variables.css') }}"/>
+			<!--FONT AWESOME-->
+			<link
+			rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 		{% endblock %}
         {% block fontawesome %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />        {% endblock %}
@@ -20,7 +23,7 @@
 			{#{{ encore_entry_script_tags('app') }}#}
 		{% endblock %}
 	</head>
-	<body>
+	<body class="overflow-x-hidden" data-set-preferred-mode-onload="true">
 		<!-- Page wrapper with overlayed sidebar -->
 		<div
 			class="page-wrapper with-navbar with-sidebar with-navbar-fixed-bottom" data-sidebar-type="full-height">
@@ -44,6 +47,7 @@
 		<!-- Requires halfmoon.js for toggling sidebar -->
 		{% block scripts %}
 			<script src="{{ asset('js/halfmoon.js') }}" defer></script>
+			<script src="{{ asset('js/hideDarkModeIcon.js')}}" defer></script>
 		{% endblock %}
 	</body>
 </html>

@@ -1,46 +1,57 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}{% endblock %} -Symfofilms Project!</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
-        {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
-            <link rel="stylesheet" type="text/css" href="{{ asset('css/halfmoon-variables.css') }}" />
-        {% endblock %}
-        <!--Tailwind css -->
-        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
-        {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
-        {% endblock %}
-    </head>
-    <body class="overflow-x-hidden">
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}{% endblock %}
+			-Symfofilms Project!</title>
+		{# Run `composer require symfony/webpack-encore-bundle`
+		           and uncomment the following Encore helpers to start using Symfony UX #}
+		{% block stylesheets %}
+			{#{{ encore_entry_link_tags('app') }}#}
+			<link
+			rel="stylesheet" type="text/css" href="{{ asset('css/halfmoon-variables.css') }}"/>
+			<!--FONT AWESOME-->
+			<link
+			rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+		{# <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" /> #}
+		{% endblock %}
+		<!--Tailwind css -->
+		<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+		{% block javascripts %}
+			{#{{ encore_entry_script_tags('app') }}#}
+		{% endblock %}
+	</head>
+	<body class="overflow-x-hidden" data-set-preferred-mode-onload="true">
 
-      {% include('components/modal.html.twig') %}
+		{% include('components/modal.html.twig') %}
 
-      <div class="page-wrapper with-navbar with-navbar-fixed-bottom" >
-      {% include('components/navbar.html.twig') %}
-      
-      {# {% include('components/sidebar.html.twig') %} #}
- 
-      <!-- Content wrapper -->
-      <div class="mt-10 content-wrapper">
-        {% block success %}
-          {% for message in app.flashes('success') %}
-            <div class="p-4 m-4 alert alert-success" role="alert">
-              <h4 class="alert-heading">Operación realizada correctamente</h4>
-              {{ message }}
-            </div>
-          {% endfor %}
-        {% endblock %}
+		<div class="page-wrapper with-navbar with-navbar-fixed-bottom">
+			{% include('components/navbar.html.twig') %}
 
-        {% block main %}{% endblock %}
 
-      </div>
-    </div>
-        {% block scripts %}
-        <script src="{{ asset('js/halfmoon.js') }}" defer></script>
-        {% endblock %}
-    </body>
+			{# {% include('components/sidebar.html.twig') %} #}
+
+			<!-- Content wrapper -->
+				<div class="mt-10 content-wrapper"> <div class="mt-0 mb-4 p-2 w-full text-center font-italic font-weight-light font-size-14">
+					{{ frase.fraseAleatoria() }}
+				</div>
+				{% block success %}
+					{% for message in app.flashes('success') %}
+						<div class="p-4 m-4 alert alert-success" role="alert">
+							<h4 class="alert-heading">Operación realizada correctamente</h4>
+							{{ message }}
+						</div>
+					{% endfor %}
+				{% endblock %}
+
+				{% block main %}{% endblock %}
+
+			</div>
+		</div>
+		{% block scripts %}
+			<script src="{{ asset('js/halfmoon.js') }}" defer></script>
+			<script src="{{ asset('js/hideDarkModeIcon.js')}}" defer></script>
+		{% endblock %}
+	</body>
 </html>

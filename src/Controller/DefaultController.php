@@ -26,6 +26,10 @@ class DefaultController extends AbstractController
     public function components(){
         return $this->render('components.html.twig');
     }
+    #[Route('/todo', name: 'todo')]
+    public function todo(){
+        return $this->render('todo.html.twig');
+    }
 
     /**
      * @Route("/searchlogs", name="searchlogs")

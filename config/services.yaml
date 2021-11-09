@@ -5,8 +5,16 @@
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
     app.name: '%env(APP_NAME)%'
-    app.admin_mail: '%env(ADMIN_EMAIL)%'
-
+    app.admin_email: '%env(ADMIN_EMAIL)%'
+    app.uploads_dir: '%kernel.project_dir%/uploads'
+    app.covers: '%env(APP_COVERS)%'
+    app.covers_root: '%kernel.project_dir%/public/%app.covers%'
+    # 
+    app.portraits: '%env(APP_PORTRAITS)%'
+    app.portraits_root: '%kernel.project_dir%/public/%app.portraits%'
+    #
+    app.users_pics: '%env(APP_USERS_PICS)%'
+    app.users_pics_root: '%kernel.project_dir%/public/%app.users_pics%'
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -22,6 +30,8 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
             - '../src/Tests/'
-
+    App\Services\FileService:
+        arguments:
+            $targetDirectory: '%app.covers_root%'
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

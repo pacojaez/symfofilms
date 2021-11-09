@@ -11,6 +11,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Validator\Constraints\File;
 
 class MovieFormType extends AbstractType
 {
@@ -56,6 +58,18 @@ class MovieFormType extends AbstractType
         ->add('sinopsis', TextareaType::class, [
             'attr' => ['class' => 'form-control'],
             'required' => false,
+            ])
+        ->add('caratula', FileType::class, [
+            'required' => false,
+            'data_class' => NULL,
+            'constraints' => [
+                new File([
+                    'maxSize' => '10240k',
+                    'mimeTypes' => [ 'image/jpeg', 'image/png', 'image/gif'],
+                    'mimeTypesMessage' => 'La image debe de ser jpg, gif o png'
+                ])
+                ],
+            'attr' => ['class' => 'form-control']
             ])
         ->add('Guardar', SubmitType::class, [
             'attr' => ['class' => 'btn btn-primary']

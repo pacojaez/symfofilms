@@ -52,6 +52,11 @@ class Movie
      */
     private $valoracion;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $caratula;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -142,6 +147,18 @@ class Movie
     public function setValoracion(?int $valoracion): self
     {
         $this->valoracion = $valoracion;
+
+        return $this;
+    }
+
+    public function getCaratula(): ?string
+    {
+        return $this->caratula;
+    }
+
+    public function setCaratula(?string $caratula): self
+    {
+        $this->caratula = $caratula;
 
         return $this;
     }

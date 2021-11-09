@@ -11,9 +11,8 @@
 			class="card p-0">
 			<!-- p-0 = padding: 0 -->
       <div class="d-flex justify-center">
-	      <img src="/img/{{ peli.titulo }}.jpg" class="img-fluid rounded-top" alt="{{ peli.titulo }}">
+	      <img src="{{ asset(covers_directory~'/'~(peli.caratula ?? 'default.jpg' ))}}" class="img-fluid rounded-top" alt="{{ peli.titulo }}" title="{{ peli.titulo }}">
       </div>
-		
 			<!-- rounded-top = rounded corners on the top -->
 			<!-- First content container nested inside card -->
 				<div class="content flex-col justify-content-center"> 
@@ -74,7 +73,7 @@
                     {% endautoescape %}
 			      </div>
 			      {% else %}
-				  <p>AUN NO HAY SINPOSIS DE LA PELÍCULA</p>
+				  <p>AUN NO HAY SINOPSIS DE LA PELÍCULA</p>
 				  {% endif %}
 			      {# <div class="text-center mt-20"> <!-- text-center = text-align: center, mt-20 = margin-top: 2rem (20px) -->
 			        <button class="btn btn-sm">Load all comments</button>

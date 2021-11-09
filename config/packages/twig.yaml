@@ -1,5 +1,11 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
+    paths:
+        '%kernel.project_dir%/public/css': styles
+        '%kernel.project_dir%/public/img': images
+    globals:
+        covers_directory: '%app.covers%'
+        frase: '@App\Services\FrasesService'
 
 when@test:
     twig:

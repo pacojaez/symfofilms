@@ -33,7 +33,7 @@
       <th>{{ peli.id }}</th>
       <td>{{ peli.titulo }}</td>
       <td>
-	  	  <img src="/img/{{ peli.titulo }}.jpg" class="img-fluid rounded-top" alt="{{ peli.titulo }}"> <!-- rounded-top = rounded corners on the top -->
+	  	  <img src="{{ asset(covers_directory ~'/'~ (peli.caratula ?? 'default.jpg' ))}}" class="img-fluid rounded-top" alt="{{ peli.titulo }}" title="{{ peli.titulo }}"> 
       </td>
       <td class="text-right">{{ peli.director }}</td>
       <td class="text-right">{{ peli.genero }}</td>

@@ -1,0 +1,22 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %} Contacto {% endblock %}
+
+{% block main %}
+{{ parent() }}
+<div class="d-flex text-center">
+ 
+  <div class="container-fluid">
+   <h2>CONTACTA CON SYMFOFILMS</h2>
+  <!-- First row -->
+  <div class="row p-2 m-2 border">
+    <div class="col-xl-6">
+       {{ form(formulario) }}
+    </div>
+    <div class="col-xl-6 d-flex justify-content-center align-middle">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2992.0321620390578!2d2.130772315727576!3d41.41682050213235!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4981b5fdca4b1%3A0x35e8d1d280af19bd!2sCIFO%20Barcelona%20-%20La%20Violeta!5e0!3m2!1ses!2ses!4v1636443826954!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

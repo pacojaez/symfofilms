@@ -1,0 +1,29 @@
+{% apply inlibne_css(source(
+    '@style/halfmoon-variables.css'
+    )
+)%}
+
+{% block header %}
+    <!-- Display flex -->
+    <div class="d-flex">
+    ENCABEZADO EMAIL
+    </div>
+    <!-- Dispaly inline-flex -->
+    <div class="d-inline-flex">
+    DENTRO DE UN FLEX-BOX
+    </div>
+{% endblock }
+
+{% block main %}
+{% endblock }
+
+{% block footer %}
+    <!-- Display flex -->
+    <div class="d-flex">
+    FOOTER EMAIL
+    </div>
+    <!-- Dispaly inline-flex -->
+    <div class="d-inline-flex">
+    DENTRO DE UN FLEX-BOX
+    </div>
+{% endblock }

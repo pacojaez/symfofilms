@@ -5,16 +5,79 @@
 {% block main %}
 {{ parent() }}
 <!-- Card with no padding with multiple content containers nested inside of it -->
-<div class="w-800 mw-full">
-  <h2>EDICION DE LA PELÍCULA {{ peli.id }}
-  <img src="/img/{{ peli.titulo }}.jpg" class="img-fluid rounded-top" alt="{{ peli.titulo }}"> 
-  <!-- w-600 = width: 60rem (600px), mw-full = max-width: 100% -->
-  <div class="card p-0"> <!-- p-0 = padding: 0 -->
-    <!-- First content container nested inside card -->
-    <div class="content">
-      {{ form(formulario) }}
+<div class="d-flex text-center">
+ 
+  <div class="container-fluid">
+   <h2>EDICION DE LA PELÍCULA {{ peli.id }}</h2>
+  <!-- First row -->
+  <div class="row p-2 m-2 border">
+    <div class="col-xl-6">
+       <div class="content">
+        {{ form(formulario) }}
+      </div>
     </div>
-    
+    <!-- Flex direction column -->
+    {# <div class="col-xl-6 d-flex flex-column justify-content-center align-items-middle">
+          <div clas="">
+            <img 
+                src="{{ asset(covers_directory ~ '/' ~ (peli.caratula) ?? 'default.jpg' )}}" 
+                class="rounded-top m-4" 
+                alt="{{ peli.titulo }}" 
+                title="{{ peli.titulo }}"
+                style="max-width: 200px; max-height=200px"
+              > 
+          </div>
+          <figure>
+              <img 
+                id="preview" 
+                src="{{ asset(covers_directory ~ '/' ~ (peli.caratula) ?? 'default.jpg' )}}" 
+                class="rounded-top m-4" 
+                alt="{{ peli.titulo }}" 
+                title="{{ peli.titulo }}"
+                style="max-width: 200px; max-height=200px"
+              >
+              <figcaption class="m-4 text-center"> Resultado de los cambios</figcaption>
+          </figure>
+          {% if peli.caratula %}
+            <figcaption class="m-4">
+              <a href="{{ path('movie_delete_image', {'id': peli.id }) }}">
+                <img src="{{ asset('img/buttons/delete.png') }}" height="30" width="30" aly="Borrar carátula" title="Borrar carátula"> 
+              </a>
+            </figcaption>
+          {% endif %}     
+    </div> #}
+    <!-- Wrap -->
+    <div class="col-xl-6 d-flex flex-column align-items-center flex-wrap justify-items-center">
+      <div clas="">
+            <img 
+                src="{{ asset(covers_directory ~ '/' ~ (peli.caratula) ?? 'default.jpg' )}}" 
+                class="rounded-top m-4" 
+                alt="{{ peli.titulo }}" 
+                title="{{ peli.titulo }}"
+                style="max-width: 200px; max-height=200px"
+              > 
+          </div>
+          <figure>
+              <img 
+                id="preview" 
+                src="{{ asset(covers_directory ~ '/' ~ (peli.caratula) ?? 'default.jpg' )}}" 
+                class="rounded-top m-4" 
+                alt="{{ peli.titulo }}" 
+                title="{{ peli.titulo }}"
+                style="max-width: 200px; max-height=200px"
+              >
+              <figcaption class="m-4 text-center"> Resultado de los cambios</figcaption>
+          </figure>
+          {% if peli.caratula %}
+            <figcaption class="m-4">
+              <a href="{{ path('movie_delete_image', {'id': peli.id }) }}">
+                <img src="{{ asset('img/buttons/delete.png') }}" height="30" width="30" aly="Borrar carátula" title="Borrar carátula"> 
+              </a>
+            </figcaption>
+          {% endif %} 
+    </div>
   </div>
 </div>
+<script src=" {{ asset('/js/previsualizacion.js') }}"></script>
+
 {% endblock %}
