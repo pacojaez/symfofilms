@@ -33,6 +33,17 @@ class FrasesService {
             "'Cariño tienes que hacerme saber…¿debería quedarme o debería irme? Si dices que eres mía, estaré aquí hasta el final de los tiempos' The Clash",
             "'Es difícil creer que no hay nadie allá afuera, es difícil creer que estoy completamente solo. Al menos tengo su amor; la ciudad, ella me ama, solitaria como yo, juntos lloramos' Red Hot Chili Peppers",
             "'Porque eres un verdadero hijo de la naturaleza, nosotros nacemos, nacemos para ser salvajes, podemos escalar muy alto y no querer morir nunca. ¡Nacidos para ser salvajes!' Steppenwolf",
+            "'Prefiero estar muerto que genial' Kurt Cobain",
+            "'Cariño, mi actitud es ‘joder’; Estoy haciendo todo con todos' Freddie Mercury",
+            "'Es aburrido tener 70 años, no quiero estar allí, estaré muerto y me iré, no tengo ninguna aspiración de tener 70 …' Freddie Mercury",
+            "'Tradicionalmente, la sociedad siempre ha tratado de encontrar chivos expiatorios para sus problemas. Bueno, aquí estoy.' Marilyn Manson",
+            "'Un niño me dijo una vez:» ¿Te dan resaca? «, Le dije:» Para tener resaca tienes que dejar de beber' Ian Lemmy Kilmister",
+            "'No soy una mujer. Soy una fuerza de la naturaleza' Coyrtney Love",
+            "'Una chica me pidió un autógrafo y le pregunté por qué, dijo porque me admiraba. Dije que debería ver a un psiquiatra. Luego comenzó a llorar y yo comencé a reír.' Nikki Sixx",
+            "'Cuando muera, espolvorea mis cenizas en los años 80' David Lee Roth",
+            "'El rock and roll es una explosión nuclear de la realidad en un mundo mundano donde a nadie se le permite ser magnífico' Kim Fowley",
+            "'Una vez vimos algunas prostitutas, pero cuando nos acercamos nos dimos cuenta de que era Motley Crue' James Hetfield",
+            
         ];
 
         return $frases[array_rand($frases)];
