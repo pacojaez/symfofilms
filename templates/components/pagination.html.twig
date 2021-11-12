@@ -1,0 +1,38 @@
+{# enlaces a paginación #}
+{% set nearbyPagesLimit = 2 %}
+<nav aria-label="Page navigation" class="d-flex flex-col justify-content-center align-items-center">
+    <p class="m-2 p-2">Tenemos {{ totalItems }} items. Página {{ paginaActual}} de {{ totalPaginas }} páginas</p>
+    <ul class="pagination d-flex flex-row">
+        {% if paginaActual > 2 %}
+            <!-- Previous page -->
+            <li class="page-item">
+            <a href="{{ path( ruta, { pagina: paginaActual-1 < 1 ? 1 : paginaActual-1}) }}" class="page-link">
+                <i class="fa fa-angle-left" aria-hidden="true"></i>
+                <span class="sr-only">Previous</span> 
+            </a>
+            </li>
+        {% endif %}
+            {% for i in 1..totalPaginas %}
+                {% if 0 == (paginaActual - nearbyPagesLimit) - i %} {# dot before #}
+                    <li class="page-item ellipsis"></li>
+                {% elseif 0 == (paginaActual + nearbyPagesLimit) - i %} {# dot after #}
+                    <li class="page-item ellipsis"></li>
+                {% elseif 0 < (paginaActual - nearbyPagesLimit) - i %} {# hide all before #}
+                {% elseif 0 > (paginaActual + nearbyPagesLimit) - i %} {# hide all after #}
+                {% else %}
+                    <li {% if paginaActual == i  %} class="page-item {{ i == paginaActual ? 'active aria-current="page"' : ''}}" {% endif %}>
+                        <a class="page-link" href="{{ path( ruta, { pagina: i }) }}">{{ i }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        {% if paginaActual < (totalPaginas - 1) %}
+            <!-- Next page -->
+            <li class="page-item">
+            <a href="{{ path( ruta, {pagina: paginaActual+1 <= totalPaginas ? paginaActual+1 : paginaActual }) }}" class="page-link">
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+                <span class="sr-only">Next</span> <!-- sr-only = only for screen readers -->
+            </a>
+            </li>
+        {% endif %}
+    </ul>
+</nav>

@@ -8,12 +8,21 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 <div class="example-wrapper">
-  <a href=" {{ path('actor_create')}}"><button class="btn btn-primary">AÑADIR NUEVO ACTOR</button></a>
+<div class="d-flex flex-row justify-content-between align-items-center m-2 p-2">
+    {# Crear variable en Twig #}
+    {% set ruta = 'all_actors' %}
+    <a href=" {{ path('actor_create')}}"><button class="btn btn-primary">AÑADIR NUEVO ACTOR</button></a>
+    {% if totalPaginas > 1 %}
+      {% include('components/pagination.html.twig') %}
+    {% endif %}	
+</div>
+  
 <!-- Hoverable rows -->
 <table class="table table-hover">
   <thead>
     <tr>
       <th>#</th>
+      <th></th>
       <th>NOMBRE</th>
 	    <th>FECHA NACIMIENTO</th>
       <th>NACIONALIDAD</th>
@@ -24,6 +33,13 @@
   	{% for actor in actors %}
     <tr>
       <th>{{ actor.id }}</th>
+      <th>
+        {% if actor.gender == 'M' %}
+          <img src="{{ asset(portraits_directory ~'/'~ (actor.portrait ?? 'default_male.jpg' ))}}" class="img-fluid rounded-top" alt="{{ actor.portrait }}" title="{{ actor.nombre }}">
+        {% else %}
+          <img src="{{ asset(portraits_directory ~'/'~ (actor.portrait ?? 'default_female.jpg' ))}}" class="img-fluid rounded-top" alt="{{ actor.portrait }}" title="{{ actor.nombre }}">
+       {% endif %} 
+      </th>
       <td>{{ actor.nombre }}</td>
       {# <td>
 	  	<img src="/img/{{ actor.nombre }}.jpg" class="img-fluid rounded-top" alt="{{ actor.nombre }}"> <!-- rounded-top = rounded corners on the top -->

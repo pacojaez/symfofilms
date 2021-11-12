@@ -9,15 +9,15 @@
 	<div class="w-800 mw-full d-flex justify-center">
 		<div class="card p-0">
 			<div class="d-flex justify-center font-weight-bold">
-                <h1>{{ actor.nombre }}</h1>
+                <h1 class="uppercase m-2">{{ actor.nombre }}</h1>
             </div>
-
-            <!--TODO -->
-            {# <div class="d-flex justify-center">
-                <img src="/img/{{ actor.nombre }}.jpg" class="img-fluid rounded-top" alt="{{ actor.nombre }}">
-            </div> #}
-		
-			<!-- rounded-top = rounded corners on the top -->
+            <div class="d-flex justify-center m-2">
+            {% if actor.gender == 'M' %}
+                <img src="{{ asset(portraits_directory ~'/'~ (actor.portrait ?? 'default_male.jpg' ))}}" class="rounded-top" alt="{{ actor.portrait }}" title="{{ actor.nombre }}"  style="width:200px; height:200px">
+            {% else %}
+                <img src="{{ asset(portraits_directory ~'/'~ (actor.portrait ?? 'default_female.jpg' ))}}" class="rounded-top" alt="{{ actor.portrait }}" title="{{ actor.nombre }}"  style="width:200px; height:200px">
+            {% endif %}
+            </div>
 			<!-- First content container nested inside card -->
             <div class="content flex-col justify-content-center m-2 p-2"> 
             <h2 class="content-title">

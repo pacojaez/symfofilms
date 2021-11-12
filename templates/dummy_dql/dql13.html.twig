@@ -1,0 +1,24 @@
+{% extends 'layouts/admin.html.twig' %}
+
+{% block title %} Portada {% endblock %}
+
+{% block main %}
+
+<div class="m-6 p-4">
+    <h1>PRUEBAS DE DQL 13</h1>
+    <div class="row">
+        <h2 class="p-2 m-4 font-weight-bold">PELÍCULAS: Contar nº de géneros </h2>
+        <details class="collapse-panel mw-full"> 
+            <summary class="collapse-header">
+                SELECT con COUNT DISTINCT:
+            </summary>
+            <div class="collapse-content">
+               <ul class="m-4">
+                    <li class="font-weight-bold">Hay {{ numeroGeneros }} Géneros distintos</li>
+               </ul>
+                <hr>
+            </div>
+        </details>
+    </div>
+</div>
+{% endblock %}

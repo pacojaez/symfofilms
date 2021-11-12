@@ -37,6 +37,16 @@ class Actor
      */
     private $biografia;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $portrait;
+
+    /**
+     * @ORM\Column(type="string", length=1)
+     */
+    private $gender;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -88,5 +98,33 @@ class Actor
         $this->biografia = $biografia;
 
         return $this;
+    }
+
+    public function getPortrait(): ?string
+    {
+        return $this->portrait;
+    }
+
+    public function setPortrait(?string $portrait): self
+    {
+        $this->portrait = $portrait;
+
+        return $this;
+    }
+
+    public function getGender(): ?string
+    {
+        return $this->gender;
+    }
+
+    public function setGender(string $gender): self
+    {
+        $this->gender = $gender;
+
+        return $this;
+    }
+
+    public function __toString(){
+        return "ID: $this->id --- $this->nombre, nacido el ". $this->fechanacimiento->format('d-m-Y') ." , de nacionalidad $this->nacionalidad";
     }
 }

@@ -8,11 +8,20 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 <div class="example-wrapper">
-<a href=" {{ path('movie_create')}}"><button class="btn btn-primary">AÑADIR NUEVA PELICULA</button></a>
+  <div class="d-flex flex-row justify-content-between align-items-center m-2 p-2">
+    {# Crear variable en Twig #}
+    {% set ruta = 'all_movies' %}
+    <a href=" {{ path ( ruta )}}"><button class="btn btn-primary">AÑADIR NUEVA PELICULA</button></a>
+    {% if totalPaginas > 1 %}
+      {% include('components/pagination.html.twig') %}
+    {% endif %}	
+  </div>
+
 
 <!-- ejemplo de como añadir un modal al proyecto -->
 {# <a href="#modal-2" class="btn btn-primary" role="button">Ejemplo de modal</a> #}
-{% if movies %}			
+{% if movies %}
+
 <!-- Hoverable rows -->
 <table class="table table-hover">
   <thead>
@@ -73,6 +82,11 @@
 	  {% endfor %}
   </tbody>
 </table>
+<div class="d-flex flex-wrap justify-content-center m-2 p-2">
+{% if totalPaginas > 1 %}
+  {% include('components/pagination.html.twig') %}
+{% endif %}
+</div>
 {% else %}
  <div class="p-4 m-4 alert alert-danger" role="alert">
     <h4 class="alert-heading">No hay películas en la DB con ese término de búsqueda</h4>

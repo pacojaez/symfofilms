@@ -26,7 +26,7 @@
 			SymfoFilms
 		</a>
 		<!-- Navbar text -->
-		<span class="navbar-text text-monospace">v3.0</span>
+		<span class="navbar-text text-monospace d-none d-md-flex">v1.0</span>
 		<!-- text-monospace = font-family shifted to monospace -->
 		<!-- Navbar nav -->
 		<ul class="navbar-nav d-none d-md-flex">
@@ -53,9 +53,7 @@
     {# <button class="mx-2 btn btn-primary" type="button" onclick="toggleDemo()">
       <i class="fa fa-sun-o" id="sun"></i>
     </button> #}
-		<div class="mr-0">
-			{{ "now"|date('d/m/Y H:i', timezone="Europe/Madrid")}}
-		</div>
+		<span class="navbar-text text-monospace d-none d-md-flex">{{ "now"|date('d/m/Y H:i', timezone="Europe/Madrid")}}</span>
 		<!-- Navbar form (inline form) -->
 		<form class="ml-auto form-inline d-none d-md-flex" action="{{ path('movie_search') }}" method="POST">
 			<input type="text" class="form-control" name="valor" id="valor" placeholder="Buscador de películas" required="required"> <button class="btn btn-primary" type="submit">SEARCH</button>
@@ -72,17 +70,18 @@
 				<div
 					class="dropdown-menu dropdown-menu-right w-200" aria-labelledby="navbar-dropdown-toggle-btn-1">
 					<!-- w-200 = width: 20rem (200px) -->
-					<a href="{{ path('admin_docs') }}" class="dropdown-item">Docs</a>
-					<a href="#" class="dropdown-item">PELICULAS</a>
+					<a href="{{ path('all_movies') }}" class="dropdown-item">PELÍCULAS</a>
+					<a href="{{ path('all_actors') }}" class="dropdown-item">ACTORES</a>
+					<a href="{{ path('contact') }}" class="dropdown-item">CONTACTO</a>
 					<div class="dropdown-divider"></div>
-					<div class="dropdown-content">
+					{# <div class="dropdown-content">
 						<form action="..." method="...">
 							<div class="form-group">
 								<input type="text" class="form-control" placeholder="Email address" required="required">
 							</div>
 							<button class="btn btn-primary btn-block" type="submit">Sign up</button>
 						</form>
-					</div>
+					</div> #}
 				</div>
 			</div>
 		</div>

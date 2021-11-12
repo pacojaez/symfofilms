@@ -110,11 +110,6 @@ class Movie
         return $this;
     }
 
-    public function  __toString(): string {
-        return "La pelicula $this->titulo dirigida por $this->director 
-                tiene una duración de $this->duracion y es de género $this->genero ";
-    }
-
     public function getSinopsis(): ?string
     {
         return $this->sinopsis;
@@ -161,5 +156,11 @@ class Movie
         $this->caratula = $caratula;
 
         return $this;
+    }
+
+    public function  __toString(): string {
+        return "La pelicula $this->titulo con id $this->id, dirigida por $this->director 
+                tiene una duración de $this->duracion minutos, una valoración de $this->valoracion / 5
+                 y es de género $this->genero ";
     }
 }

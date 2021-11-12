@@ -1,0 +1,26 @@
+{% extends 'layouts/admin.html.twig' %}
+
+{% block title %} Portada {% endblock %}
+
+{% block main %}
+
+<div class="m-6 p-4">
+    <h1>PRUEBAS DE DQL 11</h1>
+    <div class="row">
+        <h2 class="p-2 m-4 font-weight-bold">PELÍCULAS: con PARAMETRO </h2>
+        <details class="collapse-panel mw-full"> 
+            <summary class="collapse-header">
+                SELECT con parámetro (podría ser configurable):
+            </summary>
+            <div class="collapse-content">
+               <ul class="m-4">
+                {% for movie in movies %}
+                    <li class="font-weight-bold">{{ movie }}</li>
+                {% endfor %}
+               </ul>
+                <hr>
+            </div>
+        </details>
+    </div>
+</div>
+{% endblock %}

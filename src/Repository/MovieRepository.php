@@ -33,8 +33,6 @@ class MovieRepository extends ServiceEntityRepository
         ->getResult()
         ;
     }
-
-
     
     // public function findOneBySomeField($value): ?Movie {
 

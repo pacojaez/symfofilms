@@ -5,6 +5,8 @@ twig:
         '%kernel.project_dir%/public/img': images
     globals:
         covers_directory: '%app.covers%'
+        portraits_directory: '%app.portraits%'
+        users_pics_directory: '%app.users_pics%'
         frase: '@App\Services\FrasesService'
 
 when@test:

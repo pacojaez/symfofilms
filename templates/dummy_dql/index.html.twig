@@ -1,0 +1,387 @@
+{% extends 'layouts/admin.html.twig' %}
+
+{% block title %} Portada {% endblock %}
+
+{% block main %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="m-6 p-4">
+    <h1>PRUEBAS DE DQL</h1>
+
+    <div class="row">
+        <h2 class="p-2 m-4 font-weight-bold">PELICULAS CON VALORACION MAYOR DE 3 </h2>
+        <details class="collapse-panel mw-full"> 
+            <summary class="collapse-header">
+            SELECT WHERE:
+            </summary>
+            <div class="collapse-content">
+                <h3 class="m-4">CONSULTA: 
+                    <code class="code">$pelis = $entityManager->createQuery(
+                                        "SELECT m
+                                        FROM App\Entity\Movie m
+                                        WHERE m.valoracion > 3
+                                        ORDER BY m.valoracion DESC"
+                                    )
+                                    ->getResult();
+                    </code>
+                </h3>
+                <hr>
+                <ul class="m-4">
+                    <li><a href="{{ path('dummy_dql1')}}" class="font-weight-bold">VER RESPUESTA</a></li>
+                </ul>
+            </div>
+        </details>
+    </div>
+
+    <div class="row">
+        <h2 class="p-2 m-4 font-weight-bold">PELICULAS: CAMPO TITULO Y AÑO DE ESTRENO SOLAMENTE</h2>
+        <details class="collapse-panel mw-full"> 
+            <summary class="collapse-header">
+            SELECT CAMPOS DE LA DB:
+            </summary>
+            <div class="collapse-content">
+                <h3 class="m-4">CONSULTA: 
+                    <code class="code">$pelis = $entityManager->createQuery(
+                                        "SELECT m.titulo, m.estreno AS year
+                                        FROM App\Entity\Movie m"
+                                    )
+                                    ->getResult();
+                    </code>
+                </h3>
+                <hr>
+                <ul class="m-4">
+                    <li><a href="{{ path('dummy_dql2')}}" class="font-weight-bold">VER RESPUESTA</a></li>
+                </ul>
+            </div>
+        </details>
+    </div>
+
+    <div class="row">
+        <h2 class="p-2 m-4 font-weight-bold">PELICULAS: LIMIT Y OFFSET</h2>
+        <details class="collapse-panel mw-full"> 
+            <summary class="collapse-header">
+            SELECT con limit y offset (importa el orden del FirstResult y MaxResult):
+            </summary>
+            <div class="collapse-content">
+                <h3 class="m-4">CONSULTA: 
+                    <code class="code">$pelis = $entityManager->createQuery(
+                                        "SELECT m
+                                        FROM App\Entity\Movie m
+                                        ORDER BY m.id ASC"
+                                    )
+                                    ->setMaxResults(5)
+                                    ->setFirstResult(0)
+                                    ->getResult();
+                    </code>
+                </h3>
+                <hr>
+                <ul class="m-4">
+                    <li><a href="{{ path('dummy_dql3')}}" class="font-weight-bold">VER RESPUESTA</a></li>
+                </ul>
+            </div>
+        </details>
+    </div>
+
+    <div class="row">
+        <h2 class="p-2 m-4 font-weight-bold">PELICULAS: OPERADORES < Y > </h2>
+        <details class="collapse-panel mw-full"> 
+            <summary class="collapse-header">
+            SELECT con filtros:
+            </summary>
+            <div class="collapse-content">
+                <h3 class="m-4">CONSULTA: 
+                    <code class="code">$pelis = $entityManager->createQuery(
+                                        "SELECT m
+                                        FROM App\Entity\Movie m
+                                        WHERE m.valoracion <= 3 AND m.estreno > 2010
+                                        ORDER BY m.id ASC"
+                                    )
+                                    ->getResult();
+                    </code>
+                </h3>
+                <hr>
+                <ul class="m-4">
+                    <li><a href="{{ path('dummy_dql4')}}" class="font-weight-bold">VER RESPUESTA</a></li>
+                </ul>
+            </div>
+        </details>
+    </div>
+
+    <div class="row">
+        <h2 class="p-2 m-4 font-weight-bold">PELICULAS: ENTRE </h2>
+        <details class="collapse-panel mw-full"> 
+            <summary class="collapse-header">
+            SELECT con OPERADOR BETWEEN:
+            </summary>
+            <div class="collapse-content">
+                <h3 class="m-4">CONSULTA: 
+                    <code class="code">$pelis = $entityManager->createQuery(
+                                        "SELECT m
+                                        FROM App\Entity\Movie m
+                                        WHERE m.valoracion BETWEEN 2 AND 3
+                                        ORDER BY m.id ASC"
+                                    )
+                                    ->getResult();
+                    </code>
+                </h3>
+                <hr>
+                <ul class="m-4">
+                    <li><a href="{{ path('dummy_dql5')}}" class="font-weight-bold">VER RESPUESTA</a></li>
+                </ul>
+            </div>
+        </details>
+    </div>
+
+    <div class="row">
+        <h2 class="p-2 m-4 font-weight-bold">ACTORES: ENTRE </h2>
+        <details class="collapse-panel mw-full"> 
+            <summary class="collapse-header">
+            SELECT con FECHAS BETWEEN (escapar los guiones):
+            </summary>
+            <div class="collapse-content">
+                <h3 class="m-4">CONSULTA: 
+                    <code class="code">$actors = $entityManager->createQuery(
+                                        "SELECT a
+                                        FROM App\Entity\Movie m
+                                        WHERE a.fechanacimiento BETWEEN \'1960\' AND \' 1990\'
+                                        ORDER BY a.id ASC"
+                                    )
+                                    ->getResult();
+                    </code>
+                </h3>
+                <hr>
+                <ul class="m-4">
+                    <li><a href="{{ path('dummy_dql6')}}" class="font-weight-bold">VER RESPUESTA</a></li>
+                </ul>
+            </div>
+        </details>
+    </div>
+
+    <div class="row">
+        <h2 class="p-2 m-4 font-weight-bold">ACTORES: IN </h2>
+        <details class="collapse-panel mw-full"> 
+            <summary class="collapse-header">
+            SELECT con DATOS INCLUIDOS EN:
+            </summary>
+            <div class="collapse-content">
+                <h3 class="m-4">CONSULTA: 
+                    <code class="code">$actors = $entityManager->createQuery(
+                                        'SELECT a
+                                        FROM App\Entity\Actor a
+                                        WHERE a.nacionalidad 
+                                        IN (\'canadiense\' , \'belga\' )'
+                                    )
+                                    ->getResult();
+                    </code>
+                </h3>
+                <hr>
+                <ul class="m-4">
+                    <li><a href="{{ path('dummy_dql7')}}" class="font-weight-bold">VER RESPUESTA</a></li>
+                </ul>
+            </div>
+        </details>
+    </div>
+
+    <div class="row">
+        <h2 class="p-2 m-4 font-weight-bold">ACTORES: LIKE </h2>
+        <details class="collapse-panel mw-full"> 
+            <summary class="collapse-header">
+            SELECT con DATOS COMO:
+            </summary>
+            <div class="collapse-content">
+                <h3 class="m-4">CONSULTA: 
+                    <code class="code">$actors = $entityManager->createQuery(
+                                        'SELECT a
+                                        FROM App\Entity\Actor a
+                                        WHERE a.nombre
+                                        LIKE \'%mari%\' 
+                                        '
+                                    )
+                                    ->getResult();
+                    </code>
+                </h3>
+                <hr>
+                <ul class="m-4">
+                    <li><a href="{{ path('dummy_dql8')}}" class="font-weight-bold">VER RESPUESTA</a></li>
+                </ul>
+            </div>
+        </details>
+    </div>
+
+    <div class="row">
+        <h2 class="p-2 m-4 font-weight-bold">PELÍCULAS: NOT NULL </h2>
+        <details class="collapse-panel mw-full"> 
+            <summary class="collapse-header">
+            SELECT con DATOS NULL (o NOT NULL podría ser) ?????????:
+            </summary>
+            <div class="collapse-content">
+                <h3 class="m-4">CONSULTA: 
+                    <code class="code">$movies = $entityManager->createQuery(
+                                        'SELECT m
+                                        FROM App\Entity\Movie m
+                                        WHERE m.sinopsis IS NULL
+                                        '
+                                    )
+                                    ->getResult();
+                    </code>
+                </h3>
+                <hr>
+                <ul class="m-4">
+                    <li><a href="{{ path('dummy_dql10')}}" class="font-weight-bold">VER RESPUESTA</a></li>
+                </ul>
+            </div>
+        </details>
+    </div>
+
+    <div class="row">
+        <h2 class="p-2 m-4 font-weight-bold">PELÍCULAS: PARÁMETROS CON NOMBRE </h2>
+        <details class="collapse-panel mw-full"> 
+            <summary class="collapse-header">
+            SELECT con PARÁMETROS (retornamos un getSingleResult()):
+            </summary>
+            <div class="collapse-content">
+                <h3 class="m-4">CONSULTA: 
+                    <code class="code">$movies = $entityManager->createQuery(
+                                    'SELECT m
+                                    FROM App\Entity\Movie m
+                                    WHERE m.titulo LIKE :titulo')
+                                    ->setParameter('titulo',  "%$titulo%")
+                                    ->getResult();
+                    </code>
+                </h3>
+                <hr>
+                <h3 class="m-4">RUTA: 
+                    <code class="code">#[Route('/dummy/dql11/{titulo}', name: 'dummy_dql11', methods:"GET", defaults: ['titulo'=> 'Rocketman'])]</code>
+                </h3>
+                <hr>
+                <ul class="m-4">
+                    <li><a href="{{ path('dummy_dql11', {'titulo': 'LennonNYC'} ) }}" class="font-weight-bold">VER RESPUESTA con  path('dummy_dql11', {'titulo': 'LennonNYC'} </a></li>
+                </ul>
+            </div>
+        </details>
+    </div>
+
+    <div class="row">
+        <h2 class="p-2 m-4 font-weight-bold">PELÍCULAS: agrupando con DISTINCT </h2>
+        <details class="collapse-panel mw-full"> 
+            <summary class="collapse-header">
+            SELECT con Distinct
+            </summary>
+            <div class="collapse-content">
+                <h3 class="m-4">CONSULTA: 
+                    <code class="code">$movies = $entityManager->createQuery(
+                                        'SELECT DISTINTC m.GENERO
+                                        FROM App\Entity\Movie m
+                                        ')
+                                        ->getResult();
+                    </code>
+                </h3>
+                <hr>
+                <ul class="m-4">
+                    <li><a href="{{ path('dummy_dql12') }}" class="font-weight-bold">VER RESPUESTA </a></li>
+                </ul>
+            </div>
+        </details>
+    </div>
+
+    <div class="row">
+        <h2 class="p-2 m-4 font-weight-bold">PELÍCULAS: COUNT DISTINCT géneros </h2>
+        <details class="collapse-panel mw-full"> 
+            <summary class="collapse-header">
+            SELECT con COUNT Distinct
+            </summary>
+            <div class="collapse-content">
+                <h3 class="m-4">CONSULTA: 
+                    <code class="code">$numeroGeneros = $entityManager->createQuery(
+                                        'SELECT COUNT(DISTINCT m.genero)
+                                        FROM App\Entity\Movie m
+                                        ')
+                                        ->getSingleScalarResult();
+                    </code>
+                </h3>
+                <hr>
+                <ul class="m-4">
+                    <li><a href="{{ path('dummy_dql13') }}" class="font-weight-bold">VER RESPUESTA </a></li>
+                </ul>
+            </div>
+        </details>
+    </div>
+
+    <div class="row">
+        <h2 class="p-2 m-4 font-weight-bold">PELÍCULAS: CAMPOS CALCULADOS</h2>
+        <details class="collapse-panel mw-full"> 
+            <summary class="collapse-header">
+            SELECT VALORACIÓN SOBRE 100
+            </summary>
+            <div class="collapse-content">
+                <h3 class="m-4">CONSULTA: 
+                    <code class="code">$movies = $entityManager->createQuery(
+                                    'SELECT m.titulo, m.valoracion*20 AS sobreCien
+                                    FROM App\Entity\Movie m
+                                    ORDER BY sobreCien DESC, p.titulo ASC
+                                    ')
+                                    ->getResult();
+                    </code>
+                </h3>
+                <hr>
+                <ul class="m-4">
+                    <li><a href="{{ path('dummy_dql14') }}" class="font-weight-bold">VER RESPUESTA </a></li>
+                </ul>
+            </div>
+        </details>
+    </div>
+
+    <div class="row">
+        <h2 class="p-2 m-4 font-weight-bold">FECHAS: CALCULO EDAD EN DQL</h2>
+        <details class="collapse-panel mw-full"> 
+            <summary class="collapse-header">
+            SELECT CALCULANDO EDAD
+            </summary>
+            <div class="collapse-content">
+                <h3 class="m-4">CONSULTA: 
+                    <code class="code">'SELECT a.nombre, DATE_DIFF(CURRENT_DATE(), a.fechanacimiento)/365 AS edad
+                                        FROM App\Entity\Actor a
+                                        ORDER BY edad DESC
+                                        ')
+                                        ->getResult();
+                    </code>
+                </h3>
+                <hr>
+                <ul class="m-4">
+                    <li><a href="{{ path('dummy_dql15') }}" class="font-weight-bold">VER RESPUESTA </a></li>
+                </ul>
+            </div>
+        </details>
+    </div>
+
+    <div class="row">
+        <h2 class="p-2 m-4 font-weight-bold">FECHAS: CALCULO EDAD CON FUNCIÓN YEAR</h2>
+        <details class="collapse-panel mw-full"> 
+            <summary class="collapse-header">
+            SELECT CALCULANDO EDAD CON FUNCION YEAR
+            </summary>
+            <div class="collapse-content">
+                <h3 class="m-4">CONSULTA: 
+                    <code class="code">$actors = $entityManager->createQuery(
+                                'SELECT a.nombre, YEAR(CURRENT_DATE()-a-fechanacimiento AS edad
+                                FROM App\Entity\Actor a
+                                ORDER BY edad DESC
+                                ')
+                                ->getResult();
+                    </code>
+                </h3>
+                <hr>
+                <ul class="m-4">
+                    <li><a href="{{ path('dummy_dql16') }}" class="font-weight-bold">VER RESPUESTA </a></li>
+                    <li>INSTALAR: <code class="code">composer require beberlei/DoctrineExtensions</code> </li>
+                </ul>
+            </div>
+        </details>
+    </div>
+
+
+</div>
+{% endblock %}

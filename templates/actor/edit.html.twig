@@ -1,20 +1,55 @@
 {% extends 'layouts/base.html.twig' %}
 
-{% block title %}WEditar una ficha de Actor de la DB{% endblock %}
+{% block title %}Editar una ficha de Actor de la DB{% endblock %}
 
 {% block main %}
 {{ parent() }}
 <!-- Card with no padding with multiple content containers nested inside of it -->
-<div class="w-800 mw-full">
-  <h2>EDICION DE LA FICHA DEL ACTOR {{ actor.nombre }}
-  <img src="/img/{{ actor.nombre }}.jpg" class="img-fluid rounded-top" alt="{{ actor.nombre }}"> 
-  <!-- w-600 = width: 60rem (600px), mw-full = max-width: 100% -->
-  <div class="card p-0"> <!-- p-0 = padding: 0 -->
-    <!-- First content container nested inside card -->
-    <div class="content">
-      {{ form(formulario) }}
+  <div class="w-800 mw-full">
+    <div class="d-flex justify-center m-2">
+      <h2>EDICION DE LA FICHA DEL ACTOR {{ actor.nombre }}
     </div>
-    
-  </div>
+    <div class="d-flex justify-center m-2">
+      <figure>
+        {% if actor.gender == 'M' %}
+            <img src="{{ asset(portraits_directory ~'/'~ (actor.portrait ?? 'default_male.jpg' ))}}" class="img-fluid rounded-top rounded-top m-4" alt="{{ actor.portrait }}" title="{{ actor.nombre }}"  style="width:200px; height:200px">
+        {% else %}
+            <img src="{{ asset(portraits_directory ~'/'~ (actor.portrait ?? 'default_female.jpg' ))}}" class="img-fluid rounded-top rounded-top m-4" alt="{{ actor.portrait }}" title="{{ actor.nombre }}"  style="width:200px; height:200px">
+        {% endif %}
+        <figcaption class="m-4 text-center">Imagen Actual en la DB </figcaption>
+      </figure>
+      <figure>
+        {% if actor.gender == 'M' %}
+            <img src="{{ asset(portraits_directory ~'/'~ (actor.portrait ?? 'default_male.jpg' ))}}" id="preview" class="img-fluid rounded-top rounded-top m-4" alt="{{ actor.portrait }}" title="{{ actor.nombre }}"  style="width:200px; height:200px">
+        {% else %}
+            <img src="{{ asset(portraits_directory ~'/'~ (actor.portrait ?? 'default_female.jpg' ))}}" id="preview" class="img-fluid rounded-top rounded-top m-4" alt="{{ actor.portrait }}" title="{{ actor.nombre }}"  style="width:200px; height:200px">
+        {% endif %}
+          {# <img 
+            id="preview" 
+            src="{{ asset(portraits_directory ~ '/' ~ (actor.portrait) ?? 'default.jpg' )}}" 
+            class="img-fluid rounded-top rounded-top m-4" 
+            alt="{{ actor.nombre }}" 
+            title="{{ actor.nombre }}"
+            style="width:200px; height:200px"
+          > #}
+          <figcaption class="m-4 text-center"> Resultado de los cambios</figcaption>
+      </figure>
+        {% if actor.portrait %}
+            <figcaption class="m-4">
+              <a href="{{ path('actor_delete_image', {'id': actor.id }) }}">
+                <img src="{{ asset('img/buttons/delete.png') }}" height="30" width="30" aly="Borrar carátula" title="Borrar carátula"> 
+              </a>
+            </figcaption>
+        {% endif %}
+    </div>
+
+    <!-- w-600 = width: 60rem (600px), mw-full = max-width: 100% -->
+    <div class="card p-0"> <!-- p-0 = padding: 0 -->
+      <!-- First content container nested inside card -->
+      <div class="content">
+        {{ form(formulario) }}
+      </div>
+    </div>
 </div>
+<script src=" {{ asset('/js/previsualizacionactor.js') }}"></script>
 {% endblock %}

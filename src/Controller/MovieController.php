@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 use Symfony\Component\Filesystem\Filesystem;
 use App\Services\FileService;
+use App\Services\PaginatorService;
 
 use Psr\Log\LoggerInterface;
 
@@ -29,12 +30,22 @@ class MovieController extends AbstractController
     }
     
     
-    #[Route('/allmovies', name: 'all_movies')]
-    public function allmovies(): Response {
+    #[Route('/allmovies/{pagina}', name: 'all_movies', defaults: ['pagina'=> 1], methods: 'GET' )]
+    public function allmovies(int $pagina,  PaginatorService $paginator ): Response {
 
-        $movies = $this->getDoctrine()->getRepository( Movie::class )->findAll();
+        $paginator->setEntityType('App\Entity\Movie');
+
+        $movies = $paginator->findAllEntities( $pagina );
+
+        // $movies = $paginator->getPageList();
+
+        // $movies = $this->getDoctrine()->getRepository( Movie::class )->findAll();       //metodo para recuperar las pelis sin paginacion
+
         return $this->render('movie/allmovies.html.twig', [
             'movies' => $movies,
+            'totalPaginas' => $paginator->getTotalPages(),
+            'totalItems' => $paginator->getTotalItems(),
+            'paginaActual' => $pagina,
         ]);
     }
 
@@ -60,6 +71,7 @@ class MovieController extends AbstractController
 
     #[Route('/movie/create', name: 'movie_create')]
     public function create( Request $request, LoggerInterface $appInfoLogger, FileService $uploader ){
+
         $peli = new Movie();
 
         $formulario = $this->createForm( MovieFormType::class, $peli );
@@ -69,19 +81,18 @@ class MovieController extends AbstractController
 
         if($formulario->isSubmitted() && $formulario->isValid()){
             
-            $file = $request->files->get('movie_form')['caratula'];
+            // $file = $request->files->get('movie_form')['caratula'];
 
             $file = $formulario->get('caratula')->getData();
            
             if( $file ){
-
                 // $extension = $file->guessExtension();
                 // $directorio = $this->getParameter('app.covers_root');
                 // $fichero = uniqid().".$extension";
                 // $file->move($directorio, $fichero);
                 // $peli->setCaratula($fichero);
+                $uploader->targetDirectory = $this->getParameter('app.covers_root');
                 $peli->setCaratula($uploader->upload($file));       // pasamos a tener una sola linea de código en vez de 5 tras implementar el servicio
-               
             }
 
             $entityManager = $this->getDoctrine()->getManager();
@@ -114,7 +125,8 @@ class MovieController extends AbstractController
 
         if($formulario->isSubmitted() && $formulario->isValid()){
 
-            $file = $request->files->get('movie_form')['caratula'];
+            // $file = $request->files->get('movie_form')['caratula'];
+            $file = $formulario->get('caratula')->getData();
 
             if($file){
                 // $directorio = $this->getParameter('app.covers_root');
@@ -127,12 +139,14 @@ class MovieController extends AbstractController
                 // $extension = $file->guessExtension();
                 // $fichero = uniqid()."$extension"; 
                 // $file->move( $directorio, $fichero );
-                
-                $peli->setCaratula( $uploader->update( $file, $fichero ));
+                $uploader->targetDirectory = $this->getParameter('app.covers_root');
+                $fichero = $uploader->replace( $file, $fichero );     
+                $this->addFlash( 'success', 'Imagen actualizada correctamente' );
+                // $this->addFlash( 'success', 'Imagenes reemplazadas correctamente' );
                 // probado con exito el borrado del fichero: 618a94c1cef64.jpg
             }
 
-            // $peli->setCaratula($fichero);
+            $peli->setCaratula($fichero);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();
@@ -153,7 +167,7 @@ class MovieController extends AbstractController
     }
 
     #[Route('/movie/delete/{id}', name: 'movie_delete')]
-    public function delete( Movie $peli, Request $request, LoggerInterface $appInfoLogger, FileService $removeFile ): Response {
+    public function delete( Movie $peli, Request $request, LoggerInterface $appInfoLogger, FileService $uploader ): Response {
 
         $formulario = $this->createForm( MovieDeleteFormType::class, $peli );
 
@@ -166,7 +180,13 @@ class MovieController extends AbstractController
                 // $directorio = $this->getParameter('app.covers_root');
                 // $filesystem = new Filesystem(); 
                 // $filesystem->remove($directorio.'/'.$peli->getCaratula());
-                $removeFile->remove( $peli->getCaratula() );
+                $uploader->targetDirectory = $this->getParameter('app.covers_root');
+
+                if( $uploader->remove( $peli->getCaratula())){
+                    $this->addFlash( 'success', 'Imagen borrada correctamente' );
+                }else{
+                    $this->addFlash( 'warning', 'Imagen no borrada' );
+                }
             }
 
             $entityManager = $this->getDoctrine()->getManager();
@@ -186,19 +206,22 @@ class MovieController extends AbstractController
         ]);
     }
 
-     /**
-     * @Route("/movie/search", name="movie_search")
-     */
+    #[Route('/movie/search', name: 'movie_search', methods: 'POST' )]
     public function search( Request $request, LoggerInterface $appSearchLogger ): Response {
         
         $valor = $request->request->get('valor');
 
         $movies = $this->getDoctrine()->getRepository( Movie::class )->findByTitle( $valor );
+        
+        // $movies->findByTitle( $valor );
 
         $appSearchLogger->info( "Se ha buscado el término: ".$valor );
 
         return $this->render('movie/allmovies.html.twig', [
             'movies' => $movies,
+            'totalPaginas' => 5,
+            'totalItems' => 5,
+            'paginaActual' => 1,
         ]);
     }
 
@@ -221,13 +244,22 @@ class MovieController extends AbstractController
     }
 
     #[Route('/movie/deleteimage/{id}', name: 'movie_delete_image', methods:"GET")]
-    public function deleteimage( Movie $peli, Request $request, LoggerInterface $appInfoLogger ): Response {
+    public function deleteimage( Movie $peli, Request $request, LoggerInterface $appInfoLogger, FileService $uploader ): Response {
    
         if($peli->getCaratula()){
 
-            $filesystem = new Filesystem();
-            $directorio = $this->getParameter('app.covers_root');
-            $filesystem->remove($directorio.'/'.$peli->getCaratula());
+            // $filesystem = new Filesystem();
+            // $directorio = $this->getParameter('app.covers_root');
+            $uploader->targetDirectory = $this->getParameter('app.covers_root');
+            $uploader->remove( $peli->getCaratula() );
+
+            if( $uploader->remove( $peli->getCaratula())){
+                $this->addFlash( 'success', 'Imagen borrada correctamente' );
+            }else{
+                $this->addFlash( 'warning', 'Imagen no borrada' );
+            }
+
+            // $filesystem->remove($directorio.'/'.$peli->getCaratula());
             $peli->setCaratula(NULL);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();

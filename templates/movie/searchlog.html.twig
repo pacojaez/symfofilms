@@ -18,11 +18,15 @@
     </tr>
   </thead>
   <tbody>
+  {% if resultado %}
   	{% for log in resultado %}
     <tr>
       <th>{{ log }}</th>
     </tr>
 	  {% endfor %}
+  {% else %}
+    <th>Aún no hay términos que hayan buscado los usuarios </th>
+  {% endif %}
   </tbody>
 </table>
 

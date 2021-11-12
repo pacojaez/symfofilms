@@ -721,6 +721,29 @@
     </div>
 
     <div class="row">
+      <h2 class="p-2 m-4 font-weight-bold">PAGINACIÓN: SYMFONY19</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+          Cómo implementar la paginación
+        </summary>
+        <div class="collapse-content">
+            <ul>
+                <li>Doctrine paginator: <code class="code">use Doctrine\ORM\Tools\Pagination\Paginator;</code></li>
+                <li>Packages: <code class="code">KNP paginator  Pagerfanta para</code></li>
+                <li>Método paginate() en el repositorio:<code class="code">$fichero = $formulario->get(‘caratula')->getData();</code></li>
+                <li>Método findAllMovies() en el repositorio:<code class="code">isValid(), getError(), getClientOriginalName(), guessExtension(), move(), ...</code></li>
+                <li>Paginación en un servicio: (mejor hacerlo en un servicio para todas las entidades del proyecto)
+                    <code class="code">
+                      Valor de configuración en el .env APP_COVERS="/img/covers", dos parámetros en services.yaml: app.covers: '(%env(APP_COVERS)%)' y app.covers_root:'(%kernel.project_dir%/public/%app.covers%)'
+                    </code>
+                </li>
+                <li>Configuración de Twig para crear un parámetro global: <code class="code">globals: covers_directory: '%app.covers%'</code></li>
+            </ul>
+        </div>
+      </details>
+    </div>
+
+    <div class="row">
       <h2 class="p-2 m-4 font-weight-bold">Extra: METODO DE BUSQUEDA EN EL REPOSITORY</h2>
       <details class="collapse-panel mw-full"> 
         <summary class="collapse-header">

@@ -12,6 +12,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Validator\Constraints\File;
 
 
 class ActorFormType extends AbstractType
@@ -38,6 +41,36 @@ class ActorFormType extends AbstractType
                 'required' => false,
                 'label_format' => 'BIOGRAFÍA',
                 ])
+            ->add('gender', ChoiceType::class, [
+                'choices' => [
+                    'Actor' => 'M',
+                    'Actriz' => 'F'
+                ],
+                'label' => 'GÉNERO',
+                'attr' => ['class' => 'form-control'],
+                'required' => true,
+            ])
+            // ->add('gender', RadioType::class, [
+            //     'label' => 'Actor',
+            //     'data' => 'M'
+            //     ])
+            // ->add('gender', RadioType::class, [
+            //     'attr' => ['class' => 'form-control'],
+            //     'required' => true,
+            //     'label_format' => 'GÉNERO',
+            //     ])
+            ->add('portrait', FileType::class, [
+                'required' => false,
+                'data_class' => NULL,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '10240k',
+                        'mimeTypes' => [ 'image/jpeg', 'image/png', 'image/gif'],
+                        'mimeTypesMessage' => 'La image debe de ser jpg, gif o png'
+                    ])
+                ],
+                'attr' => ['class' => 'form-control']
+            ])
             ->add('Guardar', SubmitType::class, [
                 'attr' => ['class' => 'btn btn-primary']
                 ]

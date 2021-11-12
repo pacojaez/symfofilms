@@ -10,10 +10,77 @@
     </div>
 
     <div class="row">
-      <h2 class="p-2 m-4 font-weight-bold">ENVIO DE MAILS</h2>
+      <h2 class="p-2 m-4 font-weight-bold">TODO: BUGS</h2>
       <details class="collapse-panel mw-full"> 
         <summary class="collapse-header">
-          EMAILS:
+          Errores a arreglar:
+        </summary>
+        <div class="collapse-content">
+            <ul class="m-4">
+                {# <li>Si no se ha buscado un término de búsqueda da error. <code class="code">Warning: file(..\var\log\appsearch.log): Failed to open stream: No such file or directory</code> </li>                #}
+            </ul>
+            <hr>
+        </div>
+      </details>
+    </div>
+
+    <div class="row">
+      <h2 class="p-2 m-4 font-weight-bold">DONE: BUGS</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+          Errores arreglados:
+        </summary>
+        <div class="collapse-content">
+            <ul class="m-4">
+                <li>ERROR: Si no se ha buscado un término de búsqueda da error. <code class="code">Warning: file(..\var\log\appsearch.log): Failed to open stream: No such file or directory</code> </li>               
+                <li>SOLUCIÓN: DefaultController::class metodo searchlogs() //evitar error de que no exista el archivo<code class="code">if( file_exists('..\var\log\appsearch.log')){ </code> </li>               
+            </ul>
+            <ul class="m-4">
+                <li>ERROR: Si no se ha buscado un término de búsqueda da error. <code class="code">Warning: file(..\var\log\appsearch.log): Failed to open stream: No such file or directory</code> </li>               
+                <li>SOLUCIÓN: DefaultController::class metodo searchlogs() //evitar error de que no exista el archivo<code class="code">if( file_exists('..\var\log\appsearch.log')){ </code> </li>               
+            </ul>
+            <hr>
+        </div>
+      </details>
+    </div>
+
+    <div class="row">
+      <h2 class="p-2 m-4 font-weight-bold">TODO: AÑADIR FUNCIONALIDADES</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+          CSS, JS, PHP:
+        </summary>
+        <div class="collapse-content">
+            <ul class="m-4">
+                <li>try catch en el FileService</li>                
+            </ul>
+            <hr>
+        </div>
+      </details>
+    </div>
+
+    <div class="row">
+      <h2 class="p-2 m-4 font-weight-bold">DONE: AÑADIR FUNCIONALIDADES</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+          CSS, JS, PHP:
+        </summary>
+        <div class="collapse-content">
+            <ul class="m-4">
+                <li>Actors and users images. Usar el FileService para todas las entidades, definiendo rutas de directorios diferentes</li>
+                <li>try catch en el FileService</li>
+                
+            </ul>
+            <hr>
+        </div>
+      </details>
+    </div>
+
+    <div class="row">
+      <h2 class="p-2 m-4 font-weight-bold">MEJORAS ESTILOS</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+          CSS Y JS:
         </summary>
         <div class="collapse-content">
             <ul class="m-4">
@@ -25,6 +92,7 @@
         </div>
       </details>
     </div>
+
 </div>
 
 {% endblock %}

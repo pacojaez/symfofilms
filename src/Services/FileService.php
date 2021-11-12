@@ -2,8 +2,10 @@
 
 namespace App\Services;
 
+use PhpParser\Node\Stmt\TryCatch;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class FileService{
     //PROPIEDADES
@@ -13,43 +15,44 @@ class FileService{
         $this->targetDirectory = $targetDirectory;
     }
 
-    public function upload ( UploadedFile $file ) : String {
+    public function upload ( UploadedFile $file ) : ?String {
 
         $extension = $file->guessExtension();
         $fichero = uniqid().".$extension";
 
-        $file->move($this->targetDirectory, $fichero);
+        try{
+            $file->move($this->targetDirectory, $fichero);
+        }catch (FileException $e ){
+            return NULL;
+        }
+        return $fichero;
+    }
+
+    public function remove ( string $imagen ) {
+
+        $filesystem = new Filesystem();
+        return $filesystem->remove($this->targetDirectory.'/'.$imagen);
+
+    }
+
+    public function replace ( UploadedFile $file, String|NULL $imagenAntigua ): ?String {
+
+        $extension = $file->guessExtension();
+        $fichero = uniqid().".$extension";
+
+        try{
+            $file->move($this->targetDirectory, $fichero);
+
+            if( $imagenAntigua ){
+                $filesystem = new Filesystem();
+                $filesystem->remove( $this->targetDirectory.'/'.$imagenAntigua);
+            }
+        }catch( FileException $e){
+            return $imagenAntigua;
+        }
 
         return $fichero;
 
     }
-
-    public function remove ( string $imagen ): Boolean {
-
-        $filesystem = new Filesystem();
-
-        return $filesystem->remove($this->targetDirectory.'/'.$imagen);
-
-
-    }
-
-    public function update ( UploadedFile $file, ?string $imagenAntigua ){
-
-        if( $imagenAntigua != NULL ){
-            $filesystem = new Filesystem();
-            $filesystem->remove ($this->targetDirectory.'/'.$imagenAntigua );
-        }
-
-        $extension = $file->guessExtension();
-        $fichero = uniqid().".$extension";
-
-        if( $file->move($this->targetDirectory, $fichero)){
-            return $fichero;
-        }else{
-            return 'No se pudieron hacer los cambios en la DB';
-        }
-
-    }
-
 
 }
