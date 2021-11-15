@@ -1,7 +1,7 @@
 {% block navbar %}
 	<!-- Navbar (immediate child of the page wrapper) -->
 	<nav
-		class="navbar">
+		class="navbar justify-content-between">
 		<!-- Navbar content (with toggle sidebar button) -->
 		<div
 			class="navbar-content">
@@ -23,28 +23,16 @@
 		<!-- Navbar brand -->
 		<a href="{{ path('portada') }}" class="navbar-brand">
 			<img src="/img/icono.png" alt="SymfoFilms">
-			SymfoFilms
+			SymfoFilms <span class="navbar-text text-monospace d-none d-md-flex">v1.0</span>
 		</a>
 		<!-- Navbar text -->
-		<span class="navbar-text text-monospace d-none d-md-flex">v1.0</span>
+		
 		<!-- text-monospace = font-family shifted to monospace -->
 		<!-- Navbar nav -->
-		<ul class="navbar-nav d-none d-md-flex">
-			<!-- d-none = display: none, d-md-flex = display: flex on medium screens and up (width > 768px) -->
-			{# <li class="nav-item {{ app.request.get('_route') == 'docs' ? 'active'}}">
-			            <a href="{{ path('admin_docs') }}" class="nav-link">Docs</a>
-			          </li> #}
-			{# <li class="nav-item {{ app.request.get('_route') == 'components' ? 'active'}}">
-			            <a href="{{ path('components') }}" class="nav-link">CSS COMPONENTS</a>
-			          </li> #}
-				<li class="nav-item {{ app.request.get('_route') == 'all_movies' ? 'active'}}"> <a href="{{ path('all_movies') }}" class="nav-link">Peliculas</a>
-			</li>
-			<li class="nav-item {{ app.request.get('_route') == 'all_actors' ? 'active'}}">
-				<a href="{{ path('all_actors') }}" class="nav-link">Actores</a>
-			</li>
-			<li class="nav-item {{ app.request.get('_route') == 'contact' ? 'active'}}">
-				<a href="{{ path('contact') }}" class="nav-link">Contacto</a>
-			</li>
+		<ul class="navbar-nav d-none d-md-flex justify-content-end">
+			<li class="nav-item {{ app.request.get('_route') == 'all_movies' ? 'active'}}"><a href="{{ path('all_movies') }}" class="nav-link">Peliculas</a></li>
+			<li class="nav-item {{ app.request.get('_route') == 'all_actors' ? 'active'}}"><a href="{{ path('all_actors') }}" class="nav-link">Actores</a></li>
+			<li class="nav-item {{ app.request.get('_route') == 'contact' ? 'active'}}"><a href="{{ path('contact') }}" class="nav-link">Contacto</a></li>
 		</ul>
 		<!-- Toggling dark mode -->
     <button class="mx-2 btn btn-primary" type="button" onclick="toggleDemo()">
@@ -55,9 +43,9 @@
     </button> #}
 		<span class="navbar-text text-monospace d-none d-md-flex">{{ "now"|date('d/m/Y H:i', timezone="Europe/Madrid")}}</span>
 		<!-- Navbar form (inline form) -->
-		<form class="ml-auto form-inline d-none d-md-flex" action="{{ path('movie_search') }}" method="POST">
+		{# <form class="ml-auto form-inline d-none d-md-flex" action="{{ path('movie_search') }}" method="POST">
 			<input type="text" class="form-control" name="valor" id="valor" placeholder="Buscador de películas" required="required"> <button class="btn btn-primary" type="submit">SEARCH</button>
-		</form>
+		</form> #}
 		<!-- Navbar content (with the dropdown menu) -->
 		<div
 			class="ml-auto navbar-content d-md-none">

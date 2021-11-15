@@ -3,8 +3,32 @@
 {% block title %} Portada {% endblock %}
 
 {% block main %}
+<div class="d-flex flex-col justify-content-center m-4 p-2">
+    <h2 class="text-center">ÚLTIMAS PELÍCULAS AÑADIDAS CON CARÁTULAS</h2>
+    <div class="d-flex justify-content-center">
+        {% for peli in pelisLastsWithCovers %} 
+            <div class="w-300 h-quarter m-2 p-2">
+                <img src="{{ asset(covers_directory ~'/'~ (peli.caratula ?? 'default.jpg' ))}}" class="rounded-top" alt="{{ peli.titulo }}" title="{{ peli.titulo }}"> 
+                <div class="col-sm text-center">{{ peli.titulo }}</div>
+            </div>           
+        {% endfor %}
+    </div>
+</div>
 
-<div class="container-fluid">
+<div class="d-flex flex-col justify-content-center m-4 p-2">
+    <h2 class="text-center">PELÍCULAS MEJOR VALORADAS</h2>
+    <div class="d-flex justify-content-center">
+        {% for peli in pelisMejorValoradas %} 
+            <div class="w-200 h-quarter m-2 p-2">
+                <img src="{{ asset(covers_directory ~'/'~ (peli.caratula ?? 'default.jpg' ))}}" class="img-fluid rounded-top" alt="{{ peli.titulo }}" title="{{ peli.titulo }}"> 
+                <div class="col-sm text-center">{{ peli.titulo }}</div>
+                <div class="col-sm text-center font-weight-bold">VALORACIÓN: {{ peli.valoracion }}</div>
+            </div>           
+        {% endfor %}
+    </div>
+</div>
+
+{# <div class="container-fluid">
   <div class="row">
         {% for peli in peliculas %}
         <!-- Card with no padding with a content container nested inside of it -->
@@ -34,6 +58,6 @@
         </div>
         {% endfor %}
     </div>
-</div>
+</div> #}
 
 {% endblock %}

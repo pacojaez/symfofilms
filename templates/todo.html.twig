@@ -17,7 +17,8 @@
         </summary>
         <div class="collapse-content">
             <ul class="m-4">
-                {# <li>Si no se ha buscado un término de búsqueda da error. <code class="code">Warning: file(..\var\log\appsearch.log): Failed to open stream: No such file or directory</code> </li>                #}
+                <li>Metodo search() no funciona la paginación <code class="code"></code></li>            
+                <li>ERROR: allMovies tira todas las peliculas en lugar de paginar las 5 primeras <code class="code"></code> </li>
             </ul>
             <hr>
         </div>
@@ -36,8 +37,8 @@
                 <li>SOLUCIÓN: DefaultController::class metodo searchlogs() //evitar error de que no exista el archivo<code class="code">if( file_exists('..\var\log\appsearch.log')){ </code> </li>               
             </ul>
             <ul class="m-4">
-                <li>ERROR: Si no se ha buscado un término de búsqueda da error. <code class="code">Warning: file(..\var\log\appsearch.log): Failed to open stream: No such file or directory</code> </li>               
-                <li>SOLUCIÓN: DefaultController::class metodo searchlogs() //evitar error de que no exista el archivo<code class="code">if( file_exists('..\var\log\appsearch.log')){ </code> </li>               
+                               
+                {# <li>SOLUCIÓN: DefaultController::class metodo searchlogs() //evitar error de que no exista el archivo<code class="code">if( file_exists('..\var\log\appsearch.log')){ </code> </li>                #}
             </ul>
             <hr>
         </div>

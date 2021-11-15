@@ -1,0 +1,24 @@
+
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Todas las peliculas{% endblock %}
+
+{% block main %}
+
+    <div class="d-flex flex-row justify-content-center mb-6 mt-0">
+        {{ form_start(formulario)}}
+            <div class="form-control">{{ form_row(formulario.valor)}}</div>
+
+        {{ form_end(formulario) }}
+    </div>
+
+    <h4>RESULTADOS</h4>
+
+    {% include 'movie/lista_peliculas.html.twig' %}
+
+    <div class="d-flex flex-row">
+        <a href="{{ path('movie_list') }}"> VOLVER AL LISTADO</a>
+    </div>
+
+
+{% endblock %}

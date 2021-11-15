@@ -10,22 +10,31 @@ use App\Entity\Movie;
 use App\Form\MovieFormType;
 use App\Form\MovieDeleteFormType;
 use App\Form\ImageDeleteFormType;
+use App\Form\SearchFormType;       
 use Symfony\Component\HttpFoundation\Request;
 
 use Symfony\Component\Filesystem\Filesystem;
 use App\Services\FileService;
 use App\Services\PaginatorService;
+use App\Services\SimpleSearchService;
+use Doctrine\ORM\EntityManagerInterface;
 
 use Psr\Log\LoggerInterface;
 
 class MovieController extends AbstractController
 {
     #[Route('/', name: 'portada')]
-    public function portada(): Response
+    public function portada( EntityManagerInterface $entityManager ): Response
     {           
         $peliculas = $this->getDoctrine()->getRepository( Movie::class )->findAll();
+
+        $pelisLastsWithCovers =  $this->getDoctrine()->getRepository( Movie::class )->findLastsWithCovers(3);
+        $pelisMejorValoradas = $this->getDoctrine()->getRepository( Movie::class )->findBetterValoration(5);
+        // $movies = $this->getDoctrine()->getRepository( Movie::class )->findByTitle( $valor );
+
         return $this->render('portada.html.twig', [
-            'peliculas' => $peliculas,
+            'pelisLastsWithCovers' => $pelisLastsWithCovers,
+            'pelisMejorValoradas' => $pelisMejorValoradas
         ]);
     }
     
@@ -46,6 +55,7 @@ class MovieController extends AbstractController
             'totalPaginas' => $paginator->getTotalPages(),
             'totalItems' => $paginator->getTotalItems(),
             'paginaActual' => $pagina,
+            'entidad' => 'Películas'
         ]);
     }
 
@@ -206,22 +216,52 @@ class MovieController extends AbstractController
         ]);
     }
 
-    #[Route('/movie/search', name: 'movie_search', methods: 'POST' )]
-    public function search( Request $request, LoggerInterface $appSearchLogger ): Response {
+    // #[Route('/movie/search', name: 'movie_search', methods: 'POST' )]
+    // public function search( Request $request, LoggerInterface $appSearchLogger ): Response {
         
-        $valor = $request->request->get('valor');
+    //     $valor = $request->request->get('valor');
 
-        $movies = $this->getDoctrine()->getRepository( Movie::class )->findByTitle( $valor );
+    //     $movies = $this->getDoctrine()->getRepository( Movie::class )->findByTitle( $valor );
         
-        // $movies->findByTitle( $valor );
+    //     // $movies->findByTitle( $valor );
 
-        $appSearchLogger->info( "Se ha buscado el término: ".$valor );
+    //     $appSearchLogger->info( "Se ha buscado el término: ".$valor );
 
-        return $this->render('movie/allmovies.html.twig', [
-            'movies' => $movies,
-            'totalPaginas' => 5,
-            'totalItems' => 5,
-            'paginaActual' => 1,
+    //     return $this->render('movie/allmovies.html.twig', [
+    //         'movies' => $movies,
+    //         'totalPaginas' => 5,
+    //         'totalItems' => 5,
+    //         'paginaActual' => 1,
+    //     ]);
+    // }
+    #[Route('/movie/search', name: 'movie_search', methods: ['GET', 'POST'] )]
+    public function search ( Request $request, SimpleSearchService $search ){
+
+        $formulario = $this->createForm( SearchFormType::class, $search, [
+            'field_choices' => [
+                'Titulo' => 'titulo',
+                'Director' => 'director',
+                'Genero' => 'genero',
+                'Sinopsis' => 'sinopsis'
+            ],
+            'order_choices' => [
+                'Id' => 'id',
+                'Titulo' => 'titulo',
+                'Director' => 'director',
+                'Genero' => 'genero',
+            ]
+        ] );
+
+        $formulario->get('campo')->setData($busqueda->campo);
+        $formulario->get('orden')->setData($busqueda->orden);
+
+        $formulario->handleRequest( $request );
+
+        $pelis = $busqueda->search( 'App\Entity\Movie');
+
+        return $this->renderForm('movie/searchform.html.twig', [
+            'formulario' => $formulario,
+            'pelis' => $pelis
         ]);
     }
 

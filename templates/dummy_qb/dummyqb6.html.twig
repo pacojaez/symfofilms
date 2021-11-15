@@ -1,0 +1,41 @@
+{% extends 'layouts/admin.html.twig' %}
+
+{% block title %} Consultas con QueryBuilder {% endblock %}
+
+{% block main %}
+
+<div class="m-6 p-4">
+    <h1>PRUEBAS DE QB 6</h1>
+    <div class="row">
+        <h2 class="p-2 m-4 font-weight-bold">PELICULAS SELECT GETTING PARAMETERS: </h2>
+        <details class="collapse-panel mw-full"> 
+            <summary class="collapse-header">
+                SELECT recuperando PARÁMETROS DE LA QUERY:
+            </summary>
+            <div class="collapse-content">
+                <h2> PARAMETER TITULO: </h2>
+                <ul class="m-4">
+                    {# {% for parametro in parameterTitulo %} #}
+                        <li class="font-weight-bold">Parametro name: {{ parameterTitulo.name }} </li>
+                        <li class="font-weight-bold">Parametro value: {{ parameterTitulo.value }} </li>
+                        <li class="font-weight-bold">Parametro type: {{ parameterTitulo.type }} </li>
+                        {# <li class="font-weight-bold">Parametro typeSpecified: {{ parameterTitulo.typeSpecified }}</li> #}
+                    {# {% endfor %} #}
+                        {# <li class="font-weight-bold">TOODOS LOS PARÁMETROS: {{ allParameters }} </li> #}
+                </ul>
+                <h2>ALL PARAMETERS: </h2>
+                <ul class="m-4">
+                    {# {% for parametro in parameterTitulo %} #}
+                        <li class="font-weight-bold">Parametro name: {{ parameterTitulo.name }} </li>
+                        <li class="font-weight-bold">Parametro value: {{ parameterTitulo.value }} </li>
+                        <li class="font-weight-bold">Parametro type: {{ parameterTitulo.type }} </li>
+                        {# <li class="font-weight-bold">Parametro typeSpecified: {{ parameterTitulo.typeSpecified }}</li> #}
+                    {# {% endfor %} #}
+                        {# <li class="font-weight-bold">TOODOS LOS PARÁMETROS: {{ allParameters }} </li> #}
+                </ul>
+                <hr >
+            </div>
+        </details>
+    </div>
+</div>
+{% endblock %}

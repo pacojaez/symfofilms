@@ -5,8 +5,9 @@ namespace App\Repository;
 use App\Entity\Movie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManagerInterface;
 
-/**
+/**  
  * @method Movie|null find($id, $lockMode = null, $lockVersion = null)
  * @method Movie|null findOneBy(array $criteria, array $orderBy = null)
  * @method Movie[]    findAll()
@@ -33,15 +34,51 @@ class MovieRepository extends ServiceEntityRepository
         ->getResult()
         ;
     }
+    // $pelis = $entityManager->createQuery( "SELECT m FROM App\Entity\Movie m WHERE m.valoracion > 3 ORDER BY m.valoracion DESC" ) ->getResult();
     
-    // public function findOneBySomeField($value): ?Movie {
 
-    //     return $this->createQueryBuilder('m')
-    //         ->andWhere('m.titulo = :val')
-    //         ->setParameter('val', $value)
-    //         ->getQuery()
-    //         ->getOneOrNullResult()
-    //     ;
-    // }
+    /**
+     * @return Movie[] Returns an array of Movie objects
+     */
+    public function findLastsWithCovers ( int $numeroPelis,  ): Array { 
+
+        $em = $this->getEntityManager();
+
+        $movies = $em->createQuery(
+            'SELECT m
+            FROM App\Entity\Movie m
+            WHERE m.caratula IS NOT NULL
+            ORDER BY m.id DESC
+            '
+        )
+        ->setMaxResults( $numeroPelis )
+        ->getResult();
+
+        return $movies;
+        
+//         $pelisLastsWithCovers = $this->createQuery( "SELECT m FROM App\Entity\Movie m WHERE m.caratula IS NOT NULL ORDER BY m.id DESC LIMIT $numeroPelis " ) ->getResult();
+// dd($pelisLastsWithCovers);
+//         return $pelisLastsWithCovers;
+    }
+
+    /**
+     * @return Movie[] Returns an array of Movie objects
+     */
+    public function findBetterValoration ( int $numeroPelis ): Array {
+
+        $em = $this->getEntityManager();
+
+        $pelisMejorValoradas= $em->createQuery( 
+                " SELECT m 
+                FROM App\Entity\Movie m 
+                WHERE m.valoracion > 3 
+                ORDER BY m.valoracion DESC "
+            )
+            ->setMaxResults( $numeroPelis )
+             ->getResult();
+
+        return $pelisMejorValoradas;
+    }
+   
    
 }

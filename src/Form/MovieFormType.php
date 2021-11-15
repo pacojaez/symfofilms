@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraints\File;
 
 class MovieFormType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options): void
+    public function buildForm( FormBuilderInterface $builder, array $options ): void
     {
         $builder
         ->add('titulo', TextType::class, [
@@ -57,6 +57,7 @@ class MovieFormType extends AbstractType
             ])
         ->add('sinopsis', TextareaType::class, [
             'attr' => ['class' => 'form-control'],
+            'empty_data' => '',
             'required' => false,
             ])
         ->add('caratula', FileType::class, [

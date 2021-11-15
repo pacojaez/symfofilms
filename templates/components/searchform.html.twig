@@ -1,0 +1,10 @@
+<div class="d-flex flex-row justify-content-center mb-6 mt-0">
+	{# <form class="form-inline d-md-flex" action="{{ path('movie_search') }}" method="POST">
+		<input type="text" class="form-control" name="valor" id="valor" placeholder="Buscador de películas" required="required">
+        <button class="btn btn-primary" type="submit">SEARCH</button>
+	</form> #}
+    {{ form_start(formulario)}}
+        <div class="form-control">{{ form_row(formulario.valor)}}</div>
+
+    {{ form_end}}
+</div>

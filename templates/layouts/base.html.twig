@@ -28,12 +28,9 @@
 
 		<div class="page-wrapper with-navbar with-navbar-fixed-bottom">
 			{% include('components/navbar.html.twig') %}
-
-
-			{# {% include('components/sidebar.html.twig') %} #}
-
 			<!-- Content wrapper -->
 				<div class="mt-10 content-wrapper"> <div class="mt-0 mb-4 p-2 w-full text-center font-italic font-weight-light font-size-14">
+					{# {% include('components/searchform.html.twig') %} #}
 					{{ frase.fraseAleatoria() }}
 				</div>
 				{% block success %}

@@ -744,32 +744,42 @@
     </div>
 
     <div class="row">
-      <h2 class="p-2 m-4 font-weight-bold">Extra: METODO DE BUSQUEDA EN EL REPOSITORY</h2>
+      <h2 class="p-2 m-4 font-weight-bold">FORMULARIOS: SYMFONY21</h2>
       <details class="collapse-panel mw-full"> 
         <summary class="collapse-header">
-            OJO CON LA CONSTRUCCIÓN DE LA CONSULTA
+          Refactorizar formularios
         </summary>
         <div class="collapse-content">
             <ul>
-            <li>
-                <pre>
-                    <code class="code">/**
-                    * @return Movie[] Returns an array of Movie objects
-                    */
-                    public function findByTitle ( string $value ): Array {   
-                    
-                        return $this->createQueryBuilder('m')
-                        ->where("m.titulo LIKE :value")
-                        ->setParameter('value', "%".$value."%")
-                        ->orderBy('m.id', 'ASC')
-                        ->setMaxResults(10)
-                        ->getQuery()
-                        ->getResult()
-                        ;
-                    }
-                    </code>
-                </pre>
-            </li>
+                <li>Package: <code class="code">composer require symfony/form</code></li>
+                <li>clase Form Type métodos:
+                      <code class="code">buildForm(FormBuilderInterface $builder, array $options): </code> 
+                      <code class="code">configureOptions(OptionsResolver $resolver):</code> 
+                </li>
+                <li>crearlo en el controlador<code class="code"> $formulario = $this->createForm( MovieFormType::class, $peli );</code></li>
+                <li>Crear el formulario: <code class="code">renderForm()</code> o <code class="code">'formulario' => $formulario->createView()</code></li>
+            </ul>
+        </div>
+      </details>
+    </div>
+
+    <div class="row">
+      <h2 class="p-2 m-4 font-weight-bold">FORMULARIOS: SYMFONY21</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+            HELPERS DE TWIG
+        </summary>
+        <div class="collapse-content">
+            <ul>
+            <li>La función helper <code class="code">{{ form(formulario) }}</code>dibuja todos los campos y las etiquetas de inicio y final del formulario.</li>
+            <li>La función helper <code class="code">form_start(form_view, vars):</code>INICIA EL FORMULARIO</li>
+            <li>La función helper <code class="code">form_end(form_view, vars):</code>FINALIZA EL FORMULARIO</li>
+            <li>La función helper <code class="code">form_row(form_view, vars):</code>DIBUJA UNA FILA DEL FORMULARIO</li>
+            <li>La función helper <code class="code">form_label(form_view, label, vars):</code>ETIQUETA</li>
+            <li>La función helper <code class="code">form_help(form_view):</code>dibuja el texto de ayuda</li>
+            <li>La función helper <code class="code">form_errors(form_view):</code>ETIQUETA</li>
+            <li>La función helper <code class="code">form_widget(form_view, vars):</code>dibuja el componente HTML.</li>
+            <li>La función helper <code class="code">form_rest(form_view, vars):</code>dibuja todo lo que falte por dibujar.</li>         
         </ul>
         </div>
       </details>

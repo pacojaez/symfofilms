@@ -1,7 +1,7 @@
 {# enlaces a paginación #}
 {% set nearbyPagesLimit = 2 %}
 <nav aria-label="Page navigation" class="d-flex flex-col justify-content-center align-items-center">
-    <p class="m-2 p-2">Tenemos {{ totalItems }} items. Página {{ paginaActual}} de {{ totalPaginas }} páginas</p>
+    <p class="m-2 p-2">Tenemos {{ totalItems }} {{ entidad }} en total. Página {{ paginaActual}} de {{ totalPaginas }} páginas</p>
     <ul class="pagination d-flex flex-row">
         {% if paginaActual > 2 %}
             <!-- Previous page -->

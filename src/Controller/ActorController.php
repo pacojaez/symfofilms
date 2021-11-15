@@ -31,6 +31,7 @@ class ActorController extends AbstractController
             'totalPaginas' => $paginator->getTotalPages(),
             'totalItems' => $paginator->getTotalItems(),
             'paginaActual' => $pagina,
+            'entidad' => 'Actores'
         ]);
     }
 

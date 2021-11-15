@@ -13,7 +13,8 @@ class PaginatorService {
      */
      private int $limit; 
      private $entityManager; 
-     private string $entityType = ''; 
+     private string $entityType = '';
+     private int $paginaActual = 1;
      private int $total = 0;
 
     /**
@@ -35,12 +36,20 @@ class PaginatorService {
         $this->entityType = $entityType;
     }
 
+    public function setLimit( int $limit ){
+        $this->limit = $limit;
+    }
+
+    public function getPaginaActual(): int {
+        return $this->paginaActual;
+    }
+
     public function getTotalItems(): int {
         return $this->total;
     }
 
     public function getTotalPages(): int {
-        return ($this->total / $this->limit);
+        return ceil($this->total / $this->limit);
     }
 
     /**
@@ -54,17 +63,17 @@ class PaginatorService {
             $paginator->getQuery()
             ->setFirstResult( $this->limit * ( $page-1 ))
             ->setMaxResults( $this->limit );
-        
             $this->total = $paginator->count();
 
             return $paginator;
         }else{
             
             $paginator->getQuery()
-            ->setFirstResult(0)
-            // ->setMaxResults( $this->limit )
+            ->setFirstResult( $this->limit *( $page -1 ))
+            ->setMaxResults( $this->limit )
             ->getResult();
             ;
+            $this->paginaActual = $page;
             // dd($paginator->getQuery());
             $this->total = $paginator->count();
 
@@ -107,4 +116,3 @@ class PaginatorService {
         return $this->paginate( $consulta, $paginaActual );
     }
 }
-// ->where("m.titulo LIKE :value")
