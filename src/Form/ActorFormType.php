@@ -74,8 +74,7 @@ class ActorFormType extends AbstractType
             ->add('Guardar', SubmitType::class, [
                 'attr' => ['class' => 'btn btn-primary']
                 ]
-                )
-            ->getForm();
+            )
         ;
     }
 
@@ -83,6 +82,9 @@ class ActorFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Actor::class,
+            'csrf_protection' => true,
+            'csrf_field_name' => 'SymfoFilmsApp_token',
+            'csrf_toke_id' => 'nombreparagenerarlasemilladeltoken',
         ]);
     }
 }

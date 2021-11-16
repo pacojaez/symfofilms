@@ -12,8 +12,11 @@ use App\Entity\Actor;
 use App\Form\ActorFormType;
 use App\Form\ActorDeleteFormType;
 use App\Form\ImageDeleteFormType;
+use App\Form\SearchFormType;   
 use App\Services\FileService;
 use App\Services\PaginatorService;
+use App\Services\SimpleSearchService;
+
 
 class ActorController extends AbstractController
 {
@@ -240,5 +243,36 @@ class ActorController extends AbstractController
             return $edad;
         }
         return "No hay fecha de nacimiento para poder calcular la edad";
+    }
+
+
+    #[Route('/actor/search', name: 'actor_search', methods: ['GET', 'POST'] )]
+    public function search ( Request $request, SimpleSearchService $busqueda ): Response {
+
+        $formulario = $this->createForm( SearchFormType::class, $busqueda, [
+            'field_choices' => [
+                'Nombre' => 'nombre',
+                'Nacionalidad' => 'nacionalidad',
+                'Biografía' => 'biografia',
+            ],
+            'order_choices' => [
+                'Id' => 'id',
+                'Nombre' => 'nombre',
+                'Nacionalidad' => 'nacionalidad',
+                'Biografía' => 'biografia',
+            ]
+        ]);
+
+        $formulario->get('campo')->setData($busqueda->campo);
+        $formulario->get('orden')->setData($busqueda->orden);
+
+        $formulario->handleRequest( $request );
+
+        $actors = $busqueda->search( 'App\Entity\Actor');
+
+        return $this->renderForm('actor/searchform.html.twig', [
+            'formulario' => $formulario,
+            'actors' => $actors
+        ]);
     }
 }

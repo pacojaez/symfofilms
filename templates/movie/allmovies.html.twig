@@ -3,100 +3,37 @@
 {% block title %}Todas las peliculas{% endblock %}
 
 {% block main %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 1200px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-<div class="example-wrapper">
-  {# <div class="d-flex flex-row justify-content-center mb-6 mt-0">
-    {% include 'movie/searchform.html.twig' %}
-  </div> #}
-  <div class="d-flex flex-row justify-content-between align-items-center m-2 p-2">
-    {# Crear variable en Twig #}
-    {% set ruta = 'all_movies' %}
-    <a href=" {{ path ( 'movie_create' )}}"><button class="btn btn-primary">AÑADIR NUEVA PELICULA</button></a>
-    {% if totalPaginas > 1 %}
-      {% include('components/pagination.html.twig') %}
-    {% endif %}	
-  </div>
+  <style>
+      .example-wrapper { margin: 1em auto; max-width: 1200px; width: 95%; font: 18px/1.5 sans-serif; }
+      .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+  </style>
+    <div class="example-wrapper">
+        {# <div class="d-flex flex-row justify-content-center mb-6 mt-0">
+          {% include 'movie/searchform.html.twig' %}
+        </div> #}
+        <div class="d-flex flex-row justify-content-between align-items-center m-2 p-2">
+          {# Crear variable en Twig #}
+          {% set ruta = 'all_movies' %}
+            <a href=" {{ path ( 'movie_create' )}}"><button class="btn btn-primary">AÑADIR NUEVA PELICULA</button></a>
+          {% if totalPaginas > 1 %}
+            {% include('components/pagination.html.twig') %}
+          {% endif %}	
+        </div>
 
 
-<!-- ejemplo de como añadir un modal al proyecto -->
-{# <a href="#modal-2" class="btn btn-primary" role="button">Ejemplo de modal</a> #}
-{% if movies %}
-
-{% include 'movie/includes/list_movies.html.twig' %}
-
-{# <!-- Hoverable rows -->
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>TITULO</th>
-	    <th>IMAGEN</th>
-      <th>DIRECTOR</th>
-	    <th>GENERO</th>
-      <th>VALORACIÓN</th>
-      <th>DURACION</th>
-	    <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-  	{% for peli in movies %}
-    <tr>
-      <th>{{ peli.id }}</th>
-      <td>{{ peli.titulo }}</td>
-      <td>
-	  	  <img src="{{ asset(covers_directory ~'/'~ (peli.caratula ?? 'default.jpg' ))}}" class="img-fluid rounded-top" alt="{{ peli.titulo }}" title="{{ peli.titulo }}"> 
-      </td>
-      <td class="text-right">{{ peli.director }}</td>
-      <td class="text-right">{{ peli.genero }}</td>
-     
-      <td class="">
-        <div class="d-flex justify-content-center align-items-center">
-        {% if peli.valoracion != NULL %}
-            {% for i in 1..5 %}
-              {% if i <= peli.valoracion %}
-                <img src="{{ asset('img/samples/estrellaon.gif')}}" alt="{{ peli.valoracion }} / 5" title="{{ peli.valoracion }}/5" style="height:25px; width:25px"/>
-              {% else %}
-                <img src="{{ asset('img/samples/estrellaoff.gif')}}" alt="{{ peli.valoracion }} / 5" title="{{ peli.valoracion }}/5" style="height:25px; width:25px"/>
+      <!-- ejemplo de como añadir un modal al proyecto -->
+      {# <a href="#modal-2" class="btn btn-primary" role="button">Ejemplo de modal</a> #}
+        {% if pelis %}
+          {% include 'movie/includes/lista_movies.html.twig' %}
+            <div class="d-flex flex-wrap justify-content-center m-2 p-2"> 
+              {% if totalPaginas > 1 %}
+                {% include('components/pagination.html.twig') %}
               {% endif %}
-            {% endfor %}
-          {% else %}
-            <p>Sin valoracion</p>
-          {% endif %}
-        </div>
-      </td>
-      <td class="text-center">{{ peli.duracion }} min.</td>
-      <td class="">
-        <div class="d-flex justify-content-center align-items-center">
-          <a href="{{ path('movie_show', {'id':peli.id })}}" class="m-2"><img src="{{ asset('img/buttons/show.png')}}" alt="detalles pelicula {{ peli.titulo }}" style="height:20px; width:20px"/></a>
-          <a href="{{ path('movie_edit', {'id':peli.id })}}" class="m-2"><img src="{{ asset('img/buttons/update.png')}}" alt="editar pelicula {{ peli.titulo }}" style="height:20px; width:20px"/></a>
-          <a href="{{ path('movie_delete', {'id':peli.id })}}" class="m-2"><img src="{{ asset('img/buttons/delete.png')}}" alt="borrar pelicula {{ peli.titulo }}" style="height:20px; width:20px"/></a>
-        </div>
-      </td>
-      {# <td class="flex-row d-flex">
-        <a href="{{ path('movie_show', {'id':peli.id })}}"><img src="{{ asset('img/buttons/show.png')}}" alt="detalles pelicula {{ peli.titulo }}" style="height:20px; width:20px"/></a>
-        <a href="{{ path('movie_edit', {'id':peli.id })}}"><img src="{{ asset('img/buttons/update.png')}}" alt="editar pelicula {{ peli.titulo }}" style="height:20px; width:20px"/></a>
-        <a href="{{ path('movie_delete', {'id':peli.id })}}"><img src="{{ asset('img/buttons/delete.png')}}" alt="borrar pelicula {{ peli.titulo }}" style="height:20px; width:20px"/></a>
-        {# <button class="btn" type="button"> <a href="{{ path('movie_show', {'id':peli.id })}}" style="height:15px; width:15px">VER</a></button>
-        <button class="btn btn-primary" type="button"> <a href="{{ path('movie_edit', {'id':peli.id })}}" style="height:15px; width:15px">EDITAR</a></button>
-        <button class="btn btn-danger" type="button"> <a href="{{ path('movie_delete', {'id': peli.id })}}" style="height:15px; width:15px">BORRAR</a></button> 
-      </td>
-    </tr>
-	  {% endfor %}
-  </tbody>
-</table> #}
-<div class="d-flex flex-wrap justify-content-center m-2 p-2">
-{% if totalPaginas > 1 %}
-  {% include('components/pagination.html.twig') %}
-{% endif %}
-</div>
-{% else %}
- <div class="p-4 m-4 alert alert-danger" role="alert">
-    <h4 class="alert-heading">No hay películas en la DB con ese término de búsqueda</h4>
-  </div>
-{% endif %}
-
-		
+            </div>
+        {% else %}
+          <div class="p-4 m-4 alert alert-danger" role="alert">
+              <h4 class="alert-heading">No hay películas en la DB con ese término de búsqueda</h4>
+          </div>
+        {% endif %}
+    </div>
 {% endblock %}

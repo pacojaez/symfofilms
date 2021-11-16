@@ -8,7 +8,7 @@
     <div class="d-flex justify-content-center">
         {% for peli in pelisLastsWithCovers %} 
             <div class="w-300 h-quarter m-2 p-2">
-                <img src="{{ asset(covers_directory ~'/'~ (peli.caratula ?? 'default.jpg' ))}}" class="rounded-top" alt="{{ peli.titulo }}" title="{{ peli.titulo }}"> 
+                <img src="{{ asset(covers_directory ~'/'~ (peli.caratula ?? 'default.jpg' ))}}" class="h-250 w-300 rounded-top" alt="{{ peli.titulo }}" title="{{ peli.titulo }}"> 
                 <div class="col-sm text-center">{{ peli.titulo }}</div>
             </div>           
         {% endfor %}
@@ -20,7 +20,7 @@
     <div class="d-flex justify-content-center">
         {% for peli in pelisMejorValoradas %} 
             <div class="w-200 h-quarter m-2 p-2">
-                <img src="{{ asset(covers_directory ~'/'~ (peli.caratula ?? 'default.jpg' ))}}" class="img-fluid rounded-top" alt="{{ peli.titulo }}" title="{{ peli.titulo }}"> 
+                <img src="{{ asset(covers_directory ~'/'~ (peli.caratula ?? 'default.jpg' ))}}" class="h-250 w-300 rounded-top" alt="{{ peli.titulo }}" title="{{ peli.titulo }}"> 
                 <div class="col-sm text-center">{{ peli.titulo }}</div>
                 <div class="col-sm text-center font-weight-bold">VALORACIÓN: {{ peli.valoracion }}</div>
             </div>           

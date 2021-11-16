@@ -76,7 +76,6 @@ class MovieFormType extends AbstractType
             'attr' => ['class' => 'btn btn-primary']
             ]
         )
-        ->getForm();
         ;
     }
 
@@ -85,6 +84,9 @@ class MovieFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Movie::class,
+            'csrf_protection' => true,
+            'csrf_field_name' => 'SymfoFilmsApp_token',
+            'csrf_toke_id' => 'nombreparagenerarlasemilladeltoken',
         ]);
     }
 }

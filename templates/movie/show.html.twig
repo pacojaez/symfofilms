@@ -69,8 +69,8 @@
 				   {% if peli.sinopsis %}
 			      <div>
 				   {% autoescape false %}
-                    <p class="m-2">{{ peli.sinopsis|replace({ "\n":"</p><p class='m-2'>" }) }}</p>
-                    {% endautoescape %}
+                    	<p class="m-2">{{ peli.sinopsis|replace({ "\n" : "</p><p class='m-2'>" }) }}</p>
+                   {% endautoescape %}
 			      </div>
 			      {% else %}
 				  <p>AUN NO HAY SINOPSIS DE LA PELÍCULA</p>

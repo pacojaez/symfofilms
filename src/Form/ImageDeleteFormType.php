@@ -21,7 +21,9 @@ class ImageDeleteFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            // Configure your form options here
+            'csrf_protection' => true,
+            'csrf_field_name' => 'SymfoFilmsApp_token',
+            'csrf_toke_id' => 'nombreparagenerarlasemilladeltoken',
         ]);
     }
 }

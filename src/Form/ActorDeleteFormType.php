@@ -23,6 +23,9 @@ class ActorDeleteFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Actor::class,
+            'csrf_protection' => true,
+            'csrf_field_name' => 'SymfoFilmsApp_token',
+            'csrf_toke_id' => 'nombreparagenerarlasemilladeltoken',
         ]);
     }
 }

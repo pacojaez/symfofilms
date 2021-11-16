@@ -44,14 +44,14 @@ class MovieController extends AbstractController
 
         $paginator->setEntityType('App\Entity\Movie');
 
-        $movies = $paginator->findAllEntities( $pagina );
+        $pelis = $paginator->findAllEntities( $pagina );
 
         // $movies = $paginator->getPageList();
 
         // $movies = $this->getDoctrine()->getRepository( Movie::class )->findAll();       //metodo para recuperar las pelis sin paginacion
 
         return $this->render('movie/allmovies.html.twig', [
-            'movies' => $movies,
+            'pelis' => $pelis,
             'totalPaginas' => $paginator->getTotalPages(),
             'totalItems' => $paginator->getTotalItems(),
             'paginaActual' => $pagina,
@@ -235,9 +235,9 @@ class MovieController extends AbstractController
     //     ]);
     // }
     #[Route('/movie/search', name: 'movie_search', methods: ['GET', 'POST'] )]
-    public function search ( Request $request, SimpleSearchService $search ){
+    public function search ( Request $request, SimpleSearchService $busqueda ): Response {
 
-        $formulario = $this->createForm( SearchFormType::class, $search, [
+        $formulario = $this->createForm( SearchFormType::class, $busqueda, [
             'field_choices' => [
                 'Titulo' => 'titulo',
                 'Director' => 'director',
@@ -250,14 +250,19 @@ class MovieController extends AbstractController
                 'Director' => 'director',
                 'Genero' => 'genero',
             ]
-        ] );
+        ]);
 
-        $formulario->get('campo')->setData($busqueda->campo);
+        $formulario->get('valor')->setData($busqueda->campo);
         $formulario->get('orden')->setData($busqueda->orden);
 
         $formulario->handleRequest( $request );
 
         $pelis = $busqueda->search( 'App\Entity\Movie');
+
+        // $valor = $request->request->get('valor');
+        // // $valor = $formulario->get('valor')->setData($busqueda->valor);
+        // dd($request);
+        // $appSearchLogger->info( "Se ha buscado el término: ".$valor);
 
         return $this->renderForm('movie/searchform.html.twig', [
             'formulario' => $formulario,

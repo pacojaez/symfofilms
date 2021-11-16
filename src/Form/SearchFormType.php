@@ -15,18 +15,18 @@ use App\Services\SimpleSearchService;
 
 class SearchFormType extends AbstractType {
 
-    public function builderForm ( FormBuilderInterface $builder, array $options ){
+    public function buildForm ( FormBuilderInterface $builder, array $options ){
 
         $builder->add( 'campo', ChoiceType::class, [
             'choices' => $options['field_choices'],
-            // 'attr' => [ 'class' => 'form-control' ]
+            'attr' => [ 'class' => 'form-control' ]
         ])
-        ->add( 'valor', TetxType::class, [
+        ->add( 'valor', TextType::class, [
             'attr' => ['class' => 'form-control']
         ])
         ->add( 'orden', ChoiceType::class, [
             'choices' => $options[ 'order_choices' ],
-            // 'attr' => [ 'class' => 'form-control' ]
+            'attr' => [ 'class' => 'form-control' ]
         ])
         ->add( 'sentido', ChoiceType::class, [
             'expanded' => true,
@@ -38,7 +38,8 @@ class SearchFormType extends AbstractType {
             'choice_attr' => [
                 'checked' => 'checked',
                 // 'class' => 'form-control'
-            ]
+            ],
+            'attr' => [ 'class' => 'form-control' ]
         ])
         ->add( 'limite', NumberType::class, [
             'required' => true,
@@ -46,12 +47,14 @@ class SearchFormType extends AbstractType {
             'attr' => [
                 'min' => 1,
                 'max' => 20,
-                // 'class' => 'form-control'
-            ]
+                'class' => 'form-control'
+            ],
+            // 'attr' => [ 'class' => 'form-control' ]
         ])
         ->add( 'SEARCH', SubmitType::class, [
             'attr' =>[ 'class' => 'btn btn-primary' ]
-        ]);
+        ])
+        ;
     }
 
 
@@ -59,10 +62,13 @@ class SearchFormType extends AbstractType {
 
         // $resolver = new OptionsResolver();
 
-        $resolver = setDefaults([
+        $resolver->setDefaults([
             'data_class' => SimpleSearchService::class,
             'field_choices' => [ 'id' => 'id'],
             'order_choices' => [ 'id' => 'id'],
+            'csrf_protection' => true,
+            'csrf_field_name' => 'SymfoFilmsApp_token',
+            'csrf_toke_id' => 'nombreparagenerarlasemilladeltoken',
         ]);
     }
 

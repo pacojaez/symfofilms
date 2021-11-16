@@ -771,7 +771,7 @@
         </summary>
         <div class="collapse-content">
             <ul>
-            <li>La función helper <code class="code">{{ form(formulario) }}</code>dibuja todos los campos y las etiquetas de inicio y final del formulario.</li>
+            <li>La función helper <code class="code"> form(formulario) </code>dibuja todos los campos y las etiquetas de inicio y final del formulario.</li>
             <li>La función helper <code class="code">form_start(form_view, vars):</code>INICIA EL FORMULARIO</li>
             <li>La función helper <code class="code">form_end(form_view, vars):</code>FINALIZA EL FORMULARIO</li>
             <li>La función helper <code class="code">form_row(form_view, vars):</code>DIBUJA UNA FILA DEL FORMULARIO</li>
@@ -779,11 +779,55 @@
             <li>La función helper <code class="code">form_help(form_view):</code>dibuja el texto de ayuda</li>
             <li>La función helper <code class="code">form_errors(form_view):</code>ETIQUETA</li>
             <li>La función helper <code class="code">form_widget(form_view, vars):</code>dibuja el componente HTML.</li>
-            <li>La función helper <code class="code">form_rest(form_view, vars):</code>dibuja todo lo que falte por dibujar.</li>         
+            <li>La función helper <code class="code">form_rest(form_view, vars):</code>dibuja todo lo que falte por dibujar.</li>
+            <li>Form Types: 
+                <code class="code">https://symfony.com/doc/current/forms.html</code>
+                <code class="code">https://symfony.com/doc/current/form/embedded.html</code>
+                <code class="code">https://symfony.com/doc/current/form/form_customization.html</code>
+                <code class="code">https://symfony.com/doc/current/form/create_custom_field_type.html</code>
+                <code class="code">https://symfony.com/doc/current/reference/forms/types.html</code>
+            </li> 
         </ul>
         </div>
       </details>
     </div>
+
+    <div class="row">
+      <h2 class="p-2 m-4 font-weight-bold">FORMULARIOS: SYMFONY21</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+            CSRF Cross Site Request Forgery
+        </summary>
+        <div class="collapse-content">
+            <ul>
+            <li>Package: <code class="code">composer require symfony/security-csrf</code></li>
+            <li>Configuración: <code class="code">config/packages/framework.yaml</code></li>
+            <li>Método  <code class="code">configureOptions()</code> dentro de la clase Form Type</li>
+            <li>Documentación de Symfony en: <code class="code">https://symfony.com/doc/current/security/csrf.html</code></li> 
+        </ul>
+        </div>
+      </details>
+    </div>
+
+    <div class="row">
+      <h2 class="p-2 m-4 font-weight-bold">USUARIOS: SYMFONY22</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+            GESTIÓN DE USUARIOS
+        </summary>
+        <div class="collapse-content">
+            <ul>
+            <li>Instalar paquete: <code class="code"> composer require security-bundle </code></li>
+            <li>Ejecutar <code class="code">php bin/console make:user</code> ->( no hace falta hacer make:entity )</li>
+            <li>Para modificar la entidad User: <code class="code">php bin/console make:entity</code> ->( para modificar sí )</li>
+            <li>Configuración del Provider: <code class="code">config/packages/security.yaml</code> -> Cada petición será filtrada por el firewall</li>
+            <li>Crear Login Logout <code class="code">php bin/console make:auth</code></li>   
+        </ul>
+        </div>
+      </details>
+    </div>
+
+
     <div class="row">
       <h2 class="p-2 m-4 font-weight-bold">Extra: METODO DE BUSQUEDA EN EL CONTROLADOR</h2>
       <details class="collapse-panel mw-full"> 

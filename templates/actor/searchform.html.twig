@@ -1,0 +1,29 @@
+
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Todas las peliculas{% endblock %}
+
+{% block main %}
+    <div class="bg-dark">
+        {{ form_start(formulario)}}
+            <div class="d-flex flex-row justify-content-around align-items-center">
+                <div class="form-group">{{ form_row(formulario.valor)}}</div>
+                <div class="form-group">{{ form_row(formulario.campo)}}</div>
+                <div class="form-group">{{ form_row(formulario.orden)}}</div>
+                <div class="form-group">{{ form_row(formulario.sentido)}}</div>
+                <div class="form-group">{{ form_row(formulario.limite)}}</div>
+                <div class="form-group">{{ form_row(formulario.SEARCH)}}</div>
+                {{ form_rest(formulario)}}
+             </div>
+        {{ form_end(formulario) }}
+    </div>
+    <h4 class="text-center">RESULTADOS</h4>
+
+    {% include 'actor/includes/actors_list.html.twig' %}
+
+    <div class="d-flex flex-row justify-content-center">
+        <a href="{{ path('all_actors') }}"> VOLVER AL LISTADO</a>
+    </div>
+
+
+{% endblock %}
