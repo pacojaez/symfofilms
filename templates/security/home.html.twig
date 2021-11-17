@@ -1,0 +1,68 @@
+{% extends 'layouts/admin.html.twig' %}
+
+{% block title %} Home {% endblock %}
+
+{% block main %}
+{{ parent() }}
+<div class="d-flex text-center">
+      <div class="container-fluid">
+      <h2>HOME de {{ app.user.email }}</h2>
+      <!-- Card with no padding with multiple content containers nested inside of it -->
+      <div class="w-full"> <!-- w-600 = width: 60rem (600px), mw-full = max-width: 100% -->
+        <div class="card p-0"> <!-- p-0 = padding: 0 -->
+          <img src="..." class="img-fluid rounded-top" alt="..."> <!-- rounded-top = rounded corners on the top -->
+          <!-- First content container nested inside card -->
+          <div class="content">
+            <h2 class="content-title">
+              {{ app.user.email }}
+            </h2>
+            <h3 class="content-title">
+              A.K.A {{ app.user.displayname }}
+            </h3>
+            <div>
+              <span class="text-muted">
+                <i class="fa fa-clock-o mr-5" aria-hidden="true"></i>  <!-- mr-5 = margin-right: 0.5rem (5px) -->
+              </span>
+            </div>
+            <div>
+              <span class="badge">
+                <i class="fa fa-comments text-primary mr-5" aria-hidden="true"></i> 5 comments <!-- text-primary = color: primary-color, mr-5 = margin-right: 0.5rem (5px) -->
+              </span>
+              <span class="badge ml-5"> <!-- ml-5 = margin-left: 0.5rem (5px) -->
+                <i class="fa fa-heart text-danger mr-5" aria-hidden="true"></i> 124 likes <!-- text-danger = color: danger-color, mr-5 = margin-right: 0.5rem (5px) -->
+              </span>
+            </div>
+          </div>
+          <hr />
+          <!-- Second content container nested inside card (comments) -->
+          <div class="content">
+            <h2 class="content-title">
+              PELICULAS SUBIDAS
+            </h2>
+            
+            <div>
+              <strong>John Doe</strong>
+              <br />
+              Amazing picture! Great job!
+            </div>
+            <hr />
+            <div>
+              <strong>Jane Doe</strong>
+              <br />
+              This is beautiful.
+            </div>
+            <hr />
+            <div>
+              <strong>James Bucks</strong>
+              <br />
+              This is just pretentious enough for my tastes. I love it.
+            </div>
+            <div class="text-center mt-20"> <!-- text-center = text-align: center, mt-20 = margin-top: 2rem (20px) -->
+              <button class="btn btn-sm">Load all MOVIES</button>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+
+{% endblock %}

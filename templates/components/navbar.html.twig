@@ -5,13 +5,13 @@
 		<!-- Navbar content (with toggle sidebar button) -->
 		<div
 			class="navbar-content">
-			{# {% if ( app.request.get('_route') == 'admin_%' ) %} #}
-			<nav class="navbar navbar-fixed-bottom">
-				<button class="btn" type="button" onclick="halfmoon.toggleSidebar()">
-					<i class="fa fa-bars" aria-hidden="true"></i>
-				</button>
-			</nav>
-			{# {% endif %} #}
+			{% if is_granted("IS_AUTHENTICATED_FULLY") %}
+				<nav class="navbar navbar-fixed-bottom">
+					<button class="btn" type="button" onclick="halfmoon.toggleSidebar()">
+						<i class="fa fa-bars" aria-hidden="true"></i>
+					</button>
+				</nav>
+			{% endif %}
 		  {# <button class="btn btn-action" type="button">
 		            <i class="fa fa-bars" aria-hidden="true"></i>
 		            <!-- Toggle sidebar -->
@@ -70,8 +70,18 @@
       <i class="fa fa-sun-o" id="sun"></i>
     </button> #}
 	<span class="navbar-text text-monospace d-none d-md-flex">{{ "now"|date('d/m/Y H:i', timezone="Europe/Madrid")}}</span>
-	<div class="">
-		<a href="#modal-2" class="btn btn-primary" role="button">Sign in</a>
+	<div class="d-inline-flex align-items-center">
+		{% if app.user %}
+			<p class="p-2 m-2">Hola {{ app.user.displayname }}</p>
+			<a href="{{ path('app_logout') }}" class="btn btn-danger" role="button">Sign out</a>
+		{% else %}
+			<div class="">
+				<a href="{{ path('app_login') }}" class="btn btn-primary" role="button">Sign in</a>
+			</div>
+			<div class="">
+				<a href="{{ path('app_register') }}" class="btn btn-primary" role="button">Register</a>
+			</div>
+		{% endif %}
 	</div>
 		<!-- Navbar form (inline form) -->
 		{# <form class="ml-auto form-inline d-none d-md-flex" action="{{ path('movie_search') }}" method="POST">

@@ -22,11 +22,10 @@
 			{#{{ encore_entry_script_tags('app') }}#}
 		{% endblock %}
 	</head>
-	<body class="overflow-x-hidden" data-set-preferred-mode-onload="true">
-
-		{% include('components/modal.html.twig') %}
-
+	<body class="overflow-x-hidden" data-set-preferred-mode-onload="true">	
 		<div class="page-wrapper with-navbar with-navbar-fixed-bottom">
+			{# modal por si fuera necasario en el proyecto#}
+			{# {% include('components/modal.html.twig') %} #}	
 			{% include('components/navbar.html.twig') %}
 			<!-- Content wrapper -->
 				<div class="mt-10 content-wrapper"> <div class="mt-0 mb-4 p-2 w-full text-center font-italic font-weight-light font-size-14">

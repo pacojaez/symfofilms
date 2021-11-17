@@ -23,7 +23,7 @@ use Psr\Log\LoggerInterface;
 
 class MovieController extends AbstractController
 {
-    #[Route('/', name: 'portada')]
+    #[Route('/', name: 'portada', methods: ['GET', 'POST'])]
     public function portada( EntityManagerInterface $entityManager ): Response
     {           
         $peliculas = $this->getDoctrine()->getRepository( Movie::class )->findAll();
@@ -39,7 +39,7 @@ class MovieController extends AbstractController
     }
     
     
-    #[Route('/allmovies/{pagina}', name: 'all_movies', defaults: ['pagina'=> 1], methods: 'GET' )]
+    #[Route('/allmovies/{pagina}', name: 'all_movies', defaults: ['pagina'=> 1], methods: ['GET'] )]
     public function allmovies(int $pagina,  PaginatorService $paginator ): Response {
 
         $paginator->setEntityType('App\Entity\Movie');
@@ -216,7 +216,7 @@ class MovieController extends AbstractController
         ]);
     }
 
-    // #[Route('/movie/search', name: 'movie_search', methods: 'POST' )]
+    // #[Route('/movie/search', name: 'movie_search', methods: ['POST'] )]
     // public function search( Request $request, LoggerInterface $appSearchLogger ): Response {
         
     //     $valor = $request->request->get('valor');
@@ -288,7 +288,7 @@ class MovieController extends AbstractController
         ]); 
     }
 
-    #[Route('/movie/deleteimage/{id}', name: 'movie_delete_image', methods:"GET")]
+    #[Route('/movie/deleteimage/{id}', name: 'movie_delete_image', methods:["GET"])]
     public function deleteimage( Movie $peli, Request $request, LoggerInterface $appInfoLogger, FileService $uploader ): Response {
    
         if($peli->getCaratula()){

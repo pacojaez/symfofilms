@@ -10,18 +10,11 @@
 					</tr>
 
 					<tr>
-						<td align="center" style="font-family: 'Raleway', sans-serif; font-size:22px; font-weight: bold; color:#2a3a4b;"> Mensaje Recibido!!!!</td>
+						<td align="center" style="font-family: 'Raleway', sans-serif; font-size:22px; font-weight: bold; color:#2a3a4b;"> Email de Confirmación de Registro!!!!</td>
 					</tr>
 
 					<tr>
 						<td height="10"></td>
-					</tr>
-
-					<tr>
-						<td align="center" style="font-family: 'Lato', sans-serif; font-size:14px; color:#757575; line-height:24px; font-weight: 300;">
-							ASUNTO: <br>
-							{{ asunto }}
-						</td>
 					</tr>
 
 				</tbody></table>
@@ -38,36 +31,32 @@
 						<td height="50"></td>
 					</tr>
 					<tr>
-
-
 						<td align="center" bgcolor="#34495e">
 							<table class="col-600" width="600" border="0" align="center" cellpadding="0" cellspacing="0">
 								<tbody><tr>
 									<td height="35"></td>
 								</tr>
-
-
 								<tr>
-									<td align="center" style="font-family: 'Raleway', sans-serif; font-size:20px; color:#f1c40f; line-height:24px; font-weight: bold;">Mensaje recibido de {{ nombre }}</td>
+									<td align="center" style="font-family: 'Raleway', sans-serif; font-size:20px; color:#f1c40f; line-height:24px; font-weight: bold;">Hi! Please confirm your email!</td>
 								</tr>
-
-
 								<tr>
 									<td height="20"></td>
 								</tr>
-
-
 								<tr>
 									<td align="center" style="font-family: 'Lato', sans-serif; font-size:14px; color:#fff; line-height: 1px; font-weight: 300;">
-										MENSAJE: {{ mensaje|replace({"\n": "</p><p>" }) }}
+										    Please confirm your email address by clicking the following link: <br><br>
+                                            <a href="{{ signedUrl }}">Confirm my Email</a>.
+                                            This link will expire in {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
 									</td>
 								</tr>
-
-
+                                <tr>
+									<td align="center" style="font-family: 'Lato', sans-serif; font-size:14px; color:#fff; line-height: 1px; font-weight: 300;">
+										   Cheers!!
+									</td>
+								</tr>
 								<tr>
 									<td height="40"></td>
 								</tr>
-
 							</tbody></table>
 						</td>
 					</tr>
