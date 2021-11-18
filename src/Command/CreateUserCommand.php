@@ -45,6 +45,7 @@ class CreateUserCommand extends Command {
             ->addArgument('email', InputArgument::REQUIRED, 'EMAIL')
             ->addArgument('displayName', InputArgument::REQUIRED, 'Nick')
             ->addArgument('password', InputArgument::REQUIRED, 'Password')
+            ->addArgument('is_verified', InputArgument::REQUIRED, 'Verificado')
             // ->addOption('option1', null, InputOption::VALUE_NONE, 'Option description')
         ;
     }
@@ -70,13 +71,14 @@ class CreateUserCommand extends Command {
         $email = $input->getArgument('email');
         $password = $input->getArgument('password');
         $displayName = $input->getArgument('displayName');
+        $is_verified = $input->getArgument('is_verified');;
 
         if( $this->userRepository->findOneBy(['email'=> $email ])){
             $output->writeln("<error>El usuario con el mail $email ya está registrado en la DB</error>");
             return Command::FAILURE;
         }
 
-        $user = (new User())->setEmail($email)->setdisplayName($displayName);
+        $user = (new User())->setEmail($email)->setdisplayName($displayName)->setisVerified($is_verified);
 
         $hashedPassword = $this->passwordHasher->hashPassword( $user, $password);
         $user->setPassword($hashedPassword);

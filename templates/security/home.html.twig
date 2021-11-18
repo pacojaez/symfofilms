@@ -9,8 +9,13 @@
       <h2>HOME de {{ app.user.email }}</h2>
       <!-- Card with no padding with multiple content containers nested inside of it -->
       <div class="w-full"> <!-- w-600 = width: 60rem (600px), mw-full = max-width: 100% -->
-        <div class="card p-0"> <!-- p-0 = padding: 0 -->
-          <img src="..." class="img-fluid rounded-top" alt="..."> <!-- rounded-top = rounded corners on the top -->
+        <div class="card p-0 d-flex flex-col justify-content-center align-items-center"> <!-- p-0 = padding: 0 -->
+          <img src="{{ app.user.avatar ?
+                        path('pic_show', {'avatar': app.user.avatar }) :
+                        path('pic_show', {'avatar': 'default.png'})
+                    }}" 
+                    class="img-fluid rounded-top w-150 h-200 justify-center" 
+                    alt="{{ app.user.displayname }}"> 
           <!-- First content container nested inside card -->
           <div class="content">
             <h2 class="content-title">

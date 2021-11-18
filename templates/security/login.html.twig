@@ -40,11 +40,17 @@
         <button class="btn btn-lg btn-primary m-4" type="submit">
             Sign in
         </button>
-        or
-        <a href=" {{ path('app_register')}}" class="btn btn-lg btn-secondary m-4">
-           Register
-        </a>
     </div>
     {% endif %}
 </form>
+    <p>¿No estás registrado? 
+        <a href=" {{ path('app_register')}}" class="m-4 text-weight-bold text-decoration-underline">
+            Registro
+        </a>
+    </p>
+    <p>¿Olvidaste tu clave? 
+        <a href=" {{ path('app_forgot_password_request')}}" class="m-4 text-weight-bold text-decoration-underline">
+            Recuperar clave de acceso
+        </a>
+    </p>
 {% endblock %}

@@ -14,6 +14,9 @@ use Symfony\Component\Mime\Address;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
+use App\Services\FileService;
+
+use Psr\Log\LoggerInterface;
 
 class RegistrationController extends AbstractController
 {
@@ -25,7 +28,7 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasherInterface): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasherInterface, LoggerInterface $appUserLogger, FileService $uploader ): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -40,6 +43,12 @@ class RegistrationController extends AbstractController
                 )
             );
 
+            $uploader->targetDirectory = $this->getParameter('app.users_pics_root');
+
+            $file = $form->get('avatar')->getData();
+            if($file)
+                $user->setAvatar($uploader->upload($file));
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
@@ -50,21 +59,22 @@ class RegistrationController extends AbstractController
                     ->from(new Address('no-reply@symfofilms.pjrphotography.es', 'Registro de Usuarios'))
                     ->to($user->getEmail())
                     ->subject('Please Confirm your Email')
-                    ->htmlTemplate('registration/confirmation_email.html.twig')
+                    ->htmlTemplate('email/registration/confirmation_email.html.twig')
             );
             // do anything else you need here, like send an email
             $this->addFlash('success', 'Te hemos mandado un mail para que completes el registro. Clicka en el link que te hemos enviado y el proceso estará completado');
+            $appUserLogger->info( "Usuario nuevo registrado. Pendiente de verificar. Email: ".$user->getEmail());
 
             return $this->redirectToRoute('home');
         }
 
-        return $this->render('registration/register.html.twig', [
+        return $this->render('email/registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
     }
 
     #[Route('/verify/email', name: 'app_verify_email')]
-    public function verifyUserEmail(Request $request, UserRepository $userRepository): Response
+    public function verifyUserEmail(Request $request, UserRepository $userRepository, LoggerInterface $appUserLogger ): Response
     {
         $id = $request->get('id');
 
@@ -87,9 +97,10 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('app_register');
         }
 
+        $appUserLogger->info( "Usuario nuevo verificado. Email: ".$user->getEmail());
         // @TODO Change the redirect on success and handle or remove the flash message in your templates
-        $this->addFlash('success', 'Your email address has been verified.');
+        $this->addFlash('success', 'Gracias por verificar tu cuenta. Entra y comparte tus experiencias');
 
-        return $this->redirectToRoute('app_register');
+        return $this->redirectToRoute('home');
     }
 }

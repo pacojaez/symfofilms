@@ -14,7 +14,7 @@ class DefaultController extends AbstractController
       
     #[Route('/docs', name: 'docs')]
     public function docs(){
-        return $this->render('docs.html.twig');
+        return $this->render('admin/docs.html.twig');
     }
 
     #[Route('/', name: 'admin')]
@@ -28,7 +28,7 @@ class DefaultController extends AbstractController
     }
     #[Route('/todo', name: 'todo')]
     public function todo(){
-        return $this->render('todo.html.twig');
+        return $this->render('admin/todo.html.twig');
     }
 
     /**
@@ -48,14 +48,53 @@ class DefaultController extends AbstractController
                 $terminoBusqueda .= ': '.substr( $logLimpio, 79, (strlen($logLimpio)) );
                 array_push( $resultado, $terminoBusqueda );
 
-                //TODO contar el numero de busquedas de caada término y añadirlo a la vista
+                //TODO contar el numero de busquedas de cada término y añadirlo a la vista
             }
 
-            return $this->render('movie/searchlog.html.twig', [
+            return $this->render('admin/searchlog.html.twig', [
                 'resultado' => $resultado,
             ]);
         }else{
-            return $this->render('movie/searchlog.html.twig', [
+            return $this->render('admin/searchlog.html.twig', [
+                'resultado' => [],
+            ]);
+
+        }
+    
+    }
+
+    /**
+     * @Route("/usersactions", name="usersactions")
+     */
+    public function userslogs(): Response {
+
+        // [2021-11-18T10:40:58.445222+01:00] app_user.INFO: Usuario nuevo registrado. Pendiente de verificar. Email: pacojaez@gmail.com [] [] //linea que es guardada en el log de search
+        if( file_exists('..\var\log\appusers.log')){           //evita error de que no exista el archivo
+
+            $logs = file('..\var\log\appusers.log');
+            $resultado = [];
+
+            foreach( $logs as $log ){
+                // dd($log);
+                $verified = '';
+                $logLimpio = str_replace('[]', ' ', $log);
+                $userAction = substr( $logLimpio, 1, 19);
+                $userAction .= ': '.substr( $logLimpio, 50, (strlen($logLimpio)) );
+                if ( strstr( $userAction, 'Pendiente' ) ) {
+                    $verified = 'NO';
+                  } else {
+                    $verified = 'SI';
+                  }
+                array_push( $resultado, ['action' => $userAction, 'verified'=>$verified] );
+
+                //TODO poner fondo distinto si es registro o verificación
+            }
+
+            return $this->render('admin/usersAction.html.twig', [
+                'resultado' => $resultado,
+            ]);
+        }else{
+            return $this->render('admin/usersAction.html.twig', [
                 'resultado' => [],
             ]);
 

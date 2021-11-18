@@ -72,13 +72,30 @@
 	<span class="navbar-text text-monospace d-none d-md-flex">{{ "now"|date('d/m/Y H:i', timezone="Europe/Madrid")}}</span>
 	<div class="d-inline-flex align-items-center">
 		{% if app.user %}
-			<p class="p-2 m-2">Hola {{ app.user.displayname }}</p>
-			<a href="{{ path('app_logout') }}" class="btn btn-danger" role="button">Sign out</a>
+			<div class="dropdown with-arrow">
+				<div class="d-inline-flex align-items-center">
+					<p class="p-2 m-2">Hola {{ app.user.displayname }}</p>
+					<button class="btn" data-toggle="dropdown" type="button" id="navbar-dropdown-toggle-btn-1">
+						
+						<i class="fa fa-angle-down" aria-hidden="true"></i>
+					</button>
+				</div>
+				<div
+					class="dropdown-menu dropdown-menu-center w-200" aria-labelledby="navbar-dropdown-toggle-btn-1">
+					<!-- w-200 = width: 20rem (200px) -->
+					<a href="{{ path('home') }}" class="dropdown-item text-center">HOME</a>
+					<div class="dropdown-divider"></div>
+					<div class="dropdown-item text-center">
+						<a href="{{ path('app_logout') }}" class="btn btn-danger" role="button">Sign out</a>
+					</div>		
+					<div class="dropdown-divider"></div>
+				</div>
+			</div>
 		{% else %}
-			<div class="">
+			<div class="m-2 p-2">
 				<a href="{{ path('app_login') }}" class="btn btn-primary" role="button">Sign in</a>
 			</div>
-			<div class="">
+			<div class="m-2 p-2">
 				<a href="{{ path('app_register') }}" class="btn btn-primary" role="button">Register</a>
 			</div>
 		{% endif %}

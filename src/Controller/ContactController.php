@@ -9,6 +9,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
+use Symfony\Component\Mime\Address;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 
 use Psr\Log\LoggerInterface;
 
@@ -24,11 +26,21 @@ class ContactController extends AbstractController
         if( $form->isSubmitted() && $form->isValid()){
             $datos = $form->getData();
 
-            $email = new Email();
-            $email->from($datos['email'])
+            $email = new TemplatedEmail();
+            // $email->from($datos['email'])
+            //         ->to($this->getParameter('app.admin_email'))
+            //         ->subject($datos['asunto'])
+            //         ->text($datos['contenido']);
+            $email->from(new Address( $datos['email']))
                     ->to($this->getParameter('app.admin_email'))
                     ->subject($datos['asunto'])
-                    ->text($datos['contenido']);
+                    ->htmlTemplate('email/contacto/contacto.html.twig')
+                    ->context([
+                        'de' => $datos['email'],
+                        'nombre' => $datos['nombre'],
+                        'asunto' => $datos['asunto'],
+                        'contenido' => $datos['contenido']
+                    ]);
 
             $mailer->send($email);
 
