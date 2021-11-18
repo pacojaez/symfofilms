@@ -236,6 +236,9 @@
             "ref": "f8fd4ddb9b477510f8f4bce2b9c054ab428c0120"
         }
     },
+    "symfony/http-client": {
+        "version": "v5.3.10"
+    },
     "symfony/http-client-contracts": {
         "version": "v2.4.0"
     },
@@ -365,6 +368,15 @@
     },
     "symfony/security-http": {
         "version": "v5.3.10"
+    },
+    "symfony/sendinblue-mailer": {
+        "version": "5.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "5.2",
+            "ref": "ae1cf494ce06b9a4578a8445c610402a1676ee8d"
+        }
     },
     "symfony/serializer": {
         "version": "v5.3.10"

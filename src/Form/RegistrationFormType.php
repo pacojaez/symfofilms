@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -23,20 +24,18 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, [
-                'attr' => ['class' => 'form-control'],
+                'attr' => ['class' => 'form-control m-4'],
             ])
-            ->add('agreeTerms',ChoiceType::class, [
-                'choices' => [
-                    'Agree' => 1
-                ],
+            
+            ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
+                'attr' => array('checked'   => 'checked'),
+                'required' => true,
                 'constraints' => [
                     new IsTrue([
                         'message' => 'You should agree to our terms.',
                     ]),
                 ],
-                'attr' => ['class' => 'form-control'],
-                'required' => true,
             ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
@@ -54,10 +53,10 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
-                'attr' => ['class' => 'form-control'],
+                'attr' => ['class' => 'form-control m-4'],
             ])
             ->add('displayname', TextType::class, [
-                'attr' => ['class' => 'form-control'],
+                'attr' => ['class' => 'form-control m-4'],
                 'required' => true,
                 'label_format' => 'NICK',
             ])
@@ -71,8 +70,12 @@ class RegistrationFormType extends AbstractType
                         'mimeTypesMessage' => 'La image debe de ser jpg, gif o png'
                     ])
                 ],
-                'attr' => ['class' => 'form-control']
+                'attr' => ['class' => 'form-control m-4']
             ])
+            // ->add('registrar', SubmitType::class, [
+            //     'attr' => ['class' => 'btn btn-primary m-4 text-center']
+            //     ]
+            // )
         ;
     }
 

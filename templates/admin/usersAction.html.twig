@@ -24,7 +24,7 @@
     {% endfor %} #}
   	{% for log in resultado %}
         <tr>
-            <th class="{{ log['verified']=='SI' ? 'font-italic font-weight-lighter text-decoration-underline' :'font-weight-bold' }}">{{ log['action'] }}</th>
+            <th class="{{ log['verified']=='SI' ? 'font-italic font-weight-bold text-success' :'font-weight-medium text-secondary' }}">{{ log['action'] }}</th>
         </tr>
 	{% endfor %}
   {% else %}
