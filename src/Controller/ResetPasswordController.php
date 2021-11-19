@@ -84,14 +84,14 @@ class ResetPasswordController extends AbstractController
 
         $token = $this->getTokenFromSession();
         if (null === $token) {
-            throw $this->createNotFoundException('No reset password token found in the URL or in the session.');
+            throw $this->createNotFoundException('Esta sesión no adjunta el token válido para hacer la operación.');
         }
 
         try {
             $user = $this->resetPasswordHelper->validateTokenAndFetchUser($token);
         } catch (ResetPasswordExceptionInterface $e) {
             $this->addFlash('reset_password_error', sprintf(
-                'There was a problem validating your reset request - %s',
+                'Hubo un problema al validar tu petición - %s',
                 $e->getReason()
             ));
 
@@ -107,7 +107,7 @@ class ResetPasswordController extends AbstractController
             $this->resetPasswordHelper->removeResetRequest($token);
 
             // Encode(hash) the plain password, and set it.
-            $encodedPassword = $userPasswordHasherInterface->hashPassword(
+            $encodedPassword = $userPasswordHasherInterface->hashPassword(              // funciona con el UserPasswordHasherInterface
                 $user,
                 $form->get('plainPassword')->getData()
             );
@@ -120,7 +120,7 @@ class ResetPasswordController extends AbstractController
 
             $this->addFlash('success', 'Password cambiado correctamente. Ya puedes hacer LogIn con tu nuevo password');
 
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('reset_password/reset.html.twig', [

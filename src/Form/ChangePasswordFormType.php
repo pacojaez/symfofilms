@@ -24,16 +24,16 @@ class ChangePasswordFormType extends AbstractType
                     ],
                     'constraints' => [
                         new NotBlank([
-                            'message' => 'Please enter a password',
+                            'message' => 'Introduce tu nuevo password',
                         ]),
                         new Length([
                             'min' => 6,
-                            'minMessage' => 'Your password should be at least {{ limit }} characters',
+                            'minMessage' => 'Tu password debe tener al menos {{ limit }} carácteres',
                             // max length allowed by Symfony for security reasons
                             'max' => 4096,
                         ]),
                     ],
-                    'label' => 'New password',
+                    'label' => 'Nuevo password',
                 ],
                 'second_options' => [
                     'attr' => [
@@ -42,7 +42,7 @@ class ChangePasswordFormType extends AbstractType
                     ],
                     'label' => 'Repeat Password',
                 ],
-                'invalid_message' => 'The password fields must match.',
+                'invalid_message' => 'Los dos campos deben coincidir',
                 // Instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
