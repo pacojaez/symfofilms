@@ -1,9 +1,101 @@
-<h1>Hi!</h1>
+{% extends 'email/layouts/baseemail.html.twig' %}
 
-<p>To reset your password, please visit the following link</p>
+{% block title %}
+    <!-- MESSAGE SUBJECT -->
+	<tr>
+			<td align="center">
+				<table class="col-600" width="600" border="0" align="center" cellpadding="0" cellspacing="0" style="margin-left:20px; margin-right:20px; border-left: 1px solid #dbd9d9; border-right: 1px solid #dbd9d9;">
+					<tbody><tr>
+						<td height="35"></td>
+					</tr>
 
-<a href="{{ url('app_reset_password', {token: resetToken.token}) }}">{{ url('app_reset_password', {token: resetToken.token}) }}</a>
+					<tr>
+						<td align="center" style="font-family: 'Raleway', sans-serif; font-size:22px; font-weight: bold; color:#2a3a4b;"> ¡Hemos recibido una petición para cambiar tu password!</td>
+					</tr>
 
-<p>This link will expire in {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.</p>
+					<tr>
+						<td height="10"></td>
+					</tr>
 
-<p>Cheers!</p>
+					<tr>
+						<td align="center" style="font-family: 'Lato', sans-serif; font-size:14px; color:#757575; line-height:24px; font-weight: 300;">
+							Si no has sido tú, no hace falta que hagas nada. Este mail sólo te ha llegado a tí.
+						</td>
+					</tr>
+
+				</tbody></table>
+			</td>
+		</tr>
+{% endblock %}
+
+{% block main %}
+    <!-- START READY FOR NEW PROJECT -->
+		<tr>
+			<td align="center">
+				<table align="center" width="100%" border="0" cellspacing="0" cellpadding="0" style=" border-left: 1px solid #dbd9d9; border-right: 1px solid #dbd9d9;">
+					<tbody><tr>
+						<td height="50"></td>
+					</tr>
+					<tr>
+						<td align="center" bgcolor="#34495e">
+							<table class="col-600" width="600" border="0" align="center" cellpadding="0" cellspacing="0">
+								<tbody><tr>
+									<td height="35"></td>
+								</tr>
+								<tr>
+									<td align="center" style="font-family: 'Raleway', sans-serif; font-size:20px; color:#f1c40f; line-height:24px; font-weight: bold;">Hola! Confirma tu mail!</td>
+								</tr>
+								<tr>
+									<td height="20"></td>
+								</tr>
+								<tr>
+									<td align="center" style="font-family: 'Lato', sans-serif; font-size:14px; color:#fff; line-height: 1px; font-weight: 300;">
+										    Por favor, para completar el cambio de password clicka en el enlace: <br><br> 
+									</td>
+								</tr>
+								<tr>
+									<td height="20"></td>
+								</tr>
+								<tr align="left" valign="top">
+									<td>
+										<table align="center" class="button" style="border: 2px solid #fff;" bgcolor="#2b3c4d" width="30%" border="0" cellpadding="0" cellspacing="0">
+											<tbody>
+												<tr>
+													<td width="10"></td>
+													<td height="30" align="center" style="font-family: 'Open Sans', Arial, sans-serif; font-size:13px; color:#f1c40f;">
+														 <a href="{{ url('app_reset_password', {token: resetToken.token}) }}">RESET PASSWORD</a>
+													</td>
+													<td width="10"></td>
+												</tr>
+											</tbody>
+										</table>
+									</td>
+				 				</tr>
+								<tr>
+									<td height="20"></td>
+								</tr>
+								<tr>
+									<td align="center" style="font-family: 'Lato', sans-serif; font-size:14px; color:#fff; line-height: 1px; font-weight: 300;">
+										    This link will expire in {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}
+                                        <br><br> 
+									</td>
+								</tr>
+								<tr>
+									<td height="20"></td>
+								</tr>           
+                                <tr>
+									<td align="center" style="font-family: 'Lato', sans-serif; font-size:14px; color:#fff; line-height: 1px; font-weight: 300;">
+										   Cheers!!
+									</td>
+								</tr>
+								<tr>
+									<td height="40"></td>
+								</tr>
+							</tbody></table>
+						</td>
+					</tr>
+				</tbody></table>
+			</td>
+		</tr>
+
+{% endblock %}

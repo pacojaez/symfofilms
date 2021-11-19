@@ -59,7 +59,7 @@ class RegistrationController extends AbstractController
                     ->from(new Address('no-reply@symfofilms.pjrphotography.es', 'Registro de Usuarios'))
                     ->to($user->getEmail())
                     ->subject('Please Confirm your Email')
-                    ->htmlTemplate('email/registration/confirmation_email.html.twig')
+                    ->htmlTemplate('registration/confirmation_email.html.twig')
             );
             // do anything else you need here, like send an email
             $this->addFlash('success', 'Te hemos mandado un mail para que completes el registro. Clicka en el link que te hemos enviado y el proceso estará completado');
@@ -68,7 +68,7 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('home');
         }
 
-        return $this->render('email/registration/register.html.twig', [
+        return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
     }
