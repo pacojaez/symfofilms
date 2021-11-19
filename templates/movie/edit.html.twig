@@ -47,16 +47,17 @@
           {% endif %}     
     </div> #}
     <!-- Wrap -->
-    <div class="col-xl-6 d-flex flex-column align-items-center flex-wrap justify-items-center">
-      <div clas="">
+    <div class="col-xl-6 d-flex flex-row align-items-center flex-wrap justify-content-center">
+          <figure>
             <img 
                 src="{{ asset(covers_directory ~ '/' ~ (peli.caratula) ?? 'default.jpg' )}}" 
                 class="rounded-top m-4" 
                 alt="{{ peli.titulo }}" 
                 title="{{ peli.titulo }}"
                 style="max-width: 200px; max-height=200px"
-              > 
-          </div>
+              >
+              <figcaption class="m-4 text-center">Carátula actual</figcaption>
+          </figure>
           <figure>
               <img 
                 id="preview" 
@@ -69,11 +70,16 @@
               <figcaption class="m-4 text-center"> Resultado de los cambios</figcaption>
           </figure>
           {% if peli.caratula %}
-            <figcaption class="m-4">
-              <a href="{{ path('movie_delete_image', {'id': peli.id }) }}">
-                <img src="{{ asset('img/buttons/delete.png') }}" height="30" width="30" aly="Borrar carátula" title="Borrar carátula"> 
-              </a>
-            </figcaption>
+          <div class="d-flex flex-row justify-content-end">
+                <figure class="d-flex flex-col justify-content-start align-items-center">
+                    <a href="{{ path('movie_delete_image', {'id': peli.id }) }}" class=" text-center">
+                        <img src="{{ asset('img/buttons/delete.png') }}" height="30" width="30" alt="Borrar avatar" title="Borrar avatar" class=" text-center">
+                    </a>
+                    <figcaption class="m-4 text-center">
+                        Eliminar carátula
+                    </figcaption>
+                </figure>
+            </div>
           {% endif %} 
     </div>
   </div>

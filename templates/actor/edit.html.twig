@@ -9,7 +9,7 @@
     <div class="d-flex justify-center m-2">
       <h2>EDICION DE LA FICHA DEL ACTOR {{ actor.nombre }}
     </div>
-    <div class="d-flex justify-center m-2">
+    <div class="d-flex justify-content-center align-items-center m-2">
       <figure>
         {% if actor.gender == 'M' %}
             <img src="{{ asset(portraits_directory ~'/'~ (actor.portrait ?? 'default_male.jpg' ))}}" class="img-fluid rounded-top rounded-top m-4" alt="{{ actor.portrait }}" title="{{ actor.nombre }}"  style="width:200px; height:200px">
@@ -24,22 +24,19 @@
         {% else %}
             <img src="{{ asset(portraits_directory ~'/'~ (actor.portrait ?? 'default_female.jpg' ))}}" id="preview" class="img-fluid rounded-top rounded-top m-4" alt="{{ actor.portrait }}" title="{{ actor.nombre }}"  style="width:200px; height:200px">
         {% endif %}
-          {# <img 
-            id="preview" 
-            src="{{ asset(portraits_directory ~ '/' ~ (actor.portrait) ?? 'default.jpg' )}}" 
-            class="img-fluid rounded-top rounded-top m-4" 
-            alt="{{ actor.nombre }}" 
-            title="{{ actor.nombre }}"
-            style="width:200px; height:200px"
-          > #}
           <figcaption class="m-4 text-center"> Resultado de los cambios</figcaption>
       </figure>
         {% if actor.portrait %}
-            <figcaption class="m-4">
-              <a href="{{ path('actor_delete_image', {'id': actor.id }) }}">
-                <img src="{{ asset('img/buttons/delete.png') }}" height="30" width="30" aly="Borrar carátula" title="Borrar carátula"> 
-              </a>
-            </figcaption>
+          <div class="d-flex flex-row justify-content-end">
+                <figure class="d-flex flex-col justify-content-start align-items-center">
+                    <a href="{{ path('actor_delete_image', {'id': actor.id }) }}" class=" text-center">
+                        <img src="{{ asset('img/buttons/delete.png') }}" height="30" width="30" alt="Borrar imagen" title="Borrar imagen" class=" text-center">
+                    </a>
+                    <figcaption class="m-4 text-center">
+                        Eliminar Imagen
+                    </figcaption>
+                </figure>
+          </div>
         {% endif %}
     </div>
 
