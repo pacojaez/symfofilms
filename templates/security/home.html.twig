@@ -5,30 +5,69 @@
 {% block main %}
 {{ parent() }}
 <div class="d-flex text-center">
-      <div class="container-fluid">
+      <div class="container-fluid overflow-x-hidden">
       <h2>HOME de {{ app.user.email }}</h2>
       <!-- Card with no padding with multiple content containers nested inside of it -->
-      <div class="w-full"> <!-- w-600 = width: 60rem (600px), mw-full = max-width: 100% -->
+      <div class="w-full p-2 m-2"> <!-- w-600 = width: 60rem (600px), mw-full = max-width: 100% -->
         <div class="card p-0 d-flex flex-col justify-content-center align-items-center"> <!-- p-0 = padding: 0 -->
           <img src="{{ app.user.avatar ?
                         path('pic_show', {'avatar': app.user.avatar }) :
                         path('pic_show', {'avatar': 'default.png'})
                     }}" 
-                    class="img-fluid rounded-top w-150 h-200 justify-center" 
+                    class="img-fluid rounded-top w-175 h-150 justify-center m-2 p-2" 
                     alt="{{ app.user.displayname }}"> 
           <!-- First content container nested inside card -->
-          <div class="content">
+          <div class="content mt-0">
             <h2 class="content-title">
               {{ app.user.email }}
             </h2>
             <h3 class="content-title">
               A.K.A {{ app.user.displayname }}
             </h3>
-            <div>
-              <span class="text-muted">
-                <i class="fa fa-clock-o mr-5" aria-hidden="true"></i>  <!-- mr-5 = margin-right: 0.5rem (5px) -->
-              </span>
+            <div class="d-flex flex-col justify-content-center m-6">
+                <h3 class="content-title">
+                  OPERACIONES
+                </h3>
+                <div class="d-flex flex-row justify-content-between mt-6 w-full">
+                  
+                  <details class="collapse-panel w-200 mw-full m-2"> <!-- w-400 = width: 40rem (400px), mw-full = max-width: 100% -->
+                    <summary class="collapse-header w-full">
+                       PELÍCULAS <span><i class="fas fa-film mr-5" aria-hidden="true"></i></span>
+                    </summary>
+                    <div class="collapse-content">
+                      AÑADIR.
+                    </div>
+                  </details>
+                  <details class="collapse-panel w-200 mw-full m-2"> <!-- w-400 = width: 40rem (400px), mw-full = max-width: 100% -->
+                    <summary class="collapse-header">
+                       ACTORES <span><i class="fas fa-users mr-5" aria-hidden="true"></i></span>
+                    </summary>
+                    <div class="collapse-content">
+                      AÑADIR.
+                    </div>
+                  </details>
+                  <details class="collapse-panel w-200 mw-full m-2"> <!-- w-400 = width: 40rem (400px), mw-full = max-width: 100% -->
+                    <summary class="collapse-header">
+                       USUARIO <span><i class="fas fa-user mr-5" aria-hidden="true"></i></span>
+                    </summary>
+                    <div class="collapse-content">
+                      MODIFICAR DATOS
+                    </div>
+                    <div class="collapse-content">
+                      <a href="{{ path('app_forgot_password_request')}}">CAMBIAR PASSWORD</a>
+                    </div>
+                    <div class="collapse-content">
+                      <a href="{{ path('unsubscribe')}}">DAR DE BAJA</a>
+                    </div>
+                  </details>
+                </div>
             </div>
+            {# <div>
+              <span class="text-muted">
+                <i class="fa fa-clock-o mr-5" aria-hidden="true"></i>
+                
+              </span>
+            </div> #}
             <div>
               <span class="badge">
                 <i class="fa fa-comments text-primary mr-5" aria-hidden="true"></i> 5 comments <!-- text-primary = color: primary-color, mr-5 = margin-right: 0.5rem (5px) -->
@@ -44,7 +83,6 @@
             <h2 class="content-title">
               PELICULAS SUBIDAS
             </h2>
-            
             <div>
               <strong>John Doe</strong>
               <br />

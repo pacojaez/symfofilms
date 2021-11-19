@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use  App\Form\UserDeleteFormType;
 use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -63,7 +64,7 @@ class RegistrationController extends AbstractController
             );
             // do anything else you need here, like send an email
             $this->addFlash('success', 'Te hemos mandado un mail para que completes el registro. Clicka en el link que te hemos enviado y el proceso estará completado');
-            $appUserLogger->info( "Usuario nuevo registrado. Pendiente de verificar. Email: ".$user->getEmail());
+            $appUserLogger->notice( "Usuario nuevo registrado. Pendiente de verificar. Email: ".$user->getEmail());
 
             return $this->redirectToRoute('home');
         }
@@ -102,5 +103,41 @@ class RegistrationController extends AbstractController
         $this->addFlash('success', 'Gracias por verificar tu cuenta. Entra y comparte tus experiencias');
 
         return $this->redirectToRoute('home');
+    }
+
+    #[Route('/unsubscribe', name: 'unsubscribe', methods: ['GET', 'POST'])]
+    public function unsubscribe( Request $request, LoggerInterface $appUserLogger, FileService $uploader ): Response {
+
+        $user = $this->getUser();
+        $formulario = $this->createForm( UserDeleteFormType::class, $user );
+        $formulario->handleRequest($request);
+
+        if ($formulario->isSubmitted() && $formulario->isValid()) {
+
+            $uploader->targetDirectory = $this->getParameter('app.users_pics_root');
+
+            if( $user->getAvatar())
+                $uploader->delete($user->getAvatar());
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($user);
+            $entityManager->flush();
+
+            $this->container->get('security.token_storage')->setToken(NULL);
+            $this->container->get('session')->invalidate();
+
+            $mensaje = "Usuario ".$user->getDisplayname()." borrado correctamente";
+            $this->addFlash('success', $mensaje);
+
+            $mensaje = "El Usuario ".$user->getDisplayname()." se ha dado de baja";
+            $appUserLogger->warning($mensaje);
+
+            return $this->redirectToRoute('portada');
+        }
+        
+        return $this->renderForm('user/delete.html.twig', [
+            'formulario' => $formulario,
+            'user' => $user
+        ]);
     }
 }

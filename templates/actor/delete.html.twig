@@ -4,16 +4,18 @@
 
 {% block main %}
 {{ parent() }}
-<!-- Card with no padding with multiple content containers nested inside of it -->
-<div class="w-800 mw-full"> <!-- w-600 = width: 60rem (600px), mw-full = max-width: 100% -->
-  <div class="card p-0"> <!-- p-0 = padding: 0 -->
-    <!-- First content container nested inside card -->
-    <h3>CONFIRMAR EL BORRADO DE LOS DATOS DEL ACTOR {{ actor.nombre }} CON ID # {{ actor.id }}</h3>
-    <p>ojo!, esta acción es irreversible</p>
-    <div class="content">
-      {{ form(formulario) }}
+
+<div class="mb-3 text-center d-flex flex-col justify-content-center align-items-center w-full border p-4">
+    <!-- Card with no padding with multiple content containers nested inside of it -->
+    <div class="w-800 mw-full"> <!-- w-600 = width: 60rem (600px), mw-full = max-width: 100% -->
+        <div class="card p-6 m-2 d-flex flex-col justify-content-center"> <!-- p-0 = padding: 0 -->
+            <!-- First content container nested inside card -->
+            <h3>CONFIRMAR EL BORRADO DE LOS DATOS DEL ACTOR {{ actor.nombre }} CON ID # {{ actor.id }}</h3>
+            <p>ojo!, esta acción es irreversible</p>
+            <div class="content">
+              {{ form(formulario) }}
+            </div>
+        </div>
     </div>
-    
-  </div>
 </div>
 {% endblock %}

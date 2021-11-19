@@ -22,11 +22,17 @@
     {# {% for key in resultado|keys %}
         <li>{{ key }}</li>
     {% endfor %} #}
-  	{% for log in resultado %}
-        <tr>
-            <th class="{{ log['verified']=='SI' ? 'font-italic font-weight-bold text-success' :'font-weight-medium text-secondary' }}">{{ log['action'] }}</th>
-        </tr>
-	{% endfor %}
+      {% for log in resultado %}
+        {% set statusClass = '' %}
+        {% if log['status']=='Baja' %} {% set statusClass = 'font-italic font-weight-bold text-danger' %}
+        {% elseif log['status']=='Registrado' %} {% set statusClass = 'font-weight-bold text-secondary' %}
+        {% elseif log['status']=='Verificado' %} {%  set statusClass = 'font-italic font-weight-bold text-success' %}
+        {% else  %} {% set statusClass = '' %}
+        {% endif %}
+          <tr>
+              <th class="{{ statusClass }}">{{ log['action'] }}</th>
+          </tr>
+    {% endfor %}
   {% else %}
     <th>Aún no hay acciones de registro o validación de usuarios </th>
   {% endif %}

@@ -80,14 +80,18 @@ class DefaultController extends AbstractController
                 $logLimpio = str_replace('[]', ' ', $log);
                 $userAction = substr( $logLimpio, 1, 19);
                 $userAction .= ': '.substr( $logLimpio, 50, (strlen($logLimpio)) );
-                if ( strstr( $userAction, 'Pendiente' ) ) {
-                    $verified = 'NO';
-                  } else {
-                    $verified = 'SI';
+                if ( strstr( $log, 'INFO' ) ) {
+                    $status = 'Verificado';
+                  } elseif  (strstr( $log, 'NOTICE' )){
+                    $status = 'Registrado';
+                  } elseif (strstr( $log, 'WARNING' )){
+                    $status = 'Baja';
+                  }else{
+                    $status = '';
                   }
-                array_push( $resultado, ['action' => $userAction, 'verified'=>$verified] );
+                array_push( $resultado, ['action' => $userAction, 'status'=>$status] );
 
-                //TODO poner fondo distinto si es registro o verificación
+                //TODO poner fondo distinto si es registro o verificación o baja
             }
 
             return $this->render('admin/usersAction.html.twig', [

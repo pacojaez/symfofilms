@@ -1,6 +1,6 @@
 {% extends 'layouts/base.html.twig' %}
 
-{% block title %}Borrar una Película de la DB{% endblock %}
+{% block title %}Dar de baja un usuario{% endblock %}
 
 {% block main %}
 {{ parent() }}
@@ -9,11 +9,11 @@
     <div class="w-800 mw-full"> <!-- w-600 = width: 60rem (600px), mw-full = max-width: 100% -->
         <div class="card p-6 m-2 d-flex flex-col justify-content-center"> <!-- p-0 = padding: 0 -->
             <!-- First content container nested inside card -->
-            <h3>CONFIRMAR EL BORRADO DE LA PELÍCULA {{ peli.titulo }} CON ID: {{ peli.id }}</h3>
-              <p>ojo!, esta acción es irreversible</p>
-              <div class="content">
-                {{ form(formulario) }}
-              </div>
+            <h3>¿ESTÁS SEGURO DE QUERER DARTE DE BAJA? </h3>
+            <p>ojo!, esta acción es irreversible</p>
+            <div class="content">
+            {{ form(formulario) }}
+            </div>
         </div>
     </div>
 </div>
