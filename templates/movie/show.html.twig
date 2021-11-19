@@ -6,37 +6,38 @@
 
 {% block main %}
 	<!-- Card with no padding with multiple content containers nested inside of it -->
-	<div class="w-800 mw-full d-flex justify-center">
-		<div
-			class="card p-0">
-			<!-- p-0 = padding: 0 -->
-      <div class="d-flex justify-center">
-	      <img src="{{ asset(covers_directory~'/'~(peli.caratula ?? 'default.jpg' ))}}" class="img-fluid rounded-top" alt="{{ peli.titulo }}" title="{{ peli.titulo }}">
-      </div>
+<div class="w-800 mw-full d-flex justify-center m-0 p-0">
+	<div class="card p-0">
+      	<div class="d-flex justify-center m-2">
+	      <img src="{{ asset(covers_directory~'/'~(peli.caratula ?? 'default.jpg' ))}}" class="h-400 w-300 img-fluid rounded-top" alt="{{ peli.titulo }}" title="{{ peli.titulo }}">
+      	</div>
 			<!-- rounded-top = rounded corners on the top -->
 			<!-- First content container nested inside card -->
-				<div class="content flex-col justify-content-center"> 
-          <h2 class="content-title">
+		<div class="content d-flex flex-col justify-content-center align-items-center">
+		<h2 class="content-title text-primary text-smoothing-auto-dm font-weight-bolder font-size-24">
+            {{ peli.titulo }}
+        </h2>
+        <h2 class="content-title">
             Dirigida por
             {{ peli.director }}
-          </h2>
-				<div>
-					<span class="text-muted">
-						<i class="fa fa-clock-o mr-5" aria-hidden="true"></i>
-						Duracion:
-						{{ peli.duracion }} min.
-						<!-- mr-5 = margin-right: 0.5rem (5px) -->
-					</span>
-				</div>
-				<div class="d-flex">
-					<span class="badge">
-						<i class="fa fa-comments text-primary mr-5" aria-hidden="true"></i>
-						{{ peli.genero }}
-						<!-- text-primary = color: primary-color, mr-5 = margin-right: 0.5rem (5px) -->
-					</span>
-				</div>
+        </h2>
+		<div>
+			<span class="text-muted">
+				<i class="fa fa-clock-o mr-5" aria-hidden="true"></i>
+					Duracion:
+					{{ peli.duracion }} min.
+					<!-- mr-5 = margin-right: 0.5rem (5px) -->
+			</span>
+		</div>
+		<div class="d-flex">
+			<span class="badge">
+				<i class="fa fa-comments text-primary mr-5" aria-hidden="true"></i>
+					{{ peli.genero }}
+					<!-- text-primary = color: primary-color, mr-5 = margin-right: 0.5rem (5px) -->
+			</span>
+		</div>
         <div class="d-flex">
-						<span class="m-4">Valoracion: </span>
+			<span class="m-4">Valoracion: </span>
             <div class="d-flex justify-content-center align-items-center">
               {% if peli.valoracion != NULL %}
                   {% for i in 1..5 %}
@@ -51,34 +52,59 @@
                 {% endif %}
             </div>					
 				</div>
-        <div>
-					<span class="text-muted">
-						<i class="fa fa-clock-o mr-5" aria-hidden="true"></i>
+			<div>
+				<span class="text-muted">
+					<i class="fa fa-clock-o mr-5" aria-hidden="true"></i>
 						Estreno:
 						{{ peli.estreno }}
 						<!-- mr-5 = margin-right: 0.5rem (5px) -->
-					</span>
-				</div>
+				</span>
 			</div>
-			<hr/>
+		</div>
+		<hr/>
 		<!-- Second content container nested inside card (comments) -->
-			<div class="content">
-			      <h2 class="content-title">
-			        Sinopsis
-			      </h2>
-				   {% if peli.sinopsis %}
-					<div>
-						{% autoescape false %}
-								<p class="m-2">{{ peli.sinopsis|replace({ "\n" : "</p><p class='m-2'>" })|escape }}</p>
-						{% endautoescape %}
-					</div>
-			      {% else %}
-				  		<p>AUN NO HAY SINOPSIS DE LA PELÍCULA</p>
-				  {% endif %}
+		<div class="content d-flex flex-col justify-content-center align-items-center">
+			<h2 class="content-title">
+			    Sinopsis
+			</h2>
+			{% if peli.sinopsis %}
+				<div>
+					{% autoescape false %}
+						<p class="m-2">{{ peli.sinopsis|replace({ "\n" : "</p><p class='m-2'>" })|escape }}</p>
+					{% endautoescape %}
+				</div>
+			{% else %}
+				  	<p>AUN NO HAY SINOPSIS DE LA PELÍCULA</p>
+			{% endif %}
 			      {# <div class="text-center mt-20"> <!-- text-center = text-align: center, mt-20 = margin-top: 2rem (20px) -->
 			        <button class="btn btn-sm">Load all comments</button>
 			      </div> #}
-			    </div>
 		</div>
 	</div>
+</div>
+
+<div id="f1_container">
+	<div id="f1_card" class="shadow">
+		<div class="front face">
+			<img src="{{ asset(covers_directory~'/'~(peli.caratula ?? 'default.jpg' ))}}" class="img-fluid rounded-top" alt="{{ peli.titulo }}" title="{{ peli.titulo }}">
+		</div>
+		<div class="back face center">
+			<div>
+				<span class="text-muted">
+					<i class="fa fa-clock-o mr-5" aria-hidden="true"></i>
+						Estreno:
+						{{ peli.estreno }}
+						<!-- mr-5 = margin-right: 0.5rem (5px) -->
+				</span>
+			</div>
+			<h2 class="content-title text-primary text-smoothing-auto-dm font-weight-bolder font-size-24">
+					{{ peli.titulo }}
+				</h2>
+				<h2 class="content-title">
+					Dirigida por
+					{{ peli.director }}
+				</h2>
+		</div>
+	</div>
+</div>
 {% endblock %}

@@ -17,7 +17,8 @@ class SearchFormType extends AbstractType {
 
     public function buildForm ( FormBuilderInterface $builder, array $options ){
 
-        $builder->add( 'campo', ChoiceType::class, [
+        $builder
+        ->add( 'campo', ChoiceType::class, [
             'choices' => $options['field_choices'],
             'attr' => [ 'class' => 'form-control' ]
         ])

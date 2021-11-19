@@ -11,6 +11,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\UserUpdateFormType;
 use Symfony\Component\Filesystem\Filesystem;
+use App\Services\PaginatorService;
+use App\Services\SimpleSearchService;
 use App\Services\FileService;
 use Psr\Log\LoggerInterface;
 
@@ -46,7 +48,7 @@ class UserController extends AbstractController
     public function update( Request $request, LoggerInterface $appUserLogger, FileService $uploader ): Response {
 
         $user = $this->getUser();
-// dd( $request->get('id'));
+        // dd( $request->get('id'));
         if( $user->getId() != $request->get('id') ){
 
             $this->addFlash('warning', 'No tienes permiso para realizar la operación');
@@ -127,5 +129,44 @@ class UserController extends AbstractController
 
         // }
 
+    }
+
+    #[Route('/allusers/{pagina}', name: 'all_users', defaults: ['pagina'=> 1], methods: ['GET'] )]
+    public function allusers( int $pagina,  PaginatorService $paginator ): Response {
+
+        $paginator->setEntityType('App\Entity\User');
+
+        $users = $paginator->findAllEntities( $pagina );
+
+        // $movies = $this->getDoctrine()->getRepository( Movie::class )->findAll();       //metodo para recuperar las pelis sin paginacion
+
+        return $this->render('user/allusers.html.twig', [
+            'users' => $users,
+            'totalPaginas' => $paginator->getTotalPages(),
+            'totalItems' => $paginator->getTotalItems(),
+            'paginaActual' => $pagina,
+            'entidad' => 'Usuarios'
+        ]);
+    }
+
+    #[Route('/users/search', name: 'users_search', methods: ['POST'] )]
+    public function search ( int $pagina, Request $request, SimpleSearchService $busqueda, PaginatorService $paginator ): Response {
+
+        $paginator->setEntityType('App\Entity\User');
+        
+        $request->get('valor');
+
+        $users = $busqueda->search( 'App\Entity\User');
+
+        $users = $paginator->findAllEntities( $pagina );
+
+        return $this->render('user/allusers.html.twig', [
+            // 'formulario' => $formulario,
+            'users' => $users,
+            'totalPaginas' => $paginator->getTotalPages(),
+            'totalItems' => $paginator->getTotalItems(),
+            'paginaActual' => $pagina,
+            'entidad' => 'Usuarios'
+        ]);
     }
 }
