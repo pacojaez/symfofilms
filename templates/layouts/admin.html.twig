@@ -29,7 +29,6 @@
 			class="page-wrapper with-navbar with-sidebar with-navbar-fixed-bottom" data-sidebar-type="full-height">
 			<!-- Sidebar overlay -->
             <!-- Toggle sidebar -->
-
 			<!-- Navbar -->
 			<nav class="navbar">
 				{% include('components/navbar.html.twig') %}
@@ -40,6 +39,20 @@
 			</div>
 			<!-- Content wrapper -->
 			<div class="content-wrapper">
+				{% block success %}
+					{% for message in app.flashes('success') %}
+						<div class="p-4 m-4 alert alert-success" role="alert">
+							<h4 class="alert-heading">Operación realizada correctamente</h4>
+							{{ message }}
+						</div>
+					{% endfor %}
+					{% for message in app.flashes('warning') %}
+						<div class="p-4 m-4 alert alert-danger" role="alert">
+							<h4 class="alert-heading">Oops, algo no está bien</h4>
+							{{ message }}
+						</div>
+					{% endfor %}
+				{% endblock %}
 				{% block main %}{% endblock %}
 			</div>
 		</div>

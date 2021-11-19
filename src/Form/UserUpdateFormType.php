@@ -61,6 +61,9 @@ class UserUpdateFormType extends AbstractType
                 ],
                 'attr' => ['class' => 'form-control m-4']
             ])
+            ->add( 'Actualizar', SubmitType::class, [
+                'attr' =>[ 'class' => 'btn btn-primary' ]
+            ])
         ;
     }
 
