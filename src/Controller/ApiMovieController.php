@@ -19,16 +19,18 @@ class ApiMovieController extends AbstractController {
 
     #[Route('/movies/{formato}', name: 'allMovies', requirements: ['formato'=>'json|csv|xml'], defaults: ['formato'=>'json'])]
 
-    public function allmovies( string $formato ): Response
-    {
-        $movies = $this->getDoctrine()->getRepository( Movie::class )->findAll();
+    public function allmovies( string $formato ): Response {
 
+        
+        $movies = $this->getDoctrine()->getRepository( Movie::class )->findAll();
+        
         $serializer = new Serializer([new ObjectNormalizer()],
                      [ new JsonEncoder(), new CsvEncoder(), new XmlEncoder()]);
-        
+                     
         $formato = strtolower($formato);
-        $contenido = $serializer->serialize($movies, $formato );
         
+        $contenido = $serializer->serialize( $movies, $formato );        // falla A circular reference has been detected when serializing the object of class "App\Entity\Movie"
+        // dd($contenido);
         $response = new Response( $contenido );
 
         switch ( $formato ){

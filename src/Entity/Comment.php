@@ -37,6 +37,7 @@ class Comment
     public function __construct()
     {
         $this->movie = new ArrayCollection();
+        $this->user = new ArrayCollection();            // added to the construct
     }
 
     public function getId(): ?int

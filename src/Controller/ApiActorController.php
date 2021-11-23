@@ -26,7 +26,7 @@ class ApiActorController extends AbstractController
                      [ new JsonEncoder(), new CsvEncoder(), new XmlEncoder()]);
         
         $formato = strtolower($formato);
-        $contenido = $serializer->serialize($actors, $formato );
+        $contenido = $serializer->serialize( $actors, $formato );
         
         $response = new Response( $contenido );
 
