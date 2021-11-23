@@ -46,7 +46,7 @@ class UserController extends AbstractController
         return $response;
     }
 
-    #[Route('/use/update/{id}', name: 'user_update', methods: ['GET', 'POST'])]
+    #[Route('/user/edit/{id}', name: 'user_edit', methods: ['GET', 'POST'])]
     public function update( Request $request, LoggerInterface $appUserLogger, FileService $uploader ): Response {
 
         $user = $this->getUser();
@@ -96,7 +96,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute('home');
         }
         
-        return $this->renderForm('user/update.html.twig', [
+        return $this->renderForm('user/edit.html.twig', [
             'formulario' => $formulario,
             'user' => $user
         ]);
@@ -140,8 +140,6 @@ class UserController extends AbstractController
 
         $users = $paginator->findAllEntities( $pagina );
 
-        // $movies = $this->getDoctrine()->getRepository( Movie::class )->findAll();       //metodo para recuperar las pelis sin paginacion
-
         return $this->render('user/allusers.html.twig', [
             'users' => $users,
             'totalPaginas' => $paginator->getTotalPages(),
@@ -151,24 +149,85 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/users/search', name: 'users_search', methods: ['POST'] )]
+    #[Route('/users/search/{pagina}', name: 'users_search', methods: ['POST'], defaults: ['pagina'=> 1 ] )]
     public function search ( int $pagina, Request $request, SimpleSearchService $busqueda, PaginatorService $paginator ): Response {
 
         $paginator->setEntityType('App\Entity\User');
         
-        $request->get('valor');
+        $valor = $request->get('valor');
+        $busqueda->valor = $valor;
+        
+        $orden = 'email';
+        $busqueda->orden = $orden;
+    
+        $campo = 'email';
+        $busqueda->campo = $campo;
 
+        $entityType = 'App\Entity\User';
+       
         $users = $busqueda->search( 'App\Entity\User');
 
-        $users = $paginator->findAllEntities( $pagina );
+        // $users = $paginator->findEntitiesSearchTerm( $pagina, $campo, $valor );
 
-        return $this->render('user/allusers.html.twig', [
-            // 'formulario' => $formulario,
+        return $this->render('user/userssearch.html.twig', [
             'users' => $users,
-            'totalPaginas' => $paginator->getTotalPages(),
-            'totalItems' => $paginator->getTotalItems(),
-            'paginaActual' => $pagina,
-            'entidad' => 'Usuarios'
         ]);
+    }
+
+    /**
+     * @Route("/user/show/{id}", name="user_show")
+     * 
+     * metodo show hecho de forma "tradicional"
+     */
+    public function show( User $user ): Response {
+
+        $user = $this->getDoctrine()->getRepository( User::class )->find($user);
+
+        if(!$user)
+            throw $this->createNotFoundException( "No se encontró el usuario con id: $user." );
+
+        return $this->render('user/show.html.twig', [
+            'user' => $user,
+        ]); 
+    }
+
+    #[Route('/user/delete/{id}', name:'user_delete')]
+    public function delete( User $user, Request $request, LoggerInterface $appInfoLogger, FileService $uploader ): Response {
+
+        // $formulario = $this->createForm( MovieDeleteFormType::class, $peli );
+
+        // //guardando la pelicula cuando llega el form
+        // $formulario->handleRequest($request);
+
+        // if($formulario->isSubmitted() && $formulario->isValid()){
+
+        //     if( $peli->getCaratula() ){
+        //         // $directorio = $this->getParameter('app.covers_root');
+        //         // $filesystem = new Filesystem(); 
+        //         // $filesystem->remove($directorio.'/'.$peli->getCaratula());
+        //         $uploader->targetDirectory = $this->getParameter('app.covers_root');
+
+        //         if( $uploader->remove( $peli->getCaratula())){
+        //             $this->addFlash( 'success', 'Imagen borrada correctamente' );
+        //         }else{
+        //             $this->addFlash( 'warning', 'Imagen no borrada' );
+        //         }
+        //     }
+
+        //     $entityManager = $this->getDoctrine()->getManager();
+        //     $entityManager->remove($peli);
+        //     $entityManager->flush();
+
+        //     $mensaje = "Pelicula ".$peli->getTitulo()." borrada correctamente";
+        //     $this->addFlash( 'success', $mensaje );
+        //     $appInfoLogger->info( $mensaje );
+
+        //     return $this->redirectToRoute('all_movies');
+        // }
+
+        // return $this->render('movie/delete.html.twig', [
+        //     'formulario'=>$formulario->createView(),
+        //     'peli' => $peli
+        // ]);
     }
 }

@@ -24,7 +24,7 @@ class SimpleSearchService {
 
     }
 
-    public function search (string $entityType): array {
+    public function search (string $entityType ): array {
         
         $consulta = $this->entityManager->createQuery(
             "SELECT p 

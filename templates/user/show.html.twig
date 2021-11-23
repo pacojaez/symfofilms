@@ -1,28 +1,28 @@
 {% extends 'layouts/admin.html.twig' %}
 
-{% block title %} Home {% endblock %}
+{% block title %} Detalles del usuario {{ user.displayName }} {% endblock %}
 
 {% block main %}
-{{ parent() }}
+{# {{ parent() }} #}
 <div class="d-flex text-center">
       <div class="container-fluid overflow-x-hidden">
-      <h2>HOME de {{ app.user.email }}</h2>
+      <h2>PERFIL DE {{ user.email }}</h2>
       <!-- Card with no padding with multiple content containers nested inside of it -->
       <div class="w-full p-2 m-2"> <!-- w-600 = width: 60rem (600px), mw-full = max-width: 100% -->
         <div class="card p-0 d-flex flex-col justify-content-center align-items-center"> <!-- p-0 = padding: 0 -->
-          <img src="{{ app.user.avatar ?
-                        path('pic_show', {'avatar': app.user.avatar }) :
+          <img src="{{ user.avatar ?
+                        path('pic_show', {'avatar': user.avatar }) :
                         path('pic_show', {'avatar': 'default.png'})
                     }}" 
                     class="img-fluid rounded-top w-175 h-150 justify-center m-2 p-2" 
-                    alt="{{ app.user.displayname }}"> 
+                    alt="{{ user.displayname }}"> 
           <!-- First content container nested inside card -->
           <div class="content mt-0">
             <h2 class="content-title">
-              {{ app.user.email }}
+              {{ user.email }}
             </h2>
             <h3 class="content-title">
-              A.K.A {{ app.user.displayname }}
+              A.K.A {{ user.displayname }}
             </h3>
             <div class="d-flex flex-col justify-content-center m-6">
                 <h3 class="content-title">
@@ -70,13 +70,13 @@
             </div> #}
             <div>
               <span class="badge">
-                <i class="fa fa-comments text-primary mr-5" aria-hidden="true"></i> {{ app.user.getComments().count() }} comments <!-- text-primary = color: primary-color, mr-5 = margin-right: 0.5rem (5px) -->
+                <i class="fa fa-comments text-primary mr-5" aria-hidden="true"></i> {{ user.getComments().count() }} comments <!-- text-primary = color: primary-color, mr-5 = margin-right: 0.5rem (5px) -->
               </span>
               <span class="badge ml-5"> <!-- ml-5 = margin-left: 0.5rem (5px) -->
                 <i class="fa fa-heart text-danger mr-5" aria-hidden="true"></i> 124 likes <!-- text-danger = color: danger-color, mr-5 = margin-right: 0.5rem (5px) -->
               </span>
               <span class="badge ml-5"> <!-- ml-5 = margin-left: 0.5rem (5px) -->
-                <i class="fas fa-film mr-5" aria-hidden="true"></i> {{ app.user.getMovies().count() }} peliculas subidas <!-- text-danger = color: danger-color, mr-5 = margin-right: 0.5rem (5px) -->
+                <i class="fas fa-film mr-5" aria-hidden="true"></i> {{ user.getMovies().count() }} peliculas subidas <!-- text-danger = color: danger-color, mr-5 = margin-right: 0.5rem (5px) -->
               </span>
             </div>
           </div>
@@ -86,7 +86,7 @@
             <h2 class="content-title">
               PELICULAS SUBIDAS
             </h2>
-            {% set pelis = app.user.getMovies() %}
+            {% set pelis = user.getMovies() %}
             {% include '/movie/includes/lista_movies.html.twig' %}
             {# <div>
               <strong>John Doe</strong>

@@ -98,21 +98,21 @@ class PaginatorService {
     /**
      * metodo para recuperar todas las entidades con criterio de busqueda
      */
-    public function findAllEntitiesSearchTerm ( int $paginaActual = 1, string $campo, string $valor ): Paginator {
+    public function findEntitiesSearchTerm ( int $paginaActual = 1, string $campo, string $valor ): Paginator {
 
-        $entityCampo = "p.".$campo;
+        // $entityCampo = "p.".$campo;
 
         $consulta = $this->entityManager->createQuery(
             "SELECT p
             FROM $this->entityType p
-            WHERE :entityCampo LIKE :valor
-            ORDER BY p.id DESC "
+            WHERE :campo LIKE :valor
+            ORDER BY p.id D ESC "
         )
-            ->setParameter("entityCampo", $entityCampo)
-            ->setParameter("valor", $valor)
-            // ->getResult()
+            ->setParameter("campo", $campo)
+            ->setParameter("valor", '%'.$valor.'%')
+            ->getResult()
         ;
-        // dd($consulta);
+        //  dd($consulta);
         return $this->paginate( $consulta, $paginaActual );
     }
 }
