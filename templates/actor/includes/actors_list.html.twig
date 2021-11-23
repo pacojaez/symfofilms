@@ -1,31 +1,31 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>#</th>
-      <th></th>
-      <th>NOMBRE</th>
-	    <th>FECHA NACIMIENTO</th>
-      <th>NACIONALIDAD</th>
-	  <th class="text-right">Actions</th>
+      <th class="text-center">#</th>
+      <th class="text-center"></th>
+      <th class="text-center">NOMBRE</th>
+	    <th class="text-center">FECHA NACIMIENTO</th>
+      <th class="text-center">NACIONALIDAD</th>
+	    <th class="text-center">Actions</th>
     </tr>
   </thead>
   <tbody>
   	{% for actor in actors %}
     <tr>
-      <th>{{ actor.id }}</th>
-      <th>
+      <th class="text-center">{{ actor.id }}</th>
+      <th class="text-center">
         {% if actor.gender == 'M' %}
-          <img src="{{ asset(portraits_directory ~'/'~ (actor.portrait ?? 'default_male.jpg' ))}}" class="rounded-top" alt="{{ actor.portrait }}" title="{{ actor.nombre }}"  style="widht:200px, height:150px" />
+          <img src="{{ asset(portraits_directory ~'/'~ (actor.portrait ?? 'default_male.jpg' ))}}" class="h-100 w-100 rounded-top" alt="{{ actor.portrait }}" title="{{ actor.nombre }}"  style="widht:200px, height:150px" />
         {% else %}
-          <img src="{{ asset(portraits_directory ~'/'~ (actor.portrait ?? 'default_female.jpg' ))}}" class="rounded-top" alt="{{ actor.portrait }}" title="{{ actor.nombre }}" style="widht:200px, height:150px" />
+          <img src="{{ asset(portraits_directory ~'/'~ (actor.portrait ?? 'default_female.jpg' ))}}" class="h-100 w-100 rounded-top" alt="{{ actor.portrait }}" title="{{ actor.nombre }}" style="widht:200px, height:150px" />
        {% endif %} 
       </th>
-      <td>{{ actor.nombre }}</td>
+      <td class="text-center">{{ actor.nombre }}</td>
       {# <td>
 	  	<img src="/img/{{ actor.nombre }}.jpg" class="img-fluid rounded-top" alt="{{ actor.nombre }}"> <!-- rounded-top = rounded corners on the top -->
 	    </td> #}
-      <td class="text-right">{{ actor.fechanacimiento | date("d/m/Y") }}</td>
-      <td class="text-right">{{ actor.nacionalidad }}</td>
+      <td class="text-center">{{ actor.fechanacimiento | date("d/m/Y") }}</td>
+      <td class="text-center">{{ actor.nacionalidad }}</td>
       <td class="">
         <div class="d-flex justify-content-center align-items-center">
           <a href="{{ path('actor_show', {'id':actor.id })}}" class="m-2"><img src="{{ asset('img/buttons/show.png')}}" alt="detalles actor {{ actor.nombre }}" style="height:20px; width:20px"/></a>

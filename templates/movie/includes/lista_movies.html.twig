@@ -2,7 +2,7 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>#</th>
+      <th>ID</th>
       <th>TITULO</th>
 	    <th>IMAGEN</th>
       <th>DIRECTOR</th>
@@ -19,7 +19,7 @@
       <th>{{ peli.id }}</th>
       <td>{{ peli.titulo }}</td>
       <td>
-	  	  <img src="{{ asset(covers_directory ~'/'~ (peli.caratula ?? 'default.jpg' ))}}" class="rounded-top" alt="{{ peli.titulo }}" title="{{ peli.titulo }}" style="widht:200px, height:150px" /> 
+	  	  <img src="{{ asset(covers_directory ~'/'~ (peli.caratula ?? 'default.jpg' ))}}" class="h-100 w-100 rounded-top" alt="{{ peli.titulo }}" title="{{ peli.titulo }}" /> 
       </td>
       <td class="text-left">{{ peli.director }}</td>
       <td class="text-left">{{ peli.genero }}</td>
