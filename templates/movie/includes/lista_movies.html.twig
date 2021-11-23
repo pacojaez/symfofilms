@@ -9,6 +9,7 @@
 	    <th>GENERO</th>
       <th>VALORACIÓN</th>
       <th>DURACION</th>
+      <th>USUARIO</th>
 	    <th>Actions</th>
     </tr>
   </thead>
@@ -18,7 +19,7 @@
       <th>{{ peli.id }}</th>
       <td>{{ peli.titulo }}</td>
       <td>
-	  	  <img src="{{ asset(covers_directory ~'/'~ (peli.caratula ?? 'default.jpg' ))}}" class="h-200 w-150 rounded-top" alt="{{ peli.titulo }}" title="{{ peli.titulo }}"> 
+	  	  <img src="{{ asset(covers_directory ~'/'~ (peli.caratula ?? 'default.jpg' ))}}" class="rounded-top" alt="{{ peli.titulo }}" title="{{ peli.titulo }}" style="widht:200px, height:150px" /> 
       </td>
       <td class="text-left">{{ peli.director }}</td>
       <td class="text-left">{{ peli.genero }}</td>
@@ -39,6 +40,11 @@
         </div>
       </td>
       <td class="text-center">{{ peli.duracion }} min.</td>
+      {% if peli.getUser() %}
+        <td class="text-center">{{ peli.getUser().displayname }} </td>
+      {% else %}
+        <td class="text-center font-italic">Anónimo</td>
+      {% endif %}
       <td class="">
         <div class="d-flex justify-content-start align-items-center">
           <a href="{{ path('movie_show', {'id':peli.id })}}" class="m-2 primary"><img src="{{ asset('img/buttons/show.png')}}" alt="detalles pelicula {{ peli.titulo }}"  style="height:20px; width:20px"/></a>

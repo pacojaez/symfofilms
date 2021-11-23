@@ -16,6 +16,8 @@ use App\Services\SimpleSearchService;
 use App\Services\FileService;
 use Psr\Log\LoggerInterface;
 
+USE App\Entity\User;
+
 class UserController extends AbstractController
 {
     #[Route('/user', name: 'user')]
@@ -125,7 +127,7 @@ class UserController extends AbstractController
         //     $this->addFlash( 'success', $mensaje );
         //     $appInfoLogger->info( $mensaje );
 
-        //     return $this->redirectToRoute('movie_edit', ['id'=>$peli->getId()]);
+        return $this->redirectToRoute( 'portada' );
 
         // }
 

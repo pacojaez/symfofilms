@@ -15,9 +15,9 @@
       <th>{{ actor.id }}</th>
       <th>
         {% if actor.gender == 'M' %}
-          <img src="{{ asset(portraits_directory ~'/'~ (actor.portrait ?? 'default_male.jpg' ))}}" class="img-fluid rounded-top" alt="{{ actor.portrait }}" title="{{ actor.nombre }}" style="height:150px; width:200px" />
+          <img src="{{ asset(portraits_directory ~'/'~ (actor.portrait ?? 'default_male.jpg' ))}}" class="rounded-top" alt="{{ actor.portrait }}" title="{{ actor.nombre }}"  style="widht:200px, height:150px" />
         {% else %}
-          <img src="{{ asset(portraits_directory ~'/'~ (actor.portrait ?? 'default_female.jpg' ))}}" class="img-fluid rounded-top" alt="{{ actor.portrait }}" title="{{ actor.nombre }}" style="height:150px; width:200px" />
+          <img src="{{ asset(portraits_directory ~'/'~ (actor.portrait ?? 'default_female.jpg' ))}}" class="rounded-top" alt="{{ actor.portrait }}" title="{{ actor.nombre }}" style="widht:200px, height:150px" />
        {% endif %} 
       </th>
       <td>{{ actor.nombre }}</td>

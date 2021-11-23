@@ -117,7 +117,7 @@ class RegistrationController extends AbstractController
             $uploader->targetDirectory = $this->getParameter('app.users_pics_root');
 
             if( $user->getAvatar())
-                $uploader->delete($user->getAvatar());
+                $uploader->remove($user->getAvatar());
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($user);

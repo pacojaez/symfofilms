@@ -49,6 +49,15 @@
                     <p class="m-2">AUN NO HAY BIOGRAFIA PUBLICADA</p>
                 {% endif %}
             </div>
+            <div class="d-flex flex-col m-2 p-2">
+                <h2>PELÍCULAS</h2>
+                {% if actor.getMovies()|length > 0 %}
+                    {% set pelis = actor.getMovies() %}
+                    {% include 'movie/includes/lista_movies.html.twig'%}
+                {% else %}
+                    <p class="m-2">AUN NO HAY PELÍCULAS DONDE ACTUE ESTE ACTORTRIZ</p>
+                {% endif %}
+            </div>
         </div>
 	</div>
 {% endblock %}

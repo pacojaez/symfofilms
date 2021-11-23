@@ -4,19 +4,24 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Movie;
+use App\Entity\Actor;
+use App\Entity\Comment;
 
 use App\Form\MovieFormType;
 use App\Form\MovieDeleteFormType;
 use App\Form\ImageDeleteFormType;
-use App\Form\SearchFormType;       
-use Symfony\Component\HttpFoundation\Request;
+use App\Form\SearchFormType; 
+use App\Form\CommentFormType;       
+use App\Form\MovieAddActorFormType;  
 
 use Symfony\Component\Filesystem\Filesystem;
 use App\Services\FileService;
 use App\Services\PaginatorService;
 use App\Services\SimpleSearchService;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 
 use Psr\Log\LoggerInterface;
@@ -55,7 +60,7 @@ class MovieController extends AbstractController
             'totalPaginas' => $paginator->getTotalPages(),
             'totalItems' => $paginator->getTotalItems(),
             'paginaActual' => $pagina,
-            'entidad' => 'Películas'
+            'entidad' => 'Películas',
         ]);
     }
 
@@ -104,6 +109,9 @@ class MovieController extends AbstractController
                 $uploader->targetDirectory = $this->getParameter('app.covers_root');
                 $peli->setCaratula($uploader->upload($file));       // pasamos a tener una sola linea de código en vez de 5 tras implementar el servicio
             }
+
+            // establece el usuario que ha creado la pelicula
+            $peli->setUser($this->getuser());
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist( $peli );
@@ -170,8 +178,15 @@ class MovieController extends AbstractController
             ]);
         }
 
+        $formularioAddActor = $this->createForm(MovieAddActorFormType::class, NULL, [
+            'action' => $this->generateUrl('movie_add_actor', [
+                'id' =>$peli->getId()
+            ])
+        ]);
+
         return $this->render('movie/edit.html.twig', [
             'formulario' => $formulario->createView(),
+            'formularioAddActor' => $formularioAddActor->createView(),
             'peli' => $peli
         ]);
     }
@@ -283,8 +298,33 @@ class MovieController extends AbstractController
         if(!$peli)
             throw $this->createNotFoundException( "No se encontró la película con id: $peli." );
 
+        // FORMULARIO DE COMENTARIOS:
+        $comment = new Comment();
+        $commentsForm = $this->createForm( CommentFormType::class, $comment );
+
+        if( $commentsForm->isSubmitted() && $commentsForm->isValid()){
+
+            $comment->setUser( $this->getuser() );
+            $comment->addMovie( $peli );
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist( $comment );
+            $entityManager->flush();
+
+            $mensaje = "Comentario añadido correctamente a la pelicula ".$movie->getTitulo();
+            $this->addFlash( 'success', $mensaje );
+
+            return $this->redirectToRoute('all_movies', [
+                'id' => $comment->getMovie()->id,
+            ]);
+        }
+
+        $comments = $movie->getComments();
+
         return $this->render('movie/show.html.twig', [
             'peli' => $peli,
+            'commentsForm' => $commentsForm->createView(),
+            'comments' => $comments,
         ]); 
     }
 
@@ -339,6 +379,50 @@ class MovieController extends AbstractController
 
         return new Response ("Listado de películas en la DB: <br> ".implode("<br>", $pelis));
 
+    }
+
+    #[Route('/movie/addactor/{id<\d+>}', name: 'movie_add_actor', methods:'POST')]
+    public function addActor( Movie $peli, Request $request, LoggerInterface $appInfoLogger, EntityManagerInterface $em ): Response {
+
+        $formularioAddActor = $this->createForm( MovieAddActorFormType::class );
+        $formularioAddActor->handleRequest($request);
+
+        $datos = $formularioAddActor->getData();
+
+        if(empty($datos['actor'])){
+            $this->addFlash('addActorError', 'No se indicó un actor válido');
+        }else{
+            $actor = $datos['actor'];
+            //guardando la pelicula cuando llega el form
+            $peli->addActor($actor);
+            $em->flush();
+
+            $mens = 'Actor: '.$actor->getNombre().' añadido correctamente a la película: '.$peli->getTitulo();
+            $this->addFlash('success', $mens);
+    
+            $appInfoLogger->info($mens);
+
+        }
+
+        return $this->redirectToRoute('movie_edit', [
+            'id' => $peli->getId()
+        ]);
+    }
+
+    #[Route('/movie/removeactor/{movie<\d+>}/{actor<\d+>}', name: 'movie_remove_actor', methods:['GET'])]
+    public function removeActor( Movie $movie, Actor $actor, LoggerInterface $appInfoLogger, EntityManagerInterface $em ): Response {
+
+        $movie->removeActor($actor);
+        $em->flush();
+
+        $mens = 'Actor: '.$actor->getNombre().' borrado correctamente de la película: '.$movie->getTitulo();
+        $this->addFlash('success', $mens);
+
+        $appInfoLogger->info($mens);
+
+        return $this->redirectToRoute('movie_edit', [
+            'id' => $movie->getId()
+        ]);
     }
 
     // /**

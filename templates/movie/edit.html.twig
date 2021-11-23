@@ -1,12 +1,17 @@
 {% extends 'layouts/base.html.twig' %}
 
-{% block title %}Añadir una Nueva Película a la DB{% endblock %}
+{% block title %}Editar pelicula: {{ peli.titulo }}{% endblock %}
 
 {% block main %}
 {{ parent() }}
 <!-- Card with no padding with multiple content containers nested inside of it -->
-<div class="d-flex text-center">
- 
+{% for message in app.flashes('addActorError') %}
+  <div class="alert alert-danger" role="alert">
+  <h4 class="alert-heading">Oooops!!!!</h4>
+    {{ message }}.
+  </div>
+{% endfor %}
+<div class="d-flex flex-col text-center"> 
   <div class="container-fluid">
    <h2>EDICION DE LA PELÍCULA {{ peli.id }}</h2>
   <!-- First row -->
@@ -82,6 +87,63 @@
             </div>
           {% endif %} 
     </div>
+  </div>
+</div>
+{# <div class="d-flex flex-column justify-content-end align-items-center w-half"> #}
+<div class="d-flex justify-content-center">
+  <div class="m-4 p-2">
+    <div>
+        {{ form_start(formularioAddActor) }}
+          <div class="d-flex justify-content-center m-2 p-2">
+            {{ form_label(formularioAddActor.actor)}}
+          </div>
+          <div class="d-flex justify-content-center text-dark m-2 p-2">
+            {{ form_widget(formularioAddActor.actor)}}
+          </div>
+          <div class="d-flex justify-content-center m-2 p-2">
+            {{ form_row(formularioAddActor.add)}}
+          </div>
+          {{ form_rest(formularioAddActor)}}
+
+        {{ form_end(formularioAddActor )}}
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>IMAGEN</th>
+          <th>Nombre</th>
+          <th>Nacionalidad</th>
+          <th class="text-right">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for actor in peli.getActors() %}
+          <tr>
+            <td>{{ actor.id }}</td>
+            <td>
+              {% if actor.gender == 'M' %}
+                <img src="{{ asset(portraits_directory ~'/'~ (actor.portrait ?? 'default_male.jpg' ))}}" class="img-fluid rounded-top" alt="{{ actor.portrait }}" title="{{ actor.nombre }}" style="height:150px; width:200px" />
+              {% else %}
+                <img src="{{ asset(portraits_directory ~'/'~ (actor.portrait ?? 'default_female.jpg' ))}}" class="img-fluid rounded-top" alt="{{ actor.portrait }}" title="{{ actor.nombre }}" style="height:150px; width:200px" />
+              {% endif %} 
+            </td>
+            <td> {{ actor.nombre }}</td>
+            <td> {{ actor.nacionalidad }}</td>
+            <td class="text-right d-flex flex-row align-items-center justify-content-center">
+              <a href="{{ path('movie_remove_actor', {'movie':peli.id, 'actor':actor.id}) }}" class="m-2"><img src="{{ asset('img/buttons/delete.png')}}" alt="borrar actor {{actor.nombre}} de {{ peli.titulo }}" style="height:20px; width:20px"/></a>
+              <a href="{{ path('actor_show', {'id':actor.id })}}" class="m-2"><img src="{{ asset('img/buttons/show.png')}}" alt="detalles actor {{ actor.nombre }}" style="height:20px; width:20px"/></a>
+            </td>
+          </tr>
+        {% else %}
+          <tr>
+            <th>NO HAY ACTORES EN ESTA PELI, O ES DE DIBUJOS ANIMADOS O TE HAS CONFUNDIDO ;-))</th>
+        {% endfor %}
+      </tbody>
+    </table>
+     
+
+      
   </div>
 </div>
 <script src=" {{ asset('/js/previsualizacion.js') }}"></script>

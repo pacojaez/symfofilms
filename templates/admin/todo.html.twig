@@ -15,10 +15,9 @@
         <summary class="collapse-header">
           Errores a arreglar:
         </summary>
-        <div class="collapse-content">
+        <div class="collapse-content bg-secondary">
             <ul class="m-4">
-                <li>Metodo search() no funciona la paginación <code class="code"></code></li>            
-                <li>ERROR: allMovies tira todas las peliculas en lugar de paginar las 5 primeras <code class="code"></code> </li>
+                <li>Metodo search() no funciona la paginación </li>          
             </ul>
             <hr>
         </div>
@@ -26,15 +25,20 @@
     </div>
 
     <div class="row">
-      <h2 class="p-2 m-4 font-weight-bold">DONE: BUGS</h2>
+      <h2 class="p-2 m-4 font-weight-bold ">DONE: BUGS</h2>
       <details class="collapse-panel mw-full"> 
         <summary class="collapse-header">
           Errores arreglados:
         </summary>
-        <div class="collapse-content">
+        <div class="collapse-content bg-success">
             <ul class="m-4">
                 <li>ERROR: Si no se ha buscado un término de búsqueda da error. <code class="code">Warning: file(..\var\log\appsearch.log): Failed to open stream: No such file or directory</code> </li>               
                 <li>SOLUCIÓN: DefaultController::class metodo searchlogs() //evitar error de que no exista el archivo<code class="code">if( file_exists('..\var\log\appsearch.log')){ </code> </li>               
+                <li>ERROR: allMovies tiraba todas las peliculas en lugar de paginar las 5 primeras</li>
+                <li>try catch en el FileService</li>
+                <li>ERROR: allMovies tiraba todas las peliculas en lugar de paginar las 5 primeras <code class="code">Attempted to call an undefined method named "delete" of class "App\Services\FileService"</code></li>
+                <li>SOLUCIÓN: <code class="code">if( $user->getAvatar()) $uploader->remove($user->getAvatar());</code></li>
+                
             </ul>
             <ul class="m-4">
                                
@@ -45,7 +49,7 @@
       </details>
     </div>
 
-    <div class="row">
+    {# <div class="row">
       <h2 class="p-2 m-4 font-weight-bold">TODO: AÑADIR FUNCIONALIDADES</h2>
       <details class="collapse-panel mw-full"> 
         <summary class="collapse-header">
@@ -58,6 +62,21 @@
             <hr>
         </div>
       </details>
+    </div> #}
+
+    <div class="row">
+      <h2 class="p-2 m-4 font-weight-bold">TODO: REMEMBER_ME</h2>
+      <details class="collapse-panel mw-full"> 
+        <summary class="collapse-header">
+          CHECKBOX CON OPCION REMEMBERME:
+        </summary>
+        <div class="collapse-content bg-primary">
+            <ul class="m-4">
+                <li>USUARIOS. SYMFONY25. PAG 61.</li>                
+            </ul>
+            <hr>
+        </div>
+      </details>
     </div>
 
     <div class="row">
@@ -66,7 +85,7 @@
         <summary class="collapse-header">
           CSS, JS, PHP:
         </summary>
-        <div class="collapse-content">
+        <div class="collapse-content bg-success">
             <ul class="m-4">
                 <li>Actors and users images. Usar el FileService para todas las entidades, definiendo rutas de directorios diferentes</li>
                 <li>try catch en el FileService</li>
@@ -83,7 +102,7 @@
         <summary class="collapse-header">
           CSS Y JS:
         </summary>
-        <div class="collapse-content">
+        <div class="collapse-content bg-secondary">
             <ul class="m-4">
                 <li>Estilos templates emails</li>
                 <li>Añadir canal log al envio de mails</li>

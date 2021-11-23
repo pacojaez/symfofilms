@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block main %}
+{{ parent() }}
 	<!-- Card with no padding with multiple content containers nested inside of it -->
 <div class="w-800 mw-full d-flex justify-center m-0 p-0">
 	<div class="card p-0">
@@ -31,7 +32,6 @@
 		</div>
 		<div class="d-flex">
 			<span class="badge">
-				<i class="fa fa-comments text-primary mr-5" aria-hidden="true"></i>
 					{{ peli.genero }}
 					<!-- text-primary = color: primary-color, mr-5 = margin-right: 0.5rem (5px) -->
 			</span>
@@ -60,6 +60,18 @@
 						<!-- mr-5 = margin-right: 0.5rem (5px) -->
 				</span>
 			</div>
+			<div>
+				<span class="text-muted text-italic">
+					<i class="fas fa-user" aria-hidden="true"></i>
+							Subida por :
+							{% if peli.getUser() %}
+								<span class="font-italic">{{ peli.getUser().displayname }}</span>
+							{% else %}
+								<span class="font-italic">Anónimo</span>
+							{% endif %}
+						<!-- mr-5 = margin-right: 0.5rem (5px) -->
+				</span>
+			</div>
 		</div>
 		<hr/>
 		<!-- Second content container nested inside card (comments) -->
@@ -80,8 +92,67 @@
 			        <button class="btn btn-sm">Load all comments</button>
 			      </div> #}
 		</div>
+
+		<div class="content d-flex flex-col justify-content-center align-items-center">
+			<h2 class="content-title">
+			    Añadir Comentario:
+			</h2>
+				<div>
+					<form action="{{ path('comment_create' )}}" method="POST" class="w-400 mw-full"> <!-- w-400 = width: 40rem (400px), mw-full = max-width: 100% -->
+						<!-- Textarea -->
+						<div class="form-group">
+							<label for="description">No se admiten comentarios obscenos, sexistas ni racistas:</label>
+							<textarea class="form-control" id="content" placeholder="Escribe tu comentario." name="content"></textarea>
+						</div>
+						<!-- Normal input -->
+						<input type="hidden" class="form-control" value="{{ peli.id }}" name="peli_id" >
+						<!-- Submit button -->
+						<input class="btn btn-primary" type="submit" value="Comentar">
+					</form>
+				</div>
+				<div>
+						<!-- COMENTARIOS -->
+						<div class="content d-flex flex-col justify-content-center align-items-center">
+							{% if comments|length > 0 %}
+								<h2 class="content-title m-0 p-2">COMENTARIOS ANTERIORES</h2>
+								{% for comment in comments %}
+									<div class="card m-0 p-2 d-flex flex-col justify-content-center align-items-center">
+										<h2 class="card-title m-0 p-2">
+											<span class="badge">
+												<i class="fa fa-comments text-primary mr-5" aria-hidden="true"></i>
+												{{ comment.user.displayname }}
+											</span>
+										</h2>
+										<p class="m-0 p-2">
+											{{ comment.content }}
+										</p>
+										{# <div class="text-right"> <!-- text-right = text-align: right -->
+											<a href="#" class="btn">Read more</a>
+										</div> #}
+									</div>
+								{% endfor %}
+							{% else %}
+									<p class="font-weight-light font-italic">Aun no hay comentarios. Let´s Rock!!!!</p>
+							{% endif %}
+						</div>
+				</div>	
+
+				<!-- COMENTARIOS -->
+						<div class="content d-flex flex-col justify-content-center align-items-center">
+							{% if peli.getActors()|length > 0 %}
+								<h2 class="content-title m-0 p-2">LISTA DE ACTORES</h2>
+								{% set actors = peli.getActors() %}
+								{% include 'actor/includes/actors_list.html.twig' %}
+							{% endif %}
+						</div>	  	
+			      {# <div class="text-center mt-20"> <!-- text-center = text-align: center, mt-20 = margin-top: 2rem (20px) -->
+			        <button class="btn btn-sm">Load all comments</button>
+			      </div> #}
+		</div>
 	</div>
 </div>
+<!-- Required for the custom file input -->
+<script src="path/to/halfmoon.js"></script>
 
 <div id="f1_container">
 	<div id="f1_card" class="shadow">
