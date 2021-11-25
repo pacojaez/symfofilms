@@ -31,6 +31,7 @@ class FileService{
     public function remove ( string $imagen ) {
 
         $filesystem = new Filesystem();
+        
         return $filesystem->remove($this->targetDirectory.'/'.$imagen);
 
     }

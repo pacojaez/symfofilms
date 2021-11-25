@@ -1,15 +1,15 @@
 {% extends 'layouts/admin.html.twig' %}
 
-{% block title %} Home {% endblock %}
+{% block title %} Home {{ app.user.displayname }} {% endblock %}
 
 {% block main %}
 {{ parent() }}
-<div class="d-flex text-center">
+<div class="d-flex flex-column text-center">
       <div class="container-fluid overflow-x-hidden">
-      <h2>HOME de {{ app.user.email }}</h2>
+      <h2 class="font-weight-bold text-uppercase text-primary m-2 p-2">HOME de {{ app.user.email }}</h2>
       <!-- Card with no padding with multiple content containers nested inside of it -->
-      <div class="w-full p-2 m-2"> <!-- w-600 = width: 60rem (600px), mw-full = max-width: 100% -->
-        <div class="card p-0 d-flex flex-col justify-content-center align-items-center"> <!-- p-0 = padding: 0 -->
+      <div class="w-full p-2 d-flex flex-column"> <!-- w-600 = width: 60rem (600px), mw-full = max-width: 100% -->
+        <div class="card p-0 d-flex flex-column justify-content-center align-items-center"> <!-- p-0 = padding: 0 -->
           <img src="{{ app.user.avatar ?
                         path('pic_show', {'avatar': app.user.avatar }) :
                         path('pic_show', {'avatar': 'default.png'})
@@ -24,12 +24,11 @@
             <h3 class="content-title">
               A.K.A {{ app.user.displayname }}
             </h3>
-            <div class="d-flex flex-col justify-content-center m-6">
+            <div class="d-flex flex-column justify-content-center m-6">
                 <h3 class="content-title">
                   OPERACIONES
                 </h3>
-                <div class="d-flex flex-row justify-content-between mt-6 w-full">
-                  
+                <div class="d-flex flex-row justify-content-between align-items-center mb-4 w-full"> 
                   <details class="collapse-panel w-200 mw-full m-2"> <!-- w-400 = width: 40rem (400px), mw-full = max-width: 100% -->
                     <summary class="collapse-header w-full">
                        PELÍCULAS <span><i class="fas fa-film mr-5" aria-hidden="true"></i></span>
@@ -68,7 +67,7 @@
                 
               </span>
             </div> #}
-            <div>
+            <div class="d-flex flex-row justify-content-between align-items-center mt-4 w-full">
               <span class="badge">
                 <i class="fa fa-comments text-primary mr-5" aria-hidden="true"></i> {{ app.user.getComments().count() }} comments <!-- text-primary = color: primary-color, mr-5 = margin-right: 0.5rem (5px) -->
               </span>

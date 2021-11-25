@@ -43,6 +43,8 @@ class ActorController extends AbstractController
         
         $actor = new Actor();
 
+        $this->denyAccessUnlessGranted('create', $actor);
+
         $formulario = $this->createForm( ActorFormType::class, $actor );
 
         //guardando la pelicula cuando llega el form
@@ -85,6 +87,8 @@ class ActorController extends AbstractController
 
     #[Route('/actor/edit/{id}', name: 'actor_edit')]
     public function edit( Actor $actor, Request $request, FileService $uploader ){
+
+        $this->denyAccessUnlessGranted('edit', $actor);
 
         $fichero = $actor->getPortrait();
 
@@ -148,6 +152,8 @@ class ActorController extends AbstractController
     #[Route('/actor/delete/{id}', name: 'actor_delete')]
     public function delete( Actor $actor, Request $request, FileService $uploader ): Response {
 
+        $this->denyAccessUnlessGranted('delete', $actor);
+
         $formulario = $this->createForm( ActorDeleteFormType::class, $actor );
 
         //guardando la pelicula cuando llega el form
@@ -206,6 +212,8 @@ class ActorController extends AbstractController
 
     #[Route('/actor/deleteimage/{id}', name: 'actor_delete_image', methods:"GET")]
     public function deleteimage( Actor $actor, Request $request, FileService $uploader ): Response {
+
+        $this->denyAccessUnlessGranted('delete', $actor);
    
         if($actor->getPortrait()){
 

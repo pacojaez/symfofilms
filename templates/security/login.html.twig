@@ -3,7 +3,7 @@
 {% block title %}Log in!{% endblock %}
 
 {% block main %}
-<div class="mb-3 text-center w-full d-flex flex-col justify-content-center align-items-center">
+<div class="m-4 p-6 text-center w-full d-flex flex-column justify-content-center align-items-center overflow-x-hidden">
 <form method="POST" class="">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -15,7 +15,7 @@
             <a href="{{ path('app_logout') }}" class="btn btn-danger w-half">Logout</a>
         </div>
     {% else %}
-    <div class="mb-3 text-center d-flex flex-col justify-content-center align-items-center w-full border p-4">
+    <div class="m-4 p-4 text-center d-flex flex-column justify-content-center align-items-center w-full border">
         <h1 class="h3 m-3 font-weight-normal text-center">Please sign in</h1>
         <label for="inputEmail" class="h3 m-3 font-weight-normal text-center">Email</label>
         <input type="email" name="email" id="inputEmail" class="form-control m-4" autocomplete="email" required autofocus>

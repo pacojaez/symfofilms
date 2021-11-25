@@ -8,34 +8,41 @@
           Admin Panel
         </a>
         <!-- Sidebar content with the search box -->
-        <div class="sidebar-content">
-          <div class="d-flex flex-row m-2 p-2">
-            <form method='POST' action="{{ path('users_search') }}">
-              <input type="text" class="form-control m-2 p-2" placeholder="Buscador por email" name="valor" />
-              <input type='submit' class="btn btn-primary m-2" value="BUSCAR"/>
-            </form>
-          </div>
+        
+          <div class="sidebar-content">
+            {% if is_granted('show', app.user ) %}
+              <div class="flex-row p-2 m-2 d-flex">
+                <form method='POST' action="{{ path('users_search') }}">
+                  <input type="text" class="p-2 m-2 form-control" placeholder="Buscador por email" name="valor" />
+                  <input type='submit' class="m-2 btn btn-primary" value="BUSCAR"/>
+                </form>
+              </div>
+            {% endif %}
           {# <div class="mt-10 font-size-12"> <!-- mt-10 = margin-top: 1rem (10px), font-size-12 = font-size: 1.2rem (12px) -->
             Press <kbd>/</kbd> to focus
           </div> #}
         </div>
         <!-- Sidebar links and titles -->
          <div class="sidebar-content">
-          <a href="{{ path('all_users') }}"><h5 class="sidebar-title">USUARIOS</h5></a>
-          {# <div class="sidebar-content">
-          <a href="{{ path('users_search') }}"><h5 class="sidebar-title">BUSCADOR DE USUARIOS</h5></a> #}
-          <div class="sidebar-divider"></div>
-          <a href="{{ path('admin_searchlogs') }}"><h5 class="sidebar-title">LOGS DE BUSQUEDA</h5></a>
-          <div class="sidebar-divider"></div>
-          <a href="{{ path('admin_usersactions') }}"><h5 class="sidebar-title">LAST USERS ACTIONS</h5></a>
-          <div class="sidebar-divider"></div>
-          <a href="{{ path('admin_docs') }}" class="sidebar-link">DOCS DEL PROYECTO</a>
-          <div class="sidebar-divider"></div>
-          <a href="{{ path('admin_todo') }}" class="sidebar-link">TODO</a>
-           <div class="sidebar-divider"></div>
-          <a href="{{ path('dummy_dql') }}" class="sidebar-link">DUMMY DQL</a>
-          <div class="sidebar-divider"></div>
-          <a href="{{ path('dummy_qb') }}" class="sidebar-link">DUMMY QUERYBUILDER</a>
+                {% if is_granted('show', app.user ) %}
+                  <a href="{{ path('all_users') }}"><h5 class="sidebar-title">USUARIOS</h5></a>
+                  {# <div class="sidebar-content">
+                  <a href="{{ path('users_search') }}"><h5 class="sidebar-title">BUSCADOR DE USUARIOS</h5></a> #}
+                  <div class="sidebar-divider"></div>
+                  <a href="{{ path('admin_searchlogs') }}"><h5 class="sidebar-title">LOGS DE BUSQUEDA</h5></a>
+                  <div class="sidebar-divider"></div>
+                  <a href="{{ path('admin_usersactions') }}"><h5 class="sidebar-title">LAST USERS ACTIONS</h5></a>
+                  <div class="sidebar-divider"></div>
+                
+                  <a href="{{ path('admin_docs') }}" class="sidebar-link">DOCS DEL PROYECTO</a>
+                  <div class="sidebar-divider"></div>
+                  <a href="{{ path('admin_todo') }}" class="sidebar-link">TODO</a>
+                  <div class="sidebar-divider"></div>
+                {% endif %}
+                  <a href="{{ path('dummy_dql') }}" class="sidebar-link">DUMMY DQL</a>
+                  <div class="sidebar-divider"></div>
+                  <a href="{{ path('dummy_qb') }}" class="sidebar-link">DUMMY QUERYBUILDER</a>
+                  <div class="sidebar-divider"></div>
         </div>
       <div class="sidebar-content">
       {# <h2 class="p-2 m-4 font-weight-bold">API DEL PROYECTO </h2> #}

@@ -7,14 +7,14 @@
 {% block main %}
 {{ parent() }}
 	<!-- Card with no padding with multiple content containers nested inside of it -->
-<div class="w-800 mw-full d-flex justify-center m-0 p-0">
+<div class="w-800 mw-full d-flex flex-column justify-center m-0 p-0">
 	<div class="card p-0">
-      	<div class="d-flex justify-center m-2">
+      	<div class="d-flex justify-content-center m-2">
 	      <img src="{{ asset(covers_directory~'/'~(peli.caratula ?? 'default.jpg' ))}}" class="h-200 w-150 img-fluid rounded-top" alt="{{ peli.titulo }}" title="{{ peli.titulo }}">
       	</div>
 			<!-- rounded-top = rounded corners on the top -->
 			<!-- First content container nested inside card -->
-		<div class="content d-flex flex-col justify-content-center align-items-center">
+		<div class="content d-flex flex-column justify-content-center align-items-center">
 		<h2 class="content-title text-primary text-smoothing-auto-dm font-weight-bolder font-size-24">
             {{ peli.titulo }}
         </h2>
@@ -75,7 +75,7 @@
 		</div>
 		<hr/>
 		<!-- Second content container nested inside card (comments) -->
-		<div class="content d-flex flex-col justify-content-center align-items-center">
+		<div class="content d-flex flex-column justify-content-center align-items-center">
 			<h2 class="content-title">
 			    Sinopsis
 			</h2>
@@ -93,52 +93,63 @@
 			      </div> #}
 		</div>
 
-		<div class="content d-flex flex-col justify-content-center align-items-center">
+		<div class="content d-flex flex-column justify-content-center align-items-center">
 			<h2 class="content-title">
 			    Añadir Comentario:
 			</h2>
 				<div>
-					<form action="{{ path('comment_create' )}}" method="POST" class="w-400 mw-full"> <!-- w-400 = width: 40rem (400px), mw-full = max-width: 100% -->
-						<!-- Textarea -->
-						<div class="form-group">
-							<label for="description">No se admiten comentarios obscenos, sexistas ni racistas:</label>
-							<textarea class="form-control" id="content" placeholder="Escribe tu comentario." name="content"></textarea>
+					{% if is_granted('create', entityFaker.getMock('Comment') ) %}
+						<form action="{{ path('comment_create' )}}" method="POST" class="w-400 mw-full d-flex flex-column"> <!-- w-400 = width: 40rem (400px), mw-full = max-width: 100% -->
+							<!-- Textarea -->
+							<div class="form-group">
+								<label for="description">No se admiten comentarios obscenos, sexistas ni racistas:</label>
+								<textarea class="form-control" id="content" placeholder="Escribe tu comentario." name="content"></textarea>
+							</div>
+							<!-- Normal input -->
+							<input type="hidden" class="form-control" value="{{ peli.id }}" name="peli_id" >
+							<!-- Submit button -->
+							<input class="btn btn-primary" type="submit" value="Comentar">
+						</form>
+					{% else %}
+						<div class="content d-flex flex-column justify-content-center align-items-center">
+							<p class="font-weight-light font-italic">Tienes que registrarte para poder comentar. Let´s Rock!!!!</p>
+							<div class="m-2 p-2">
+								<a href="{{ path('app_register') }}" class="btn btn-primary" role="button">Register</a>
+							</div>
 						</div>
-						<!-- Normal input -->
-						<input type="hidden" class="form-control" value="{{ peli.id }}" name="peli_id" >
-						<!-- Submit button -->
-						<input class="btn btn-primary" type="submit" value="Comentar">
-					</form>
+					{% endif %}
 				</div>
-				<div>
-						<!-- COMENTARIOS -->
-						<div class="content d-flex flex-col justify-content-center align-items-center">
-							{% if comments|length > 0 %}
-								<h2 class="content-title m-0 p-2">COMENTARIOS ANTERIORES</h2>
-								{% for comment in comments %}
-									<div class="card m-0 p-2 d-flex flex-col justify-content-center align-items-center">
-										<h2 class="card-title m-0 p-2">
-											<span class="badge">
-												<i class="fa fa-comments text-primary mr-5" aria-hidden="true"></i>
-												{{ comment.user.displayname }}
-											</span>
-										</h2>
-										<p class="m-0 p-2">
-											{{ comment.content }}
-										</p>
-										{# <div class="text-right"> <!-- text-right = text-align: right -->
-											<a href="#" class="btn">Read more</a>
-										</div> #}
-									</div>
-								{% endfor %}
-							{% else %}
-									<p class="font-weight-light font-italic">Aun no hay comentarios. Let´s Rock!!!!</p>
-							{% endif %}
+				<div>			
+					<!-- COMENTARIOS -->
+					<div class="content d-flex flex-column justify-content-center align-items-center">
+						{% if comments|length > 0 %}
+							<h2 class="content-title m-0 p-2">COMENTARIOS ANTERIORES</h2>
+							{% for comment in comments %}
+								<div class="card m-0 p-2 d-flex flex-column justify-content-center align-items-center">
+									<h2 class="card-title m-0 p-2">
+										<span class="badge">
+											<i class="fa fa-comments text-primary mr-5" aria-hidden="true"></i>
+											{{ comment.user.displayname }}
+										</span>
+									</h2>
+									<p class="m-0 p-2">
+										{{ comment.content }}
+									</p>
+									{# <div class="text-right"> <!-- text-right = text-align: right -->
+										<a href="#" class="btn">Read more</a>
+									</div> #}
+								</div>
+							{% endfor %}
+						{% else %}
+						<div class="content d-flex flex-column justify-content-center align-items-center">
+							<p class="m-0 p-2">
+								No hay comentarios aún sobre esta película
+							</p>
 						</div>
-				</div>	
-
+						{% endif %}
+					</div>	
 				<!-- COMENTARIOS -->
-						<div class="content d-flex flex-col justify-content-center align-items-center">
+						<div class="content d-flex flex-column justify-content-center align-items-center">
 							{% if peli.getActors()|length > 0 %}
 								<h2 class="content-title m-0 p-2">LISTA DE ACTORES</h2>
 								{% set actors = peli.getActors() %}

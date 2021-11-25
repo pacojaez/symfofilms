@@ -4,67 +4,73 @@
 
 {% block main %}
 {{ parent() }}
-<div class="mb-3 text-center d-flex flex-col justify-content-center align-items-center w-full border p-4">
+<div class="flex-col w-full p-4 mb-3 text-center border d-flex justify-content-center align-items-center">
     <!-- Card with no padding with multiple content containers nested inside of it -->
     <div class="w-800 mw-full"> <!-- w-600 = width: 60rem (600px), mw-full = max-width: 100% -->
-        <div class="card p-6 m-2 d-flex flex-col justify-content-center"> <!-- p-0 = padding: 0 -->
+        <div class="flex-col p-6 m-2 card d-flex justify-content-center"> <!-- p-0 = padding: 0 -->
             <!-- First content container nested inside card -->
             <h3>VAS A MODIFICAR TUS DATOS </h3>
             <div class="content">
-            <div class="d-flex flex-row align-items-center justify-content-center">
-                <figure clas="">
-                    <img src="{{ app.user.avatar ?
-                                path('pic_show', {'avatar': app.user.avatar }) :
-                                path('pic_show', {'avatar': 'default.png'})
-                            }}" 
-                            class="img-fluid rounded-top w-175 h-150 justify-center m-2 p-2" 
-                            alt="{{ app.user.displayname }}">
-                    {# <img 
-                        src="{{ asset(covers_directory ~ '/' ~ (user.avatar) ?? 'default.jpg' )}}" 
-                        class="rounded-top m-4" 
-                        alt="{{ user.displayname }}" 
-                        title="{{ user.displayname }}"
-                        style="max-width: 200px; max-height=200px"
-                    >  #}
-                    <figcaption class="m-4 text-center">Tu avatar actual</figcaption>
-                </figure>
-                <figure>
-                    <img 
-                        id="preview"
-                        src="{{ app.user.avatar ?
-                                path('pic_show', {'avatar': app.user.avatar }) :
-                                path('pic_show', {'avatar': 'default.png'})
-                            }}" 
-                            class="img-fluid rounded-top w-175 h-150 justify-center m-2 p-2" 
-                            alt="{{ app.user.displayname }}">
-                    {# <img 
-                        id="preview" 
-                        src="{{ asset(covers_directory ~ '/' ~ (user.avatar) ?? 'default.jpg' )}}" 
-                        class="rounded-top m-4" 
-                        alt="{{ user.displayname }}" 
-                        title="{{ user.displayname }}"
-                        style="max-width: 200px; max-height=200px"
-                    > #}
-                    <figcaption class="m-4 text-center"> Resultado de los cambios</figcaption>
-                </figure>
-                {% if user.avatar %}
-                    <div class="d-flex flex-row justify-content-end">
-                        <figure class="d-flex flex-col justify-content-start align-items-center">
-                            <a href="{{ path('user_delete_image', {'id': user.id }) }}" class=" text-center">
-                                <img src="{{ asset('img/buttons/delete.png') }}" height="30" width="30" alt="Borrar avatar" title="Borrar avatar" class=" text-center">
-                            </a>
-                            <figcaption class="m-4 text-center">
-                                Eliminar avatar
-                            </figcaption>
-                        </figure>
-                    </div>
-                {% endif %} 
+                <div class="flex-row d-flex align-items-center justify-content-center">
+                    <figure clas="">
+                        <img src="{{ app.user.avatar ?
+                                    path('pic_show', {'avatar': app.user.avatar }) :
+                                    path('pic_show', {'avatar': 'default.png'})
+                                }}" 
+                                class="justify-center p-2 m-2 img-fluid rounded-top w-175 h-150" 
+                                alt="{{ app.user.displayname }}">
+                        {# <img 
+                            src="{{ asset(covers_directory ~ '/' ~ (user.avatar) ?? 'default.jpg' )}}" 
+                            class="m-4 rounded-top" 
+                            alt="{{ user.displayname }}" 
+                            title="{{ user.displayname }}"
+                            style="max-width: 200px; max-height=200px"
+                        >  #}
+                        <figcaption class="m-4 text-center">Tu avatar actual</figcaption>
+                    </figure>
+                    <figure>
+                        <img 
+                            id="preview"
+                            src="{{ app.user.avatar ?
+                                    path('pic_show', {'avatar': app.user.avatar }) :
+                                    path('pic_show', {'avatar': 'default.png'})
+                                }}" 
+                                class="justify-center p-2 m-2 img-fluid rounded-top w-175 h-150" 
+                                alt="{{ app.user.displayname }}">
+                        {# <img 
+                            id="preview" 
+                            src="{{ asset(covers_directory ~ '/' ~ (user.avatar) ?? 'default.jpg' )}}" 
+                            class="m-4 rounded-top" 
+                            alt="{{ user.displayname }}" 
+                            title="{{ user.displayname }}"
+                            style="max-width: 200px; max-height=200px"
+                        > #}
+                        <figcaption class="m-4 text-center"> Resultado de los cambios</figcaption>
+                    </figure>
+                    {% if user.avatar %}
+                        <div class="flex-row d-flex justify-content-end">
+                            <figure class="flex-col d-flex justify-content-start align-items-center">
+                                <a href="{{ path('user_delete_image', {'id': user.id }) }}" class="text-center ">
+                                    <img src="{{ asset('img/buttons/delete.png') }}" height="30" width="30" alt="Borrar avatar" title="Borrar avatar" class="text-center ">
+                                </a>
+                                <figcaption class="m-4 text-center">
+                                    Eliminar avatar
+                                </figcaption>
+                            </figure>
+                        </div>
+                    {% endif %} 
+                </div>
+                {{ form(formulario) }}
             </div>
-            {{ form(formulario) }}
+            <div class="content">
+            {# {% set id = user.id %} #}
+            {{ form_start(role_form,  { } )}}
+                {{ form_row( role_form.role ) }}
+                {{ form_rest(role_form)}}
+            {{ form_end(role_form)}}
             </div>
         </div>
-    </div>
-    
+    </div>   
 </div>
 <script src=" {{ asset('/js/previsualizacionUserAvatar.js') }}"></script>
 {% endblock %}

@@ -89,6 +89,8 @@ class MovieController extends AbstractController
 
         $peli = new Movie();
 
+        $this->denyAccessUnlessGranted('create', $peli);
+
         $formulario = $this->createForm( MovieFormType::class, $peli );
 
         //guardando la pelicula cuando llega el form
@@ -133,6 +135,9 @@ class MovieController extends AbstractController
 
     #[Route('/movie/edit/{id}', name: 'movie_edit')]
     public function edit( Movie $peli, Request $request, LoggerInterface $appInfoLogger, FileService $uploader ){
+
+        $this->denyAccessUnlessGranted('edit', $peli);
+        // $this->denyAccessUnlessGranted('isOwner', $peli);
 
         $fichero = $peli->getCaratula();
         
@@ -194,6 +199,9 @@ class MovieController extends AbstractController
     #[Route('/movie/delete/{id}', name: 'movie_delete')]
     public function delete( Movie $peli, Request $request, LoggerInterface $appInfoLogger, FileService $uploader ): Response {
 
+        $this->denyAccessUnlessGranted('delete', $peli);
+        // $this->denyAccessUnlessGranted('isOwner', $peli);
+        
         $formulario = $this->createForm( MovieDeleteFormType::class, $peli );
 
         //guardando la pelicula cuando llega el form
@@ -331,15 +339,18 @@ class MovieController extends AbstractController
     #[Route('/movie/deleteimage/{id}', name: 'movie_delete_image', methods:["GET"])]
     public function deleteimage( Movie $peli, Request $request, LoggerInterface $appInfoLogger, FileService $uploader ): Response {
    
+        $this->denyAccessUnlessGranted('edit', $peli);
+        // dd($peli->getCaratula());
+        // "619fc41380b1c.jpg"
         if($peli->getCaratula()){
 
             // $filesystem = new Filesystem();
             // $directorio = $this->getParameter('app.covers_root');
             $uploader->targetDirectory = $this->getParameter('app.covers_root');
-            $uploader->remove( $peli->getCaratula() );
+            // $uploader->remove( $peli->getCaratula() );
 
-            if( $uploader->remove( $peli->getCaratula())){
-                $this->addFlash( 'success', 'Imagen borrada correctamente' );
+            if( !$uploader->remove( $peli->getCaratula())){
+                $this->addFlash( 'success', 'Imagen borrada del sistema de archivos correctamente' );
             }else{
                 $this->addFlash( 'warning', 'Imagen no borrada' );
             }
@@ -349,7 +360,7 @@ class MovieController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();
 
-            $mensaje = "Carátula de la Pelicula ".$peli->getTitulo()." borrada correctamente";
+            $mensaje = "Carátula de la Pelicula ".$peli->getTitulo()." Actualizada";
             $this->addFlash( 'success', $mensaje );
             $appInfoLogger->info( $mensaje );
 
@@ -384,6 +395,8 @@ class MovieController extends AbstractController
     #[Route('/movie/addactor/{id<\d+>}', name: 'movie_add_actor', methods:'POST')]
     public function addActor( Movie $peli, Request $request, LoggerInterface $appInfoLogger, EntityManagerInterface $em ): Response {
 
+        $this->denyAccessUnlessGranted('edit', $peli);
+        
         $formularioAddActor = $this->createForm( MovieAddActorFormType::class );
         $formularioAddActor->handleRequest($request);
 
@@ -411,6 +424,8 @@ class MovieController extends AbstractController
 
     #[Route('/movie/removeactor/{movie<\d+>}/{actor<\d+>}', name: 'movie_remove_actor', methods:['GET'])]
     public function removeActor( Movie $movie, Actor $actor, LoggerInterface $appInfoLogger, EntityManagerInterface $em ): Response {
+
+        $this->denyAccessUnlessGranted('edit', $movie);
 
         $movie->removeActor($actor);
         $em->flush();

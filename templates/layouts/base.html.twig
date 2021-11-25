@@ -30,28 +30,27 @@
 			{# {% include('components/modal.html.twig') %} #}	
 			{% include('components/navbar.html.twig') %}
 			<!-- Content wrapper -->
-				<div class="mt-10 content-wrapper"> <div class="mt-0 mb-4 p-2 w-full text-center font-italic font-weight-light font-size-14">
-					{# {% include('components/searchform.html.twig') %} #}
-					{{ frase.fraseAleatoria() }}
+				<div class="mt-10 content-wrapper overflow-x-hidden">
+				 	<div class="mt-0 mb-4 p-2 w-full text-center font-italic font-weight-light font-size-14">
+						{# {% include('components/searchform.html.twig') %} #}
+						{{ frase.fraseAleatoria() }}
+					</div>
+					{% block success %}
+						{% for message in app.flashes('success') %}
+							<div class="p-4 m-4 alert alert-success" role="alert">
+								<h4 class="alert-heading">Operación realizada correctamente</h4>
+								{{ message }}
+							</div>
+						{% endfor %}
+						{% for message in app.flashes('warning') %}
+							<div class="p-4 m-4 alert alert-danger" role="alert">
+								<h4 class="alert-heading">Oops, algo no está bien</h4>
+								{{ message }}
+							</div>
+						{% endfor %}
+					{% endblock %}
+					{% block main %}{% endblock %}
 				</div>
-				{% block success %}
-					{% for message in app.flashes('success') %}
-						<div class="p-4 m-4 alert alert-success" role="alert">
-							<h4 class="alert-heading">Operación realizada correctamente</h4>
-							{{ message }}
-						</div>
-					{% endfor %}
-					{% for message in app.flashes('warning') %}
-						<div class="p-4 m-4 alert alert-danger" role="alert">
-							<h4 class="alert-heading">Oops, algo no está bien</h4>
-							{{ message }}
-						</div>
-					{% endfor %}
-				{% endblock %}
-
-				{% block main %}{% endblock %}
-
-			</div>
 		</div>
 		{% block scripts %}
 			<script src="{{ asset('js/halfmoon.js') }}" defer></script>

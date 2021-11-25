@@ -1,0 +1,21 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %} Operacion no permitida {% endblock %}
+
+{% block main %}
+{{ parent() }}
+<!-- Card with no padding with multiple content containers nested inside of it -->
+<div class="w-600 mw-full"> <!-- w-600 = width: 60rem (600px), mw-full = max-width: 100% -->
+  <div class="card p-0"> <!-- p-0 = padding: 0 -->
+    <img src="{{ asset('/img/errors/403.jpg')}}" class="img-fluid rounded-top" alt="error 403"> <!-- rounded-top = rounded corners on the top -->
+    <!-- First content container nested inside card -->
+    <div class="content">
+      <h2 class="content-title">
+        Ooops, Operación no permitida
+      </h2>
+    </div>
+    <hr />
+  </div>
+</div>
+
+{% endblock %}

@@ -17,16 +17,18 @@ use App\Services\FileService;
 use Psr\Log\LoggerInterface;
 
 USE App\Entity\User;
+use App\Form\RoleFormType;
+use Doctrine\ORM\EntityManagerInterface;
 
 class UserController extends AbstractController
 {
-    #[Route('/user', name: 'user')]
-    public function index(): Response
-    {
-        return $this->render('user/index.html.twig', [
-            'controller_name' => 'UserController',
-        ]);
-    }
+    // #[Route('/user', name: 'user')]
+    // public function index(): Response
+    // {
+    //     return $this->render('user/index.html.twig', [
+    //         'controller_name' => 'UserController',
+    //     ]);
+    // }
 
     #[Route('/user/pic/{avatar}', name: 'pic_show', methods: ['GET']) ]
     public function showPic( string $avatar ): Response
@@ -50,14 +52,17 @@ class UserController extends AbstractController
     public function update( Request $request, LoggerInterface $appUserLogger, FileService $uploader ): Response {
 
         $user = $this->getUser();
-        // dd( $request->get('id'));
-        if( $user->getId() != $request->get('id') ){
 
-            $this->addFlash('warning', 'No tienes permiso para realizar la operación');
-            return $this->redirectToRoute('portada');
-        }
-        // dd($request->get('id'));
-        //dd($user);
+        $this->denyAccessUnlessGranted('edit', $user );
+        // dd( $request->get('id'));
+        // if( $user->getId() != $request->get('id') ){
+
+        //     $this->addFlash('warning', 'No tienes permiso para realizar la operación');
+        //     return $this->redirectToRoute('portada');
+        // }
+        
+        $role_form = $this->createForm( RoleFormType::class );
+
         $fichero = $user->getAvatar();
         // dd($fichero);
         
@@ -98,7 +103,8 @@ class UserController extends AbstractController
         
         return $this->renderForm('user/edit.html.twig', [
             'formulario' => $formulario,
-            'user' => $user
+            'user' => $user,
+            'role_form' => $role_form
         ]);
     }
 
@@ -136,6 +142,9 @@ class UserController extends AbstractController
     #[Route('/allusers/{pagina}', name: 'all_users', defaults: ['pagina'=> 1], methods: ['GET'] )]
     public function allusers( int $pagina,  PaginatorService $paginator ): Response {
 
+        $user = $this->getUser();
+        $this->denyAccessUnlessGranted('show', $user);
+
         $paginator->setEntityType('App\Entity\User');
 
         $users = $paginator->findAllEntities( $pagina );
@@ -150,7 +159,11 @@ class UserController extends AbstractController
     }
 
     #[Route('/users/search/{pagina}', name: 'users_search', methods: ['POST'], defaults: ['pagina'=> 1 ] )]
+    #@
     public function search ( int $pagina, Request $request, SimpleSearchService $busqueda, PaginatorService $paginator ): Response {
+
+        $user = $this->getUser();
+        $this->denyAccessUnlessGranted('show', $user);
 
         $paginator->setEntityType('App\Entity\User');
         
@@ -183,6 +196,8 @@ class UserController extends AbstractController
 
         $user = $this->getDoctrine()->getRepository( User::class )->find($user);
 
+        $this->denyAccessUnlessGranted('show', $user);
+
         if(!$user)
             throw $this->createNotFoundException( "No se encontró el usuario con id: $user." );
 
@@ -193,6 +208,9 @@ class UserController extends AbstractController
 
     #[Route('/user/delete/{id}', name:'user_delete')]
     public function delete( User $user, Request $request, LoggerInterface $appInfoLogger, FileService $uploader ): Response {
+
+        $user = new User();
+        $this->denyAccessUnlessGranted('delete', $user);
 
         // $formulario = $this->createForm( MovieDeleteFormType::class, $peli );
 
@@ -229,5 +247,36 @@ class UserController extends AbstractController
         //     'formulario'=>$formulario->createView(),
         //     'peli' => $peli
         // ]);
+        return new Response();
     }
+
+    /**
+     * @Route("/user/addRole/{id}", name="add_role", methods="POST" )
+     */
+    public function addRole( User $user, Request $request, EntityManagerInterface $em ): Response {
+        dd($request);
+        $newRole = $request->get('role');
+
+        if( $user ){
+            $roles = $user->getRoles();
+            $roles [] = $newRole;
+            $user->setRoles($roles);
+            $em->flush( );
+
+            $msg = 'Role añadido correctamente al usuario '.$user->getDisplayname();
+            $this->addFlash('success', $msg);
+
+            return $this->render('user/show.html.twig', [
+                'user' => $user,
+            ]);
+        }
+
+        $msg = 'No se pudo añadir el Role al usuario '.$user->getDisplayname();
+        $this->addFlash('warning', $msg);
+
+        return $this->render('user/show.html.twig', [
+            'user' => $user,
+        ]); 
+    }
+
 }

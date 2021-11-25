@@ -6,9 +6,9 @@
     {% for flashError in app.flashes('reset_password_error') %}
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
-     <div class="mb-3 text-center d-flex flex-col justify-content-center align-items-center w-full border p-4">
+     <div class="mb-3 text-center d-flex flex-column justify-content-center align-items-center w-full border p-4">
         <h1 class="h3 m-3 font-weight-normal text-center">Please, introduce tu mail y te mandaremos un enlace para que puedas recuperar tu clave</h1>
-        <div class="d-flex flex-col w-half">
+        <div class="d-flex flex-column w-full">
         {{ form_start(requestForm) }}
             {{ form_row(requestForm.email) }}
             <div>

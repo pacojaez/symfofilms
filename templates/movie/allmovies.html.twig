@@ -8,24 +8,27 @@
       .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
   </style>
     <div class="example-wrapper">
-        {# <div class="d-flex flex-row justify-content-center mb-6 mt-0">
+        {# <div class="flex-row mt-0 mb-6 d-flex justify-content-center">
           {% include 'movie/searchform.html.twig' %}
         </div> #}
-        <div class="d-flex flex-row justify-content-between align-items-center m-2 p-2">
-          {# Crear variable en Twig #}
-          {% set ruta = 'all_movies' %}
-            <a href=" {{ path ( 'movie_create' )}}"><button class="btn btn-primary">AÑADIR NUEVA PELICULA</button></a>
-          {% if totalPaginas > 1 %}
-            {% include('components/pagination.html.twig') %}
-          {% endif %}	
-        </div>
+        
+          <div class="flex-row p-2 m-2 d-flex justify-content-around align-items-center">
+            {# Crear variable en Twig #}
+            {% set ruta = 'all_movies' %}
+                {% if is_granted('create', entityFaker.getMock('Movie') ) %}
+                  <a href=" {{ path ( 'movie_create' )}}"><button class="btn btn-primary">AÑADIR NUEVA PELICULA</button></a>
+                {% endif %}
+            {% if totalPaginas > 1 %}
+              {% include('components/pagination.html.twig') %}
+            {% endif %}	
+          </div>
 
 
       <!-- ejemplo de como añadir un modal al proyecto -->
       {# <a href="#modal-2" class="btn btn-primary" role="button">Ejemplo de modal</a> #}
         {% if pelis %}
           {% include 'movie/includes/lista_movies.html.twig' %}
-            <div class="d-flex flex-wrap justify-content-center m-2 p-2"> 
+            <div class="flex-wrap p-2 m-2 d-flex justify-content-center"> 
               {% if totalPaginas > 1 %}
                 {% include('components/pagination.html.twig') %}
               {% endif %}

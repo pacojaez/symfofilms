@@ -8,6 +8,7 @@ twig:
         portraits_directory: '%app.portraits%'
         users_pics_directory: '%app.users_pics%'
         frase: '@App\Services\FrasesService'
+        entityFaker: '@App\Services\EntityFakerService'
     form_themes: [
         'widgets/data_list.html.twig']
 
