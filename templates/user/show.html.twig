@@ -46,20 +46,22 @@
                       <a href=" {{ path('actor_create')}}"><button class="btn btn-primary">AÑADIR ACTOR</button></a>
                     </div>
                   </details>
-                  <details class="collapse-panel w-200 mw-full m-2"> <!-- w-400 = width: 40rem (400px), mw-full = max-width: 100% -->
-                    <summary class="collapse-header">
-                       USUARIO <span><i class="fas fa-user mr-5" aria-hidden="true"></i></span>
-                    </summary>
-                    <div class="collapse-content">
-                      <a href="{{ path('user_edit', {'id':app.user.id } )}}" class="btn btn-primary">MODIFICAR DATOS</a>
-                    </div>
-                    <div class="collapse-content">
-                      <a href="{{ path('app_forgot_password_request')}}" class="btn btn-secondary">CAMBIAR PASSWORD</a>
-                    </div>
-                    <div class="collapse-content">
-                      <a href="{{ path('unsubscribe')}}" class="btn btn-danger">DAR DE BAJA</a>
-                    </div>
-                  </details>
+                  {% if is_granted('edit', user ) %}
+                    <details class="collapse-panel w-200 mw-full m-2"> <!-- w-400 = width: 40rem (400px), mw-full = max-width: 100% -->
+                      <summary class="collapse-header">
+                        USUARIO <span><i class="fas fa-user mr-5" aria-hidden="true"></i></span>
+                      </summary>
+                      <div class="collapse-content">
+                        <a href="{{ path('user_edit', {'id':app.user.id } )}}" class="btn btn-primary">MODIFICAR DATOS</a>
+                      </div>
+                      <div class="collapse-content">
+                        <a href="{{ path('app_forgot_password_request')}}" class="btn btn-secondary">CAMBIAR PASSWORD</a>
+                      </div>
+                      <div class="collapse-content">
+                        <a href="{{ path('unsubscribe')}}" class="btn btn-danger">DAR DE BAJA</a>
+                      </div>
+                    </details>
+                  {% endif %}
                 </div>
             </div>
             {# <div>

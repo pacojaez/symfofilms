@@ -14,6 +14,9 @@ class DefaultController extends AbstractController
       
     #[Route('/docs', name: 'docs')]
     public function docs(){
+        // $user = $this->getUser();
+        // $this->denyAccessUnlessGranted('edit', $user );
+
         return $this->render('admin/docs.html.twig');
     }
 

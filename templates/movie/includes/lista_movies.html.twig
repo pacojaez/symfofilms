@@ -1,68 +1,83 @@
-<!-- Hoverable rows -->
-<table class="table p-4 m-4 table-hover">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>TITULO</th>
-	    <th>IMAGEN</th>
-      <th>DIRECTOR</th>
-	    <th>GENERO</th>
-      <th>VALORACIÓN</th>
-      <th>DURACION</th>
-      <th>USUARIO</th>
-	    <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-  	{% for peli in pelis %}
-    <tr>
-      <th>{{ peli.id }}</th>
-      <td>{{ peli.titulo }}</td>
-      <td>
-	  	  <img src="{{ asset(covers_directory ~'/'~ (peli.caratula ?? 'default.jpg' ))}}" class="h-100 w-100 rounded-top" alt="{{ peli.titulo }}" title="{{ peli.titulo }}" /> 
-      </td>
-      <td class="text-left">{{ peli.director }}</td>
-      <td class="text-left">{{ peli.genero }}</td>
-     
-      <td class="">
-        <div class="d-flex justify-content-start align-items-center">
-        {% if peli.valoracion != NULL %}
-            {% for i in 1..5 %}
-              {% if i <= peli.valoracion %}
-                <img src="{{ asset('img/samples/estrellaon.gif')}}" alt="{{ peli.valoracion }} / 5" title="{{ peli.valoracion }}/5" style="height:25px; width:25px"/>
-              {% else %}
-                <img src="{{ asset('img/samples/estrellaoff.gif')}}" alt="{{ peli.valoracion }} / 5" title="{{ peli.valoracion }}/5" style="height:25px; width:25px"/>
-              {% endif %}
-            {% endfor %}
-          {% else %}
-            <p>Sin valoracion</p>
-          {% endif %}
-        </div>
-      </td>
-      <td class="text-center">{{ peli.duracion }} min.</td>
-      {% if peli.getUser() %}
-        <td class="text-center">{{ peli.getUser().displayname }} </td>
-      {% else %}
-        <td class="text-center font-italic">Anónimo</td>
-      {% endif %}
-      <td class="">
-        <div class="d-flex justify-content-start align-items-center">
-          <a href="{{ path('movie_show', {'id':peli.id })}}" class="m-2 primary"><img src="{{ asset('img/buttons/show.png')}}" alt="detalles pelicula {{ peli.titulo }}"  style="height:20px; width:20px"/></a>
-          {% if is_granted('edit', peli ) %}
-            <a href="{{ path('movie_edit', {'id':peli.id })}}" class="m-2"><img src="{{ asset('img/buttons/update.png')}}" alt="editar pelicula {{ peli.titulo }}" style="height:20px; width:20px"/></a>
-            <a href="{{ path('movie_delete', {'id':peli.id })}}" class="m-2"><img src="{{ asset('img/buttons/delete.png')}}" alt="borrar pelicula {{ peli.titulo }}" style="height:20px; width:20px"/></a>
-          {% endif %}
-        </div>
-      </td>
-      {# <td class="flex-row d-flex">
-        <a href="{{ path('movie_show', {'id':peli.id })}}"><img src="{{ asset('img/buttons/show.png')}}" alt="detalles pelicula {{ peli.titulo }}" style="height:20px; width:20px"/></a>
-        <a href="{{ path('movie_edit', {'id':peli.id })}}"><img src="{{ asset('img/buttons/update.png')}}" alt="editar pelicula {{ peli.titulo }}" style="height:20px; width:20px"/></a>
-        <a href="{{ path('movie_delete', {'id':peli.id })}}"><img src="{{ asset('img/buttons/delete.png')}}" alt="borrar pelicula {{ peli.titulo }}" style="height:20px; width:20px"/></a>
-        {# <button class="btn" type="button"> <a href="{{ path('movie_show', {'id':peli.id })}}" style="height:15px; width:15px">VER</a></button>
-        <button class="btn btn-primary" type="button"> <a href="{{ path('movie_edit', {'id':peli.id })}}" style="height:15px; width:15px">EDITAR</a></button>
-        <button class="btn btn-danger" type="button"> <a href="{{ path('movie_delete', {'id': peli.id })}}" style="height:15px; width:15px">BORRAR</a></button> #}
-      </td>
-    </tr>
-	  {% endfor %}
-  </tbody>
-</table>
+<!-- Responsive table -->
+<div class="w-full m-2 p-2"> <!-- w-400 = width: 40rem (400px), mw-full = max-width: 100% -->
+  <div class="card p-0 bg-very-dark-dm"> <!-- p-0 = padding: 0, bg-very-dark-dm = background-color: var(--dark-color-dark) only in dark mode -->
+    <div class="table-responsive">
+      <table class="table p-4 m-4 table-hover">
+        <thead>
+          <tr>
+            <th></th>
+            <th>TITULO</th>
+            <th>CARÁTULA</th>
+            <th>DIRECTOR</th>
+            <th>GENERO</th>
+            <th>VALORACIÓN</th>
+            <th>DURACION</th>
+            <th>USUARIO</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for peli in pelis %}
+          <tr>
+            <th>{{ peli.id }}</th>
+            <td class="text-wrap w-150">{{ peli.titulo }}</td>
+            <td>
+              <img src="{{ asset(covers_directory ~'/'~ (peli.caratula ?? 'default.jpg' ))}}" class="h-200 w-150 rounded-top" alt="{{ peli.titulo }}" title="{{ peli.titulo }}" /> 
+            </td>
+            <td class="text-left text-wrap w-150">{{ peli.director }}</td>
+            <td class="text-left text-wrap w-150">{{ peli.genero }}</td>
+          
+            <td class="">
+              <div class="d-flex justify-content-start align-items-center">
+              {% if peli.valoracion != NULL %}
+                  {% for i in 1..5 %}
+                    {% if i <= peli.valoracion %}
+                      <img src="{{ asset('img/samples/estrellaon.gif')}}" alt="{{ peli.valoracion }} / 5" title="{{ peli.valoracion }}/5" style="height:25px; width:25px"/>
+                    {% else %}
+                      <img src="{{ asset('img/samples/estrellaoff.gif')}}" alt="{{ peli.valoracion }} / 5" title="{{ peli.valoracion }}/5" style="height:25px; width:25px"/>
+                    {% endif %}
+                  {% endfor %}
+                {% else %}
+                  <p>Sin valoracion</p>
+                {% endif %}
+              </div>
+            </td>
+            <td class="text-center">{{ peli.duracion }} min.</td>
+            {% if peli.getUser() %}
+              <td class="text-center">{{ peli.getUser().displayname }} </td>
+            {% else %}
+              <td class="text-center font-italic">Anónimo</td>
+            {% endif %}
+            <td class="">
+              <div class="d-flex justify-content-start align-items-center">
+                <a href="{{ path('movie_show', {'id':peli.id })}}" class="m-2 primary">
+                  {# <img src="{{ asset('img/buttons/show.png')}}" alt="detalles pelicula {{ peli.titulo }}"  style="height:20px; width:20px"/> #}
+                  <i class="fas fa-search-plus"></i>
+                </a>
+                {% if is_granted('edit', peli ) %}
+                  <a href="{{ path('movie_edit', {'id':peli.id })}}" class="m-2">
+                    {# <img src="{{ asset('img/buttons/update.png')}}" alt="editar pelicula {{ peli.titulo }}" style="height:20px; width:20px"/> #}
+                    <i class="fas fa-edit"></i>
+                  </a>
+                  <a href="{{ path('movie_delete', {'id':peli.id })}}" class="m-2">
+                    {# <img src="{{ asset('img/buttons/delete.png')}}" alt="borrar pelicula {{ peli.titulo }}" style="height:20px; width:20px"/> #}
+                    <i class="fas fa-trash"></i>
+                  </a>
+                {% endif %}
+              </div>
+            </td>
+            {# <td class="flex-row d-flex">
+              <a href="{{ path('movie_show', {'id':peli.id })}}"><img src="{{ asset('img/buttons/show.png')}}" alt="detalles pelicula {{ peli.titulo }}" style="height:20px; width:20px"/></a>
+              <a href="{{ path('movie_edit', {'id':peli.id })}}"><img src="{{ asset('img/buttons/update.png')}}" alt="editar pelicula {{ peli.titulo }}" style="height:20px; width:20px"/></a>
+              <a href="{{ path('movie_delete', {'id':peli.id })}}"><img src="{{ asset('img/buttons/delete.png')}}" alt="borrar pelicula {{ peli.titulo }}" style="height:20px; width:20px"/></a>
+              {# <button class="btn" type="button"> <a href="{{ path('movie_show', {'id':peli.id })}}" style="height:15px; width:15px">VER</a></button>
+              <button class="btn btn-primary" type="button"> <a href="{{ path('movie_edit', {'id':peli.id })}}" style="height:15px; width:15px">EDITAR</a></button>
+              <button class="btn btn-danger" type="button"> <a href="{{ path('movie_delete', {'id': peli.id })}}" style="height:15px; width:15px">BORRAR</a></button> #}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

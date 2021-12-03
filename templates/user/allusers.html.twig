@@ -29,21 +29,34 @@
                 <tr>
                 <th>{{ user.id }}</th>
                     <td>
-                    <img src="{{ app.user.avatar ?
-                            path('pic_show', {'avatar': app.user.avatar }) :
+                    <img src="{{ user.avatar ?
+                            path('pic_show', {'avatar': user.avatar }) :
                             path('pic_show', {'avatar': 'default.png'})
                             }}" 
                             class="img-fluid rounded-top w-175 h-150 justify-center m-2 p-2" 
-                            alt="{{ app.user.displayname }}">
+                            alt="{{ user.displayname }}">
                     </td>
                     <td class="text-left">{{ user.email }}</td>
                     <td class="text-left">{{ user.displayname }}</td>
                     <td class="text-center">{{ user.isverified }}</td>
                     <td class="">
                         <div class="d-flex justify-content-start align-items-center">
-                            {# <a href="{{ path('user_show', {'id':user.id })}}" class="m-2 primary"><img src="{{ asset('img/buttons/show.png')}}" alt="detalles usuario {{ user.displayname }}"  style="height:20px; width:20px"/></a>
-                            <a href="{{ path('user_edit', {'id':user.id })}}" class="m-2"><img src="{{ asset('img/buttons/update.png')}}" alt="editar usuario {{ user.displayname }}" style="height:20px; width:20px"/></a>
-                            <a href="{{ path('user_delete', {'id':user.id })}}" class="m-2"><img src="{{ asset('img/buttons/delete.png')}}" alt="borrar usuario {{ user.displayname }}" style="height:20px; width:20px"/></a> #}
+                            {% if is_granted('show', user ) %}
+                                <a href="{{ path('user_show', {'id':user.id })}}" class="m-2 primary">
+                                    {# <img src="{{ asset('img/buttons/show.png')}}" alt="detalles usuario {{ user.displayname }}"  style="height:20px; width:20px"/> #}
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                                {% if is_granted('edit', user ) %}
+                                    <a href="{{ path('user_edit', {'id':user.id })}}" class="m-2">
+                                        {# <img src="{{ asset('img/buttons/update.png')}}" alt="editar usuario {{ user.displayname }}" style="height:20px; width:20px"/> #}
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="{{ path('user_delete', {'id':user.id })}}" class="m-2">
+                                        {# <img src="{{ asset('img/buttons/delete.png')}}" alt="borrar usuario {{ user.displayname }}" style="height:20px; width:20px"/> #}
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                {% endif %}
+                            {% endif %}
                         </div>
                     </td>
                 {# <td class="flex-row d-flex">

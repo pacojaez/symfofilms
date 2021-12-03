@@ -3,9 +3,9 @@
 {% block title %} Portada {% endblock %}
 
 {% block main %}
-<div class="d-flex flex-column justify-content-center m-4 p-2">
+<div class="d-flex flex-wrap flex-column justify-content-center m-4 p-2">
     <h2 class="text-center font-size-24 font-weight-bold primary text-primary text-smoothing-auto-dm">ÚLTIMAS PELÍCULAS AÑADIDAS CON CARÁTULAS</h2>
-    <div class="d-flex justify-content-center">
+    <div class="d-flex flex-wrap justify-content-center">
         {% for peli in pelisLastsWithCovers %} 
             <a href="{{ path('movie_show', {'id':peli.id })}}" class="m-2">
                 <div class="w-300 h-quarter m-2 p-2">
@@ -17,9 +17,9 @@
     </div>
 </div>
 
-<div class="d-flex flex-column justify-content-center m-4 p-2">
+<div class="d-flex flex-wrap flex-column justify-content-center m-4 p-2">
     <h2 class="text-center font-size-24 font-weight-bold text-primary text-smoothing-auto-dm">PELÍCULAS MEJOR VALORADAS</h2>
-    <div class="d-flex justify-content-center">
+    <div class="d-flex flex-wrap justify-content-center">
         {% for peli in pelisMejorValoradas %}
             <a href="{{ path('movie_show', {'id':peli.id })}}" class="m-2">
                 <div class="w-200 h-quarter m-2 p-2">

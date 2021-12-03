@@ -44,7 +44,7 @@ security:
         - { path: ^/movie/(search|show), roles: PUBLIC_ACCESS }
         - { path: ^/movie, roles: ROLE_USER }
         - { path: ^/actor, roles: ROLE_USER }
-        - { path: ^/admin, roles: ROLE_SUPERVISOR }
+        # - { path: ^/admin, roles: ROLE_SUPERVISOR }
         # - { path: ^/profile, roles: ROLE_USER }
     role_hierarchy:
         ROLE_EDITOR: ROLE_USER

@@ -51,8 +51,9 @@ class UserController extends AbstractController
     #[Route('/user/edit/{id}', name: 'user_edit', methods: ['GET', 'POST'])]
     public function update( Request $request, LoggerInterface $appUserLogger, FileService $uploader ): Response {
 
-        $user = $this->getUser();
-
+        $id = $request->get('id');
+        
+        $user = $this->getDoctrine()->getRepository( User::class )->find($id);
         $this->denyAccessUnlessGranted('edit', $user );
         // dd( $request->get('id'));
         // if( $user->getId() != $request->get('id') ){
@@ -254,7 +255,7 @@ class UserController extends AbstractController
      * @Route("/user/addRole/{id}", name="add_role", methods="POST" )
      */
     public function addRole( User $user, Request $request, EntityManagerInterface $em ): Response {
-        dd($request);
+        // dd($request);
         $newRole = $request->get('role');
 
         if( $user ){
