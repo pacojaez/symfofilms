@@ -5,6 +5,7 @@
       <table class="table p-4 m-4 table-hover">
         <thead>
           <tr>
+<<<<<<< HEAD
             <th class="text-center"></th>
             <th class="text-center">TITULO</th>
             <th class="text-center d-none d-xl-block">CARÁTULA</th>
@@ -14,11 +15,23 @@
             <th class="text-center">DURACION</th>
             <th class="text-center">USUARIO</th>
             <th class="text-center">Actions</th>
+=======
+            <th></th>
+            <th>TITULO</th>
+            <th>CARÁTULA</th>
+            <th>DIRECTOR</th>
+            <th>GENERO</th>
+            <th>VALORACIÓN</th>
+            <th>DURACION</th>
+            <th>USUARIO</th>
+            <th>Actions</th>
+>>>>>>> 3ba5d2c9e73c06ee31e61ec8c3a1dee98af193d4
           </tr>
         </thead>
         <tbody>
           {% for peli in pelis %}
           <tr>
+<<<<<<< HEAD
             <th class="text-center">{{ peli.id }}</th>
             <td class="text-wrap w-150">{{ peli.titulo }}</td>
             <td class="text-center d-none d-xl-block">
@@ -26,6 +39,15 @@
             </td>
             <td class="text-center text-wrap w-150">{{ peli.director }}</td>
             <td class="text-center text-wrap w-150">{{ peli.genero }}</td>
+=======
+            <th>{{ peli.id }}</th>
+            <td class="text-wrap w-150">{{ peli.titulo }}</td>
+            <td>
+              <img src="{{ asset(covers_directory ~'/'~ (peli.caratula ?? 'default.jpg' ))}}" class="h-200 w-150 rounded-top" alt="{{ peli.titulo }}" title="{{ peli.titulo }}" /> 
+            </td>
+            <td class="text-left text-wrap w-150">{{ peli.director }}</td>
+            <td class="text-left text-wrap w-150">{{ peli.genero }}</td>
+>>>>>>> 3ba5d2c9e73c06ee31e61ec8c3a1dee98af193d4
           
             <td class="">
               <div class="d-flex justify-content-start align-items-center">

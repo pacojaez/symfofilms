@@ -6,7 +6,11 @@
         <thead>
           <tr>
             <th class="text-center">#</th>
+<<<<<<< HEAD
             <th class="text-center d-none d-xl-block">FOTO</th>
+=======
+            <th class="text-center">FOTO</th>
+>>>>>>> 3ba5d2c9e73c06ee31e61ec8c3a1dee98af193d4
             <th class="text-center">NOMBRE</th>
             <th class="text-center">FECHA NACIMIENTO</th>
             <th class="text-center">NACIONALIDAD</th>
@@ -17,7 +21,11 @@
           {% for actor in actors %}
           <tr>
             <th class="text-center">{{ actor.id }}</th>
+<<<<<<< HEAD
             <th class="text-center d-none d-xl-block">
+=======
+            <th class="text-center">
+>>>>>>> 3ba5d2c9e73c06ee31e61ec8c3a1dee98af193d4
               {% if actor.gender == 'M' %}
                 <img src="{{ asset(portraits_directory ~'/'~ (actor.portrait ?? 'default_male.jpg' ))}}" class="h-200 w-150 rounded-top" alt="{{ actor.portrait }}" title="{{ actor.nombre }}"   />
               {% else %}
