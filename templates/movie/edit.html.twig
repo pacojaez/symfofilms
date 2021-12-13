@@ -78,7 +78,8 @@
           <div class="d-flex flex-row justify-content-end">
                 <figure class="d-flex flex-col justify-content-start align-items-center">
                     <a href="{{ path('movie_delete_image', {'id': peli.id }) }}" class=" text-center">
-                        <img src="{{ asset('img/buttons/delete.png') }}" height="30" width="30" alt="Borrar avatar" title="Borrar avatar" class=" text-center">
+                        {# <img src="{{ asset('img/buttons/delete.png') }}" height="30" width="30" alt="Borrar imagen" title="Borrar imagen" class=" text-center"> #}
+                        <i class="fas fa-trash"></i>
                     </a>
                     <figcaption class="m-4 text-center">
                         Eliminar carátula

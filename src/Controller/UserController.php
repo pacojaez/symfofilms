@@ -51,8 +51,9 @@ class UserController extends AbstractController
     #[Route('/user/edit/{id}', name: 'user_edit', methods: ['GET', 'POST'])]
     public function update( Request $request, LoggerInterface $appUserLogger, FileService $uploader ): Response {
 
-        $user = $this->getUser();
-
+        $id = $request->get('id');
+        
+        $user = $this->getDoctrine()->getRepository( User::class )->find($id);
         $this->denyAccessUnlessGranted('edit', $user );
         // dd( $request->get('id'));
         // if( $user->getId() != $request->get('id') ){
@@ -159,7 +160,6 @@ class UserController extends AbstractController
     }
 
     #[Route('/users/search/{pagina}', name: 'users_search', methods: ['POST'], defaults: ['pagina'=> 1 ] )]
-    #@
     public function search ( int $pagina, Request $request, SimpleSearchService $busqueda, PaginatorService $paginator ): Response {
 
         $user = $this->getUser();
@@ -254,7 +254,7 @@ class UserController extends AbstractController
      * @Route("/user/addRole/{id}", name="add_role", methods="POST" )
      */
     public function addRole( User $user, Request $request, EntityManagerInterface $em ): Response {
-        dd($request);
+        // dd($request);
         $newRole = $request->get('role');
 
         if( $user ){

@@ -45,7 +45,7 @@ class MovieController extends AbstractController
     
     
     #[Route('/allmovies/{pagina}', name: 'all_movies', defaults: ['pagina'=> 1], methods: ['GET'] )]
-    public function allmovies(int $pagina,  PaginatorService $paginator ): Response {
+    public function allmovies( int $pagina,  PaginatorService $paginator ): Response {
 
         $paginator->setEntityType('App\Entity\Movie');
 

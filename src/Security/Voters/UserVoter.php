@@ -29,38 +29,60 @@ class UserVoter extends Voter {
 
     protected function voteOnAttribute( string $attribute, $subject , TokenInterface $token ) {
         
-        $user = $token->getUser();
+        $userLogeado = $token->getUser();
         
-        if(!$user instanceof User)
+        if(!$userLogeado instanceof User)
             return false;
 
         $method = 'can'.ucfirst($attribute);
 
-        return $this->$method( $user );
+        return $this->$method( $userLogeado, $subject );
     }
 
-    private function canShow ( User $user ): bool {
-       
-        return $user === $this->security->isGranted('ROLE_SUPERVISOR');
+    private function canShow ( User $userLogeado ): bool {
+
+        if (in_array('ROLE_SUPERVISOR', $userLogeado->getRoles(), true) || in_array('ROLE_ADMIN', $userLogeado->getRoles(), true))
+            return true;
+    
+        return false;
 
     }
 
-    private function canCreate( User $user ): bool {
+    private function canCreate( User $userLogeado ): bool {
         
-        if (in_array('ROLE_ADMIN', $user->getRoles(), true))
+        if (in_array('ROLE_ADMIN', $userLogeado->getRoles(), true))
             return true;
         
         return false;
 
     }
+    private function canEdit(  User $userLogeado, ?User $user ): bool {
+    
+        // return $this->security->getuser() ==  $user ;
+        if (in_array('ROLE_ADMIN', $userLogeado->getRoles(), true))
+            return true;
+        // dd( $user );
+            // $this->security->isGranted('ROLE_EDITOR');
+        if( $userLogeado ===  $user) return 'hello world';
 
-    private function canEdit(  User $user ): bool {
-       
-        return $this->security->getuser() ==  $user ;
+        return false;
     }
 
-    private function canDelete( User $user ): bool {
+    // private function canEdit(  User $user ): bool {
+    
+    //     // return $this->security->getuser() ==  $user ;
+    //     if (in_array('ROLE_ADMIN', $user->getRoles(), true))
+    //         return true;
+    //     // dd( $user );
+    //         // $this->security->isGranted('ROLE_EDITOR');
+    //     if( $this->security->getuser() ===  $user )
+    //         return true;
+
+    //     return false;
+    // }
+
+    private function canDelete( User $userLogeado, ?User $userAComprobar ): bool {
         
-        return $this->canEdit( $user );
+        return $this->canEdit( $userLogeado, $userAComprobar );
     }
 }

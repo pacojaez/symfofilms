@@ -18,15 +18,15 @@ use App\Entity\Actor;
 class ApiActorController extends AbstractController
 {
     #[Route('/actors/{formato}', name: 'allActors', requirements: ['formato'=>'json|csv|xml'], defaults: ['formato'=>'json'])]
-    public function allactors( string $formato ): Response
-    {
+    public function allactors( string $formato ): Response{
+        
         $actors = $this->getDoctrine()->getRepository( Actor::class )->findAll();
 
         $serializer = new Serializer([new ObjectNormalizer()],
                      [ new JsonEncoder(), new CsvEncoder(), new XmlEncoder()]);
         
         $formato = strtolower($formato);
-        $contenido = $serializer->serialize( $actors, $formato );
+        $contenido = $serializer->serialize( $actors, $formato, [ ObjectNormalizer::IGNORED_ATTRIBUTES => ['user', 'movies', 'fechaNacimiento'] ] );
         
         $response = new Response( $contenido );
 

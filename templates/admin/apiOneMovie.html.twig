@@ -1,0 +1,13 @@
+{% extends 'layouts/admin.html.twig' %}
+
+{% block title %} Devolver una peli en el formato indicado {% endblock %}
+
+{% block main %}
+
+<div class="d-flex flex-column p-5 m-5 align-items-center justify-content-center">
+    <div class="p-10 m-5">
+        <h1 class="uppercase font-weight-bold">Formulario para ver peliculas en diversos formatos</h1>        
+    </div>
+     {{ form(formulario) }}
+
+{% endblock %}

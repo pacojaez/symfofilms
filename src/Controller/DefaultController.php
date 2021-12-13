@@ -5,6 +5,9 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
+
+use App\Form\ApiOneMovieFormType;
 
 use App\Entity\Movie;
 
@@ -14,6 +17,9 @@ class DefaultController extends AbstractController
       
     #[Route('/docs', name: 'docs')]
     public function docs(){
+        // $user = $this->getUser();
+        // $this->denyAccessUnlessGranted('edit', $user );
+
         return $this->render('admin/docs.html.twig');
     }
 
@@ -29,6 +35,25 @@ class DefaultController extends AbstractController
     #[Route('/todo', name: 'todo')]
     public function todo(){
         return $this->render('admin/todo.html.twig');
+    }
+
+    #[Route('/one_movie_api', name: 'one_movie_api')]
+    public function oneMovieApi( Request $request ){
+
+        $formulario = $this->createForm( ApiOneMovieFormType::class );
+
+        $formulario->handleRequest($request);
+
+        if($formulario->isSubmitted() && $formulario->isValid()){
+
+            return $this->redirectToRoute('actor_show', [
+                'id' => $request->getId()
+            ]);
+        }
+
+        return $this->render('admin/apiOneMovie.html.twig', [
+            'formulario' => $formulario->createView()
+        ]);
     }
 
     /**
@@ -52,7 +77,7 @@ class DefaultController extends AbstractController
             }
 
             return $this->render('admin/searchlog.html.twig', [
-                'resultado' => $resultado,
+                'resultado' => array_reverse($resultado),
             ]);
         }else{
             return $this->render('admin/searchlog.html.twig', [
@@ -95,7 +120,7 @@ class DefaultController extends AbstractController
             }
 
             return $this->render('admin/usersAction.html.twig', [
-                'resultado' => $resultado,
+                'resultado' => array_reverse($resultado),
             ]);
         }else{
             return $this->render('admin/usersAction.html.twig', [
