@@ -28,10 +28,9 @@ CREATE TABLE IF NOT EXISTS `actor` (
   `portrait` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `gender` varchar(1) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla symfofilms.actor: ~81 rows (aproximadamente)
-DELETE FROM `actor`;
+-- Volcando datos para la tabla symfofilms.actor: ~83 rows (aproximadamente)
 /*!40000 ALTER TABLE `actor` DISABLE KEYS */;
 INSERT INTO `actor` (`id`, `nombre`, `fechanacimiento`, `nacionalidad`, `biografia`, `portrait`, `gender`) VALUES
 	(1, 'John Belushi', '2017-04-04 00:00:00', 'Canadiense', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe nisi molestiae libero harum magni distinctio deleniti debitis a expedita quasi quisquam aperiam recusandae dicta voluptatibus sapiente laboriosam at autem suscipit quibusdam, repellendus ad corrupti. Reiciendis, quos obcaecati incidunt error, iste ea, dolorem corporis dicta veniam fugiat maxime ex. Repellat, ut! Reiciendis incidunt quis mollitia officia quibusdam atque eveniet, excepturi voluptas! Eveniet quod quidem repellat nostrum, quibusdam sint, incidunt impedit obcaecati atque est nulla cupiditate id rem temporibus? Obcaecati quisquam fugiat adipisci? Fugiat fugit laborum facere aliquam veniam ex aperiam tenetur, neque repudiandae atque excepturi dolorem commodi cupiditate itaque quam accusamus?\r\n\r\nLorem ipsum dolor sit amet consectetur adipisicing elit. Officiis ad harum in, atque laborum cumque nostrum sit maiores asperiores incidunt debitis pariatur deleniti reprehenderit obcaecati esse provident reiciendis earum, nihil repellat natus animi ullam voluptatibus? Quibusdam quod veniam delectus exercitationem excepturi et repellendus quas consectetur expedita ducimus accusamus optio non natus, ab nostrum ex cupiditate quaerat rem sed iste? Tenetur doloremque animi ipsa architecto pariatur odio, fuga mollitia amet deserunt voluptatem incidunt veniam rem quae! Fugiat odio blanditiis cum. Esse, commodi officia exercitationem repudiandae distinctio nulla blanditiis voluptatibus deserunt. Quos numquam ipsa dolorum mollitia at debitis alias, voluptatem adipisci reiciendis deserunt animi quis magnam officiis ex autem asperiores corporis. Ducimus minima nobis maxime eaque fugit id cumque consequatur modi. Aut!\r\nLorem ipsum dolor sit amet consectetur adipisicing elit. Officiis ad harum in, atque laborum cumque nostrum sit maiores asperiores incidunt debitis pariatur deleniti reprehenderit obcaecati esse provident reiciendis earum, nihil repellat natus animi ullam voluptatibus? Quibusdam quod veniam delectus exercitationem excepturi et repellendus quas consectetur expedita ducimus accusamus optio non natus, ab nostrum ex cupiditate quaerat rem sed iste? Tenetur doloremque animi ipsa architecto pariatur odio, fuga mollitia amet deserunt voluptatem incidunt veniam rem quae! Fugiat odio blanditiis cum. Esse, commodi officia exercitationem repudiandae distinctio nulla blanditiis voluptatibus deserunt. Quos numquam ipsa dolorum mollitia at debitis alias, voluptatem adipisci reiciendis deserunt animi quis magnam officiis ex autem asperiores corporis. Ducimus minima nobis maxime eaque fugit id cumque consequatur modi. Aut!', NULL, 'M'),
@@ -111,10 +110,10 @@ INSERT INTO `actor` (`id`, `nombre`, `fechanacimiento`, `nacionalidad`, `biograf
 	(78, 'Maria de Medeiros', '1958-11-12 11:58:06', 'Canadiense', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe nisi molestiae libero harum magni distinctio deleniti debitis a expedita quasi quisquam aperiam recusandae dicta voluptatibus sapiente laboriosam at autem suscipit quibusdam, repellendus ad corrupti. Reiciendis, quos obcaecati incidunt error, iste ea, dolorem corporis dicta veniam fugiat maxime ex. Repellat, ut! Reiciendis incidunt quis mollitia officia quibusdam atque eveniet, excepturi voluptas! Eveniet quod quidem repellat nostrum, quibusdam sint, incidunt impedit obcaecati atque est nulla cupiditate id rem temporibus? Obcaecati quisquam fugiat adipisci? Fugiat fugit laborum facere aliquam veniam ex aperiam tenetur, neque repudiandae atque excepturi dolorem commodi cupiditate itaque quam accusamus?', NULL, 'F'),
 	(79, 'Maria de Medeiros', '1958-11-12 11:58:06', 'Canadiense', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe nisi molestiae libero harum magni distinctio deleniti debitis a expedita quasi quisquam aperiam recusandae dicta voluptatibus sapiente laboriosam at autem suscipit quibusdam, repellendus ad corrupti. Reiciendis, quos obcaecati incidunt error, iste ea, dolorem corporis dicta veniam fugiat maxime ex. Repellat, ut! Reiciendis incidunt quis mollitia officia quibusdam atque eveniet, excepturi voluptas! Eveniet quod quidem repellat nostrum, quibusdam sint, incidunt impedit obcaecati atque est nulla cupiditate id rem temporibus? Obcaecati quisquam fugiat adipisci? Fugiat fugit laborum facere aliquam veniam ex aperiam tenetur, neque repudiandae atque excepturi dolorem commodi cupiditate itaque quam accusamus?', NULL, 'F'),
 	(80, 'Maria de Medeiros', '1958-11-12 11:58:06', 'Canadiense', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe nisi molestiae libero harum magni distinctio deleniti debitis a expedita quasi quisquam aperiam recusandae dicta voluptatibus sapiente laboriosam at autem suscipit quibusdam, repellendus ad corrupti. Reiciendis, quos obcaecati incidunt error, iste ea, dolorem corporis dicta veniam fugiat maxime ex. Repellat, ut! Reiciendis incidunt quis mollitia officia quibusdam atque eveniet, excepturi voluptas! Eveniet quod quidem repellat nostrum, quibusdam sint, incidunt impedit obcaecati atque est nulla cupiditate id rem temporibus? Obcaecati quisquam fugiat adipisci? Fugiat fugit laborum facere aliquam veniam ex aperiam tenetur, neque repudiandae atque excepturi dolorem commodi cupiditate itaque quam accusamus?', NULL, 'F'),
-	(81, 'Maria de Medeiros', '1958-11-12 11:58:06', 'Canadiense', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe nisi molestiae libero harum magni distinctio deleniti debitis a expedita quasi quisquam aperiam recusandae dicta voluptatibus sapiente laboriosam at autem suscipit quibusdam, repellendus ad corrupti. Reiciendis, quos obcaecati incidunt error, iste ea, dolorem corporis dicta veniam fugiat maxime ex. Repellat, ut! Reiciendis incidunt quis mollitia officia quibusdam atque eveniet, excepturi voluptas! Eveniet quod quidem repellat nostrum, quibusdam sint, incidunt impedit obcaecati atque est nulla cupiditate id rem temporibus? Obcaecati quisquam fugiat adipisci? Fugiat fugit laborum facere aliquam veniam ex aperiam tenetur, neque repudiandae atque excepturi dolorem commodi cupiditate itaque quam accusamus?', NULL, 'F'),
-	(82, 'Maria de Medeiros', '1958-11-12 11:58:06', 'Canadiense', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe nisi molestiae libero harum magni distinctio deleniti debitis a expedita quasi quisquam aperiam recusandae dicta voluptatibus sapiente laboriosam at autem suscipit quibusdam, repellendus ad corrupti. Reiciendis, quos obcaecati incidunt error, iste ea, dolorem corporis dicta veniam fugiat maxime ex. Repellat, ut! Reiciendis incidunt quis mollitia officia quibusdam atque eveniet, excepturi voluptas! Eveniet quod quidem repellat nostrum, quibusdam sint, incidunt impedit obcaecati atque est nulla cupiditate id rem temporibus? Obcaecati quisquam fugiat adipisci? Fugiat fugit laborum facere aliquam veniam ex aperiam tenetur, neque repudiandae atque excepturi dolorem commodi cupiditate itaque quam accusamus?', NULL, 'F'),
-	(83, 'Maria de Medeiros', '1958-11-12 11:58:06', 'Canadiense', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe nisi molestiae libero harum magni distinctio deleniti debitis a expedita quasi quisquam aperiam recusandae dicta voluptatibus sapiente laboriosam at autem suscipit quibusdam, repellendus ad corrupti. Reiciendis, quos obcaecati incidunt error, iste ea, dolorem corporis dicta veniam fugiat maxime ex. Repellat, ut! Reiciendis incidunt quis mollitia officia quibusdam atque eveniet, excepturi voluptas! Eveniet quod quidem repellat nostrum, quibusdam sint, incidunt impedit obcaecati atque est nulla cupiditate id rem temporibus? Obcaecati quisquam fugiat adipisci? Fugiat fugit laborum facere aliquam veniam ex aperiam tenetur, neque repudiandae atque excepturi dolorem commodi cupiditate itaque quam accusamus?', NULL, 'F'),
-	(87, 'Scarlet', '1978-03-25 00:00:00', 'Belga', 'lorem ipsum', '619d2dbe024b7.jpg', 'F');
+	(82, 'Maria de Medeiros', '1958-11-12 00:00:00', 'Canadiense', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe nisi molestiae libero harum magni distinctio deleniti debitis a expedita quasi quisquam aperiam recusandae dicta voluptatibus sapiente laboriosam at autem suscipit quibusdam, repellendus ad corrupti. Reiciendis, quos obcaecati incidunt error, iste ea, dolorem corporis dicta veniam fugiat maxime ex. Repellat, ut! Reiciendis incidunt quis mollitia officia quibusdam atque eveniet, excepturi voluptas! Eveniet quod quidem repellat nostrum, quibusdam sint, incidunt impedit obcaecati atque est nulla cupiditate id rem temporibus? Obcaecati quisquam fugiat adipisci? Fugiat fugit laborum facere aliquam veniam ex aperiam tenetur, neque repudiandae atque excepturi dolorem commodi cupiditate itaque quam accusamus?', '619fbf4d60c5b.jpg', 'F'),
+	(87, 'Scarlet', '1978-03-25 00:00:00', 'Belga', 'lorem ipsum', '619d2dbe024b7.jpg', 'F'),
+	(88, 'Daniel Day Lewis', '2000-11-12 00:00:00', 'Española', 'lorem', '619fbf26e2311.jpg', 'M'),
+	(89, 'Rossi de Palma', '1992-03-22 00:00:00', 'Canadiense', 'lorem', '619fbf8082011.jpg', 'F');
 /*!40000 ALTER TABLE `actor` ENABLE KEYS */;
 
 -- Volcando estructura para tabla symfofilms.comment
@@ -126,10 +125,9 @@ CREATE TABLE IF NOT EXISTS `comment` (
   PRIMARY KEY (`id`),
   KEY `IDX_9474526CA76ED395` (`user_id`),
   CONSTRAINT `FK_9474526CA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Volcando datos para la tabla symfofilms.comment: ~7 rows (aproximadamente)
-DELETE FROM `comment`;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
 INSERT INTO `comment` (`id`, `user_id`, `content`) VALUES
 	(1, 25, 'awesome'),
@@ -138,7 +136,8 @@ INSERT INTO `comment` (`id`, `user_id`, `content`) VALUES
 	(4, 25, 'awesome'),
 	(5, 9, 'awesome'),
 	(6, 9, 'awesome'),
-	(7, 25, 'grandisima película');
+	(7, 25, 'grandisima película'),
+	(8, 26, 'Peliculón que veía en el covacha');
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 
 -- Volcando estructura para tabla symfofilms.comment_movie
@@ -153,8 +152,7 @@ CREATE TABLE IF NOT EXISTS `comment_movie` (
   CONSTRAINT `FK_B4C46A9EF8697D13` FOREIGN KEY (`comment_id`) REFERENCES `comment` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla symfofilms.comment_movie: ~7 rows (aproximadamente)
-DELETE FROM `comment_movie`;
+-- Volcando datos para la tabla symfofilms.comment_movie: ~6 rows (aproximadamente)
 /*!40000 ALTER TABLE `comment_movie` DISABLE KEYS */;
 INSERT INTO `comment_movie` (`comment_id`, `movie_id`) VALUES
 	(1, 76),
@@ -163,7 +161,8 @@ INSERT INTO `comment_movie` (`comment_id`, `movie_id`) VALUES
 	(4, 74),
 	(5, 10),
 	(6, 6),
-	(7, 90);
+	(7, 90),
+	(8, 91);
 /*!40000 ALTER TABLE `comment_movie` ENABLE KEYS */;
 
 -- Volcando estructura para tabla symfofilms.doctrine_migration_versions
@@ -176,7 +175,6 @@ CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Volcando datos para la tabla symfofilms.doctrine_migration_versions: ~16 rows (aproximadamente)
-DELETE FROM `doctrine_migration_versions`;
 /*!40000 ALTER TABLE `doctrine_migration_versions` DISABLE KEYS */;
 INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
 	('DoctrineMigrations\\Version20211025075943', '2021-10-30 08:06:01', 38),
@@ -213,10 +211,9 @@ CREATE TABLE IF NOT EXISTS `movie` (
   PRIMARY KEY (`id`),
   KEY `IDX_1D5EF26FA76ED395` (`user_id`),
   CONSTRAINT `FK_1D5EF26FA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla symfofilms.movie: ~28 rows (aproximadamente)
-DELETE FROM `movie`;
+-- Volcando datos para la tabla symfofilms.movie: ~27 rows (aproximadamente)
 /*!40000 ALTER TABLE `movie` DISABLE KEYS */;
 INSERT INTO `movie` (`id`, `titulo`, `duracion`, `director`, `genero`, `sinopsis`, `estreno`, `valoracion`, `caratula`, `user_id`) VALUES
 	(1, 'Shine a Light', 122, 'Martin Scorsese', 'Documental', 'Documental sobre los Rolling Stones. Un acercamiento riguroso, deslumbrante, divertido y profundamente humano al pasado y al presente de los cuatro miembros de la banda. Excelente equipo técnico en el que destacan los directores de fotografía Robert Richarson (Aviador, JFK), Mitch Amundsen (Misión Imposible 3), Stuart Dryburgh (El Piano), Robert Elswit (Buenas Noches, Buena Suerte), Ellen Kuras (Olvídate de Mí), Andrew Lesnie (EL Señor de los Anillos), Emmanuel Lubezki (Sleepy Hollow), Anastas Michos (Quiz Show), Declan Quinn (Leaving Las Vegas), John Toll (Braveheart) y Albert Mayles, director de GIMME SHELTER, documental sobre los trágicos eventos ocurridos en San Francisco en 1969 durante el concierto más multitudinario de los ROLLING STONES -información de la distribuidora-. (FILMAFFINITY)', 2008, 4, '618a95d65669f.jpg', 25),
@@ -246,7 +243,8 @@ INSERT INTO `movie` (`id`, `titulo`, `duracion`, `director`, `genero`, `sinopsis
 	(87, 'What Drives Us', 88, 'Dave Grohl', 'Documental', 'Dirigida por Dave Grohl, este largometraje documental es una carta de amor al raro club del rock and roll, así como una inspiración para todos los niños pequeños que sueñan con una vida tocando música. Dave era ese niño. Y también Ringo, Annie Clark, The Edge, Steven Tyler y todos los demás. La lista es infinita. Si bien todos tienen historias, escandalosas, increíbles, locas y conmovedoras, todos comparten un vínculo común. En algún momento, antes de que nadie supiera su nombre, tuvieron un impulso imparable por compartir su música con el mundo. Su pasión los llevó a dejar todo atrás, lanzar la precaución al viento y perseguir su sueño. A nadie se le prometió nada, pero todos tenían un plan.', 2021, 4, '619d18c6b0aac.jpg', 25),
 	(88, 'Becoming Led Zeppelin', 137, 'Bernard MacMahon', 'Documental', 'El proyecto, que se anunció primero en 2019, tiene un acceso sin precedentes a la banda, marcando la primera y única vez que el grupo ha participado en un documental en 50 años. Aunque el documental de 1976 \'The Song Remains The Same\' se centra en la banda, aquello fue en gran parte una película de concierto de una serie de actuaciones en el Madison Square Garden en 1973. (FILMAFFINITY)', 2021, 5, '619d19158f35e.jpg', 25),
 	(89, 'I Feel Good: La historia de James Brown', 138, 'Tate Taylor', 'Documental', 'Basada en la extraordinaria trayectoria del padrino del soul, la película se adentra sin temor en la música, la vida y los estados de ánimo de James Brown, guiando al público en un viaje desde la dura infancia del cantante hasta que se convierte en una de las figuras más influyentes del siglo XX. (FILMAFFINITY)', 2014, 5, '619d19729691b.jpg', 25),
-	(90, 'Searching for Sugar Man', 87, 'Malik Bendjelloul', 'Documental', 'A finales de los años 60, Sixto Rodríguez, un misterioso músico, fue descubierto en un bar de Detroit por dos productores que quedaron fascinados por sus melodías conmovedoras y sus letras proféticas. Grabaron dos discos con la convicción de que el artista se convertiría en uno de los más grandes de su generación. Sin embargo, el éxito nunca llegó, y el cantante desapareció en medio de rumores sobre su suicidio en un escenario. Mientras tanto, uno de los discos llegó a la Sudáfrica del Apartheid y se extendió por todo el país en grabaciones piratas, que hizo de Rodríguez un icono de la libertad y de la lucha contra el sistema. Mucho tiempo después, dos fans sudafricanos se empeñaron en averiguar qué había pasado realmente con Rodríguez y su investigación los llevó a conocer una historia extraordinaria. (FILMAFFINITY)', 2012, 5, '619d1a4713605.jpg', 25);
+	(90, 'Searching for Sugar Man', 87, 'Malik Bendjelloul', 'Documental', 'A finales de los años 60, Sixto Rodríguez, un misterioso músico, fue descubierto en un bar de Detroit por dos productores que quedaron fascinados por sus melodías conmovedoras y sus letras proféticas. Grabaron dos discos con la convicción de que el artista se convertiría en uno de los más grandes de su generación. Sin embargo, el éxito nunca llegó, y el cantante desapareció en medio de rumores sobre su suicidio en un escenario. Mientras tanto, uno de los discos llegó a la Sudáfrica del Apartheid y se extendió por todo el país en grabaciones piratas, que hizo de Rodríguez un icono de la libertad y de la lucha contra el sistema. Mucho tiempo después, dos fans sudafricanos se empeñaron en averiguar qué había pasado realmente con Rodríguez y su investigación los llevó a conocer una historia extraordinaria. (FILMAFFINITY)', 2012, 5, '619d1a4713605.jpg', 25),
+	(91, 'The Song Remains the Same', 122, 'Peter Clifton & Joe Massot', 'Documental', 'lorem', 2008, 3, NULL, 26);
 /*!40000 ALTER TABLE `movie` ENABLE KEYS */;
 
 -- Volcando estructura para tabla symfofilms.movie_actor
@@ -261,11 +259,11 @@ CREATE TABLE IF NOT EXISTS `movie_actor` (
   CONSTRAINT `FK_3A374C658F93B6FC` FOREIGN KEY (`movie_id`) REFERENCES `movie` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla symfofilms.movie_actor: ~1 rows (aproximadamente)
-DELETE FROM `movie_actor`;
+-- Volcando datos para la tabla symfofilms.movie_actor: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `movie_actor` DISABLE KEYS */;
 INSERT INTO `movie_actor` (`movie_id`, `actor_id`) VALUES
-	(76, 30);
+	(76, 30),
+	(91, 13);
 /*!40000 ALTER TABLE `movie_actor` ENABLE KEYS */;
 
 -- Volcando estructura para tabla symfofilms.reset_password_request
@@ -283,7 +281,6 @@ CREATE TABLE IF NOT EXISTS `reset_password_request` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Volcando datos para la tabla symfofilms.reset_password_request: ~0 rows (aproximadamente)
-DELETE FROM `reset_password_request`;
 /*!40000 ALTER TABLE `reset_password_request` DISABLE KEYS */;
 /*!40000 ALTER TABLE `reset_password_request` ENABLE KEYS */;
 
@@ -299,17 +296,16 @@ CREATE TABLE IF NOT EXISTS `user` (
   `avatar` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_8D93D649E7927C74` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Volcando datos para la tabla symfofilms.user: ~23 rows (aproximadamente)
-DELETE FROM `user`;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`id`, `email`, `roles`, `password`, `displayname`, `is_verified`, `avatar`) VALUES
-	(1, 'paco@paco.com', '[]', '$2y$13$V9zmnXrMp3jhUGHE0Ec6LOj4GASkAlO/5iS2a6YWuvYeKp8lSSRD.', 'pacoj', 0, NULL),
-	(2, 'paco2@paco.com', '[]', '$2y$13$ElHz2S7kdhD1ZdOM9mJ/6...sMvl0qNPWrtkpzRWTelfLI9gBv4bW', 'pacoj2', 0, NULL),
-	(3, 'paaez@gmail.com', '[]', '$2y$13$6YESX1WIEmNDT8XY5q4AhuoWujzfwWBRZ7yGv3.DBjj8ei9N60PjW', 'pacooo', 0, NULL),
-	(4, 'pacojaez@gail.com', '[]', '$2y$13$Q1YAQe4nRzIWGYaxHBTgUO/DJ4cvUVAcXJu5jAc1iwr39ihRbdj/O', 'pacooo', 0, '(NULL)'),
-	(5, 'paae@gmail.com', '[]', '$2y$13$DwKFW7nXo8VI11g.NtJlN.F/PepQ6ozcTIX68uh2MmemIlENZJ1g2', 'pacooo', 0, '(NULL)'),
+	(1, 'admin@symfofilms.com', '["ROLE_ADMIN"]', '$2y$13$uPAfgcCqvjt3evqEJgUYSebm5iiGhQDEu3JhjzX0qNxODH9ng16vy', 'ADMIN', 0, NULL),
+	(2, 'user@symfofilms.com', '["ROLE_USER"]', '$2y$13$uPAfgcCqvjt3evqEJgUYSebm5iiGhQDEu3JhjzX0qNxODH9ng16vy', 'USER', 0, NULL),
+	(3, 'editor@symfofilms.com', '["ROLE_EDITOR"]', '$2y$13$uPAfgcCqvjt3evqEJgUYSebm5iiGhQDEu3JhjzX0qNxODH9ng16vy', 'EDITOR', 0, NULL),
+	(4, 'supervisor@symfofilms.com', '["ROLE_SUPERVISOR", "ROLE_TEST"]', '$2y$13$uPAfgcCqvjt3evqEJgUYSebm5iiGhQDEu3JhjzX0qNxODH9ng16vy', 'SUPERVISOR', 0, '(NULL)'),
+	(5, 'test@symfofilms.com', '["ROLE_TEST"]', '$2y$13$uPAfgcCqvjt3evqEJgUYSebm5iiGhQDEu3JhjzX0qNxODH9ng16vy', 'TEST', 0, '(NULL)'),
 	(6, 'pacojaez@gml.com', '[]', '$2y$13$0ysQ002.VMyJDa90KkP1fehqWiBx.9YXjLT4EiVu33N270ZLq/xNq', 'pacooo', 0, NULL),
 	(7, 'cojaez@gmail.com', '[]', '$2y$13$8R.x6t/xAxRSAb7XDsyi/Oev/puIewQO7mAJJ.73IgSv6b4GbVmKi', 'pacooo', 0, NULL),
 	(8, 'pacoz@gmail.com', '[]', '$2y$13$yvUB.yOOASAITpcWt00qDuZgJa/7ki/OLR0o0uHC96TxzceVEwYJq', 'pacooo', 0, NULL),
@@ -327,7 +323,8 @@ INSERT INTO `user` (`id`, `email`, `roles`, `password`, `displayname`, `is_verif
 	(21, 'pacojaeWWWWz@gmail.com', '[]', '$2y$13$0P8eGEQMwQ40WC8meAS3luLpREbXDMqtlU5b6NUuP1x0p0zuq/QQi', 'pacooo', 0, '6197562d2e9c8.jpg'),
 	(22, 'pacojaez21212@gmail.com', '[]', '$2y$13$XVFi5msu4xSIViuxZdh6IeXBY7UP62vQbToAUfYxb1wkgdFjHicBO', 'pacooo', 1, '619756ccee5c3.jpg'),
 	(23, 'pacojaeWWddWWz@gmail.com', '[]', '$2y$13$2xiTpTZr1WMS93bk2wTS8erLh3MVbu9rG0G3inATnFofglKrS.Cny', 'pacooo', 0, NULL),
-	(25, 'pacojaez@gmail.com', '[]', '$2y$13$uPAfgcCqvjt3evqEJgUYSebm5iiGhQDEu3JhjzX0qNxODH9ng16vy', 'Michael MacConahugh', 1, '619cfc8e3cf07.jpg');
+	(25, 'pacojaez2@gmail.com', '[]', '$2y$13$uPAfgcCqvjt3evqEJgUYSebm5iiGhQDEu3JhjzX0qNxODH9ng16vy', 'Paco', 1, '619cfc8e3cf07.jpg'),
+	(26, 'pacojaez@gmail.com', '[]', '$2y$13$RzAQpQVN4aftqUo6./U2G.yrOUzxY4MVgS4DmAT3a2juRZrTKZvt2', 'pacooo', 1, '619fb99621a03.jpg');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
