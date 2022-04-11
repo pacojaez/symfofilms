@@ -2,10 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\MovieRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\MovieRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints\Type;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Positive;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
 
 /**
  * @ORM\Entity(repositoryClass=MovieRepository::class)
@@ -78,7 +83,7 @@ class Movie
     {
         $this->comments = new ArrayCollection();
         $this->actors = new ArrayCollection();
-        $this->user = new ArrayCollection();            // added to the construct
+        $this->user = new User();            // added to the construct
     }
 
     public function getId(): ?int
@@ -249,5 +254,16 @@ class Movie
         $this->actors->removeElement($actor);
 
         return $this;
+    }
+
+    // VALIDATOR RULES:
+
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+        $metadata->addPropertyConstraint('titulo', new NotBlank())
+                    ->addPropertyConstraint('duracion', new Positive() )
+                    // ->addPropertyConstraint('duracion', new GreaterThanOrEqual(10))
+                    ->addPropertyConstraint('director', new NotBlank() )
+                    ->addPropertyConstraint('sinopsis', new NotBlank() );;
     }
 }
