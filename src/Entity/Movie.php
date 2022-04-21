@@ -264,6 +264,6 @@ class Movie
                     ->addPropertyConstraint('duracion', new Positive() )
                     // ->addPropertyConstraint('duracion', new GreaterThanOrEqual(10))
                     ->addPropertyConstraint('director', new NotBlank() )
-                    ->addPropertyConstraint('sinopsis', new NotBlank() );;
+                    ->addPropertyConstraint('sinopsis', new NotBlank() );
     }
 }

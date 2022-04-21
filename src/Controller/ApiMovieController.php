@@ -253,10 +253,131 @@ class ApiMovieController extends AbstractController {
                 "message" => "Pelicula guardada con id: ".$movie->getId()
             ], $formato);
 
-            return $this->sendREsponse($contenido, $formato, Response::HTTP_CREATED);
+            return $this->sendResponse($contenido, $formato, Response::HTTP_CREATED);
         }
             
 
     }
 
+
+    #[Route('/movies/{id<\d+>}/{formato}', 
+                name: 'api_movie_edit', 
+                requirements: ['formato'=>'json|csv|xml'], 
+                defaults: [
+                    'formato'=>'json',
+                    ], 
+                methods: ['PUT', 'PATCH']
+            )]
+    /**
+     * edit a movie from the API
+     *
+     * @param integer $id
+     * @param string $formato
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @param ValidatorInterface $validator
+     * @return Response
+     */
+    public function edit( int $id, string $formato, Request $request, EntityManagerInterface $em, ValidatorInterface $validator ) : Response {
+
+
+        $movie = $this->movieRepository->find($id);
+        if( !$movie){
+            $contenido = $this->serializer->serialize([
+                "status" => "ERROR",
+                "message" => "No hay ninguna pelicula con el id: $id",
+            ], $formato );
+
+            return $this->sendResponse( $contenido, $formato, Response::HTTP_NOT_FOUND);
+        }
+
+        try{
+            $this->serializer->deserialize(
+                $request->getContent(),
+                'App\Entity\Movie', $formato,
+                ['object_to_populate' => $movie]
+            );
+        }catch ( NotEncodableValueException $e ){
+            $contenido = $this->serializer->serialize([
+                "status" => "ERROR",
+                "message" => "Error en el $formato. Se ha recibido: ".$request->getContent()
+            ], $formato);
+
+            return $this->sendResponse ($contenido, $formato, Response::HTTP_BAD_REQUEST );
+        }
+
+        $errors = $validator->validate($movie);
+
+        if(count( $errors) > 0 ){
+            $errores = [];
+
+            foreach( $errors as $error )
+                $errores[ $error->getPropertyPath()] = $error->getMessage();
+
+            $contenido = $this->serializer->serialize([
+                "status" => "ERROR",
+                "message" => "Error de validación",
+                "errors" => $errores
+            ], $formato );
+
+            return $this->sendResponse( $contenido, $formato, Response::HTTP_UNPROCESSABLE_ENTITY );
+
+        }else{
+
+            // Para probar asignamos el id 25 de un usuario,
+            // deberemos autenticar primero al usuario via API
+            // y añadirlo a la $movie
+            $movie->setUser ($this->getDoctrine()->getRepository( User::class )->find(25));
+            
+            // $em->persist($movie);
+            $em->flush();
+            $contenido = $this->serializer->serialize([
+                "status" => "OK",
+                "message" => "Pelicula con id: ".$movie->getId()." actualizada correctamente.",
+            ], $formato);
+
+            return $this->sendResponse($contenido, $formato, Response::HTTP_CREATED);
+        }
+        
+    }
+
+    #[Route('/movies/{id<\d+>}/{formato}', 
+    name: 'api_movie_delete', 
+    requirements: ['formato'=>'json|csv|xml'], 
+    defaults: [
+        'formato'=>'json',
+        ], 
+    methods: ['DELETE']
+    )]
+    /**
+    * delete a movie from the API
+    *
+    * @param integer $id
+    * @param string $formato
+    * @param EntityManagerInterface $em
+    * @return Response
+    */
+    public function delete( int $id, string $formato, EntityManagerInterface $em) : Response {
+        $movie = $this->movieRepository->find($id);
+
+        if($movie){
+            $id = $movie->getId();
+            $em->remove($movie);
+            $em->flush();
+
+            $contenido = $this->serializer->serialize([
+                "status" => "OK",
+                "message" => "Pelicula con id ". $id." borrada correctamente.",
+            ], $formato);
+
+            return $this->sendResponse($contenido, $formato );
+        }
+
+        $contenido = $this->serializer->serialize([
+            "status" => "ERROR",
+            "message" => "No hay ninguna pelicula con el id: $id",
+        ], $formato );
+
+        return $this->sendResponse( $contenido, $formato, Response::HTTP_NOT_FOUND);
+    }
 }
